@@ -1,0 +1,46 @@
+.container {
+  max-width: $container-max-size;
+}
+
+.columns {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  &:last-child,
+  &:not(:last-child) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.column {
+  padding: 0 $building-unit;
+}
+
+.button {
+  padding: $button-padding;
+  line-height: 1;
+}
+
+.tags {
+  .tag {
+    margin-bottom: 0;
+  }
+}
+
+.is-clipped {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.dropdown-content {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.dropdown-item {
+  padding: $building-unit / 2 $building-unit;
+  font-size: inherit;
+  line-height: inherit;
+  color: $gray-56;
+}

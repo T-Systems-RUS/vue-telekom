@@ -1,0 +1,55 @@
+.title {
+  color: $gray-56;
+
+  &.is-7 {
+    line-height: 18px;
+  }
+
+  &.is-5 {
+    font-weight: $font-weight-bold;
+  }
+
+  &.is-magenta {
+    @include font-size(7);
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    color: $magenta;
+    margin-bottom: $magenta-title-margin-bottom;
+  }
+
+  &.is-grey {
+    @extend .is-magenta;
+    color: $gray-178;
+  }
+
+  @each $font in $font-list {
+    $i: index($font-list, $font);
+
+    &.is-#{$i}-mobile {
+      @include mobile {
+        @include font-size($i)
+      }
+    }
+  }
+
+  &.is-thin {
+    font-weight: $font-weight-thin;
+  }
+
+  &.is-regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &.is-medium {
+    font-weight: $font-weight-medium;
+  }
+
+  &.is-bold {
+    font-weight: $font-weight-bold;
+  }
+
+  &.is-ultra {
+    font-weight: $font-weight-ultra;
+  }
+
+}

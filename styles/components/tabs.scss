@@ -1,0 +1,68 @@
+@import '../base/variables';
+@import '../utilities/mixins';
+@import '../base/typography';
+
+$tabs-padding: 0 30px;
+$tabs-border-size: 1px;
+$tab-padding: $building-unit $building-unit-x0_5;
+$tab-border-height: $building-unit / 3;
+
+.tabs-wrap {
+  display: flex;
+  justify-content: center;
+
+  &.is-aligned-left {
+    justify-content: flex-start;
+  }
+
+  &.is-aligned-right {
+    justify-content: flex-end;
+  }
+
+  .tabs {
+    display: inline-flex;
+    padding: $tabs-padding;
+    border-bottom: $tabs-border-size solid $gray-220;
+
+    .tab {
+      @include font-size(6);
+      padding: $tab-padding;
+      margin-right: $building-unit-x2;
+      position: relative;
+      transition: $transition-default;
+      cursor: pointer;
+      color: $gray-117;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -$tabs-border-size;
+        height: $tab-border-height;
+        transition: $transition-default;
+      }
+
+      &:hover {
+        color: $gray-56;
+
+        &::after {
+          background: $gray-237;
+        }
+      }
+
+      &.is-active {
+        color: $magenta;
+        pointer-events: none;
+
+        &::after {
+          background: $magenta;
+        }
+      }
+    }
+  }
+}

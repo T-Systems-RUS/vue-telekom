@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>cancel_outline</title>
+  <rect class="a" width="64" height="64"/>
+  <path fill="#262626" d="M51.82,49.73,34.12,32l17.7-17.7a1.5,1.5,0,0,0-2.12-2.12L32,29.91,14.3,12.21a1.5,1.5,0,0,0-2.12,2.12L29.88,32l-17.7,17.7a1.5,1.5,0,0,0,2.12,2.12L32,34.15l17.7,17.7a1.5,1.5,0,1,0,2.12-2.12Z"/>
+</svg>

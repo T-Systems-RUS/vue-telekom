@@ -1,0 +1,60 @@
+@import '../base/variables';
+@import '../base/typography';
+@import '../bulma/bulma-override-variables';
+@import '../utilities/mixins';
+
+$breadcrumb-margin: $building-unit 0;
+$breadcrumb-margin-mobile: $building-unit 0 $building-unit $building-unit;
+
+@mixin disabled-breadcrumb {
+  color: $gray-56;
+  pointer-events: none;
+  cursor: default;
+}
+
+.breadcrumbs {
+  flex-wrap: wrap;
+  margin: $breadcrumb-margin-mobile;
+
+  @include widescreen {
+    margin: $breadcrumb-margin;
+  }
+
+  &.is-disabled {
+    .breadcrumb-link {
+      @include disabled-breadcrumb;
+    }
+  }
+}
+
+.breadcrumb {
+  color: $gray-117;
+  margin-right: $building-unit;
+
+  &:last-child {
+    .breadcrumb-link {
+      @include disabled-breadcrumb;
+    }
+
+    &::after {
+      content: none;
+    }
+  }
+
+  &::after {
+    content: '>';
+    margin-left: $building-unit;
+    @include font-size(7);
+  }
+
+  &-link {
+    color: $gray-117;
+    cursor: pointer;
+    transition: $transition-default;
+
+    &:hover {
+      color: $gray-117;
+      text-decoration: underline;
+    }
+  }
+}
