@@ -21,7 +21,7 @@ import {
 export enum FileUploadErrorType {
   FILE_SIZE = 'FILE_SIZE',
   FILE_EXTENSION = 'FILE_EXTENSION',
-  IMAGE_EXTENSION = 'IMAGE_EXTENSION',
+  IMAGE_EXTENSION = 'IMAGE_EXTENSION'
 }
 
 export interface IFileUploadError {
@@ -34,16 +34,16 @@ export type IFileUploadErrors = {
 };
 
 export interface IFileUploadState {
-  isImageUpload: boolean,
-  isMultiple: boolean,
-  isUploadModalOpen: boolean,
-  files: IFileUpload[],
-  tempFiles: IFileUpload[],
-  isImageUrl: boolean,
-  imageUrl: IImageUrl,
-  replacementFiles: IFileUpload[],
-  replacementUrl: string,
-  errors: IFileUploadErrors
+  isImageUpload: boolean;
+  isMultiple: boolean;
+  isUploadModalOpen: boolean;
+  files: IFileUpload[];
+  tempFiles: IFileUpload[];
+  isImageUrl: boolean;
+  imageUrl: IImageUrl;
+  replacementFiles: IFileUpload[];
+  replacementUrl: string;
+  errors: IFileUploadErrors;
 }
 
 export const IMAGE_URL_INITIAL = {

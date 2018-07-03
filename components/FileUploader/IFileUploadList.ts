@@ -5,9 +5,9 @@ export enum FileUploadStatus {
 }
 
 export interface IFileUpload {
-  file: File,
-  loadingStatus: FileUploadStatus,
-  imageDataUrl?: string
+  file: File;
+  loadingStatus: FileUploadStatus;
+  imageDataUrl?: string;
 }
 
 export interface IImageUrl {

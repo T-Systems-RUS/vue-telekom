@@ -9,12 +9,12 @@ export enum AlertType {
 }
 
 export interface IAlertItem {
-  text: string,
-  type: AlertType
+  text: string;
+  type: AlertType;
 }
 
 interface IAlertState {
-  alert: IAlertItem|null
+  alert: IAlertItem|null;
 }
 
 const alertState: Module<IAlertState, {}> = {

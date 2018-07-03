@@ -101,7 +101,7 @@ export const mutations: MutationTree<IFileUploadState> = {
         state.errors[key].fileNames = [];
       });
   },
-  [SET_FILE_UPLOAD_ERROR](state, {errorType, fileName}: {errorType: FileUploadErrorType; fileName: string;}) {
+  [SET_FILE_UPLOAD_ERROR](state, {errorType, fileName}: {errorType: FileUploadErrorType; fileName: string; }) {
     state.errors[errorType].hasError = true;
     state.errors[errorType].fileNames.push(fileName);
   },
