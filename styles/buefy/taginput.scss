@@ -1,0 +1,62 @@
+@import '~buefy/src/scss/components/_autocomplete.scss';
+@import '~buefy/src/scss/components/_tag.scss';
+@import '~buefy/src/scss/components/_taginput.scss';
+@import '../base/typography';
+@import '../utilities/mixins';
+
+$delete-button-size: $building-unit;
+$delete-button-icon-size: $building-unit/2;
+$taginput-vertical-padding: 2px;
+
+.taginput {
+  .taginput-container {
+    position: relative;
+    padding-bottom: 0 !important;
+    padding-top: $taginput-vertical-padding!important;
+
+    .control,
+    .autocomplete {
+      position: static;
+
+      input {
+        height: auto;
+        margin-bottom: 0;
+        padding: $building-unit-x0_25 0;
+      }
+    }
+
+    .tag {
+      @include font-size(7);
+      height: auto;
+      padding-top: $building-unit-x0_5;
+      padding-bottom: $building-unit-x0_5;
+      margin-bottom: $taginput-vertical-padding!important;
+
+      a.delete {
+        width: $delete-button-size;
+        height: $delete-button-size;
+        border-radius: 50%;
+        background-color: $gray-199;
+        position: relative;
+
+        &::after,
+        &::before {
+          content: '';
+          width: $delete-button-icon-size;
+          height: 1px;
+          @include absolute-xy-center;
+          background-color: $white;
+          transform-origin: center center;
+        }
+
+        &::after {
+          transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        &::before {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
+      }
+    }
+  }
+}
