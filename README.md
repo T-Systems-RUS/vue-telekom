@@ -12,7 +12,7 @@ To use *vue-telekom* in your project you will need to add *vue-telekom* reposito
 ```bash
 # navigate to the folder in your project
 # where you would like the submodule to be located (e.g my-project/src/common) and run:
-git submodule add https://misp.t-systems.com/tools/gitlab/shared/vue/vue-telekom.git
+git submodule add https://github.com/T-Systems-RUS/vue-telekom.git
 git submodule init
 git submodule update
 ```
