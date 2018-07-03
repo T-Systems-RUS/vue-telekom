@@ -1,0 +1,45 @@
+// Container
+$container-max-size: 984px;
+
+// Fonts
+$family-serif: 'TeleGrotesk Next', serif;
+$family-primary: $family-serif;
+
+// Colors
+$primary: $magenta;
+$primary-invert: $white;
+
+// Links
+$link: $dark-blue;
+
+// Titles
+$title-weight: 200;
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7 $size-8;
+$magenta-title-margin-bottom: $building-unit / 2;
+
+// Radius for forms and buttons
+$radius: $telekom-radius;
+$control-radius: $radius;
+
+// Forms
+$input-shadow: none;
+$label-weight: normal;
+$input-border-color: $gray-178;
+$input-hover-border-color: $gray-178;
+$input-focus-border-color: $blue;
+$input-focus-box-shadow-size: 0 0 6px 0;
+$input-focus-box-shadow-color: rgba($blue, .5);
+
+// Buttons
+$size-large: $size-5;
+$button-padding: $building-unit $building-unit * 2;
+
+// Breakpoints
+$tablet: 640px;
+$desktop: 1024px;
+$widescreen: 1500px;
+$fullhd: 1800px;
+
+// Modals
+$modal-z: 110;
+

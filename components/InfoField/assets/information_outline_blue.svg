@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+      }
+      .blue {
+        fill: #007FAF;
+      }
+    </style>
+  </defs>
+  <title>information_outline_blue</title>
+  <rect class="a" width="64" height="64"/>
+  <path class="blue" d="M56,6H8A2,2,0,0,0,6,8V56a2,2,0,0,0,2,2H56a2,2,0,0,0,2-2V8A2,2,0,0,0,56,6ZM55,55H9V9H55ZM33.56,17h-3v4h3ZM37,43H33.5V25H27v3h3.5V43H27v3H37Z"/>
+</svg>

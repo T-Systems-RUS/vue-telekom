@@ -1,0 +1,14 @@
+$link-list-visited-color: $purple-151;
+$link-list-margin-bottom: $building-unit * 0.25;
+
+.link-list {
+    li {
+        margin-bottom: $link-list-margin-bottom;
+
+        a {
+            &:visited {
+                color: $link-list-visited-color;
+            }
+        }
+    }
+}

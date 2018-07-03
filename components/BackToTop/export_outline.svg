@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .a {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>export_outline</title>
+  <rect class="a" width="64" height="64"/>
+  <path d="M33.5,19l0,37.5A1.5,1.5,0,0,1,32,58h0a1.5,1.5,0,0,1-1.5-1.5l0-37.5H19L32,6,45,19Z"/>
+</svg>

@@ -1,0 +1,38 @@
+body {
+  color: $gray-56;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}
+
+.inner {
+  padding: 0 $building-unit;
+}
+
+a {
+  @include font-size(6);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $dark-blue-121;
+    box-shadow: none;
+    outline: 0;
+    text-decoration: underline;
+  }
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.absolute-y-center {
+  @include absolute-y-center;
+}
+
+.absolute-x-center {
+  @include absolute-x-center;
+}
+
+.absolute-xy-center {
+  @include absolute-xy-center;
+}
