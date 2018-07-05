@@ -3,35 +3,43 @@ import {ALERT} from './getter-types';
 import {RESET_ALERT, SET_ALERT} from './mutation-types';
 
 export enum AlertType {
-  SUCCESS = 'SUCCESS',
-  WARNING = 'WARNING',
-  HINT = 'HINT'
+    DEFAULT = 'DEFAULT',
+    SUCCESS = 'SUCCESS',
+    WARNING = 'WARNING',
+    HINT = 'HINT'
+}
+
+interface IAlertItemLink {
+    text: string;
+    method: () => {};
 }
 
 export interface IAlertItem {
-  text: string;
-  type: AlertType;
+    text: string;
+    type: AlertType;
+    noCloseBtn?: boolean;
+    link?: IAlertItemLink;
 }
 
 interface IAlertState {
-  alert: IAlertItem|null;
+    alert: IAlertItem|null;
 }
 
 const alertState: Module<IAlertState, {}> = {
-  state: {
-    alert: null
-  },
-  mutations: {
-    [SET_ALERT](state, payload: IAlertItem) {
-      state.alert = payload;
+    state: {
+        alert: null
     },
-    [RESET_ALERT](state) {
-      state.alert = null;
+    mutations: {
+        [SET_ALERT](state, payload: IAlertItem) {
+            state.alert = payload;
+        },
+        [RESET_ALERT](state) {
+            state.alert = null;
+        }
+    },
+    getters: {
+        [ALERT]: state => state.alert
     }
-  },
-  getters: {
-    [ALERT]: state => state.alert
-  }
 };
 
 export default alertState;
