@@ -23,7 +23,7 @@ git submodule update
 - Import *vue-telekom* mixins to your *mixins.scss* file: `@import 'vue-telekom/styles/utilities/mixins;`
 and use this file when importing to components that need mixins. (*vue-telekom* mixins file already contains *bulma* mixins with overriden variables. So please  ***do not***  import bulma mixins directly to your components as it might lead to viewport breakpoint inconsistency, e.g when using *bulma* mixins like `mobile`, `tablet`, `deskop` etc.)
 
-# Override required variables
+### Override required variables
 
 Most likely you will need to copy fonts from `styles/assets/fonts` to your local static folder.
 Otherwise fonts will be encoded in the CSS and cause bloat.
