@@ -1,7 +1,7 @@
 import Vue, {VNodeDirective} from 'vue';
 
 interface IOuterClickHTMLElement extends HTMLElement {
-  event?: EventListener
+  event?: EventListener;
 }
 
 Vue.directive('outer-click', {
