@@ -1,3 +1,7 @@
+// TODO investigate broken bulma mixins after importing single component
+
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/derived-variables';
 @import '../bulma/bulma-override-variables';
 @import '~bulma/sass/utilities/mixins';
 
