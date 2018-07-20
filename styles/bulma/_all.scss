@@ -1,13 +1,8 @@
 // Override bulma defaults
 // Remember to override derived variables from @import '~bulma/sass/utilities/derived-variables.sass';
-@import '~bulma/sass/utilities/initial-variables';
-@import '~bulma/sass/utilities/_all';
 
 // Overriding bulma variables
 @import 'bulma-override-variables';
-$colors: map-merge($colors, (
-  'primary':($primary, $primary-invert)
-));
 
 // Global bulma base styles
 @import '~bulma/sass/base/all';

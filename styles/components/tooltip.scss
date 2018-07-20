@@ -1,5 +1,5 @@
 @import '../base/variables';
-@import '../bulma/_all';
+@import '../bulma/bulma-override-variables';
 
 $tooltip-background-color: $gray-38;
 $tooltip-max-width: 312px;

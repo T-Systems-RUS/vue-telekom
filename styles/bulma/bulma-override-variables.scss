@@ -1,3 +1,5 @@
+@import '~bulma/sass/utilities/_all';
+
 // Container
 $container-max-size: 984px;
 
@@ -43,3 +45,6 @@ $fullhd: 1800px;
 // Modals
 $modal-z: 110;
 
+$colors: map-merge($colors, (
+  'primary': ($primary, $primary-invert)
+));

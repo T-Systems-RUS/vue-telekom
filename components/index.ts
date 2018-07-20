@@ -20,6 +20,8 @@ import SortingHeaderCell from './SortingHeaderCell/SortingHeaderCell.vue';
 import Dropdown from './Dropdown/Dropdown.vue';
 import Alert from './Alert/Alert.vue';
 import Pagination from './Pagination/Pagination.vue';
+import Selectbox from './Selectbox/Selectbox.vue';
+import SelectboxItem from './Selectbox/SelectboxItem/SelectboxItem.vue';
 
 const components: { [key: string]: {} } = {
   ActionsPane,

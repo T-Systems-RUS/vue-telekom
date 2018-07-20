@@ -1,66 +1,145 @@
-@import '../../styles/base/variables';
-@import '../../styles/utilities/mixins';
+$button-default-height: $building-unit-x3;
+$button-box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
 
-$border-width: 1px;
-$horz-padding: $building-unit-x2;
-$close-size: $building-unit-x2;
-$inner-padding-right: $close-size + $building-unit;
-$inner-padding-right-mobile: $close-size + $building-unit-x2;
+$button-border-size: 1px;
+$disabled-button-text-color: $gray-184;
+$disabled-button-border-color: $gray-220;
+$button-padding: $building-unit-x0_5 - $button-border-size $building-unit-x2;
+$large-button-padding: $building-unit - $button-border-size $building-unit-x2;
+$disabled-button-bg-color: $gray-248;
 
-.alert {
-  border-top: $border-width solid;
-  border-bottom: $border-width solid;
-  transition: .2s;
-  border-color: $gray-117;
-  background-color: $gray-248;
+// default-button
+$button-border-color: $gray-178;
+$button-text-color: $gray-56;
+$active-button-border-color: $gray-117;
+$active-button-bg-color: $gray-199;
 
-  &.is-success {
-    border-color: $green;
-    background-color: $green-247;
-  }
+// icon button
+$icon-button-padding: ($building-unit-x0_25 * 3 - $button-border-size) $building-unit;
 
-  &.is-warning {
-    border-color: $red;
-    background-color: $red-253;
-  }
+// primary button
+$primary-button-bg-color: $magenta;
+$primary-button-border-color: $magenta-160;
 
-  &.is-hint {
+@mixin button-no-style {
+  border: none;
+  outline: none;
+  background: none;
+  box-shadow: none!important;
+}
+
+.button {
+  @include font-size(6);
+  padding: $button-padding;
+  background-color: $gray-237;
+  border-radius: $telekom-radius;
+  border: $button-border-size solid $button-border-color;
+  color: $button-text-color;
+  height: auto;
+  width: auto;
+  transition: $transition-default;
+  text-decoration: none;
+
+  &:focus:not(:active),
+  &.is-focused:not(:active) {
+    box-shadow: $button-box-shadow !important;
     border-color: $blue;
-    background-color: $blue-242;
   }
 
-  .alert-inner {
-    padding: $building-unit 0;
-
-    @include mobile {
-      padding: $building-unit $horz-padding;
-    }
+  &:active {
+    border-color: $active-button-border-color;
+    background-color: $active-button-bg-color;
   }
 
-  .alert-text {
-    padding-right: $inner-padding-right;
+  &:hover {
+    background-color: $gray-220;
+    text-decoration: none;
   }
 
-  .alert-close {
-    // set background image for close button in the component where you import alert styles
-    background-position: center;
-    background-size: cover;
+  // Button types
+  &.is-icon {
+    padding: $icon-button-padding;
+  }
+
+  &.is-outline {
     background-color: transparent;
-    background-repeat: no-repeat;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: none;
-    width: $close-size;
-    height: $close-size;
-    position: absolute;
-    top: $building-unit;
-    right: 0;
 
-    @include mobile {
-      right: $horz-padding;
+    &:hover {
+      background-color: $gray-237;
     }
+
+    &:active {
+      background-color: $gray-220;
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: transparent;
+    }
+  }
+
+  &.is-primary {
+    background-color: $primary-button-bg-color;
+    border-color: $primary-button-border-color;
+    color: $white;
+
+    &:hover {
+      background-color: $magenta-208;
+    }
+
+    &:active {
+      background-color: $magenta-188;
+      border-color: $magenta-140;
+    }
+
+    &:disabled,
+    &.is-disabled {
+      background-color: $disabled-button-bg-color;
+      border-color: $disabled-button-border-color;
+      color: $disabled-button-text-color;
+    }
+  }
+
+  &.is-link {
+    @include button-no-style;
+    color: $dark-blue;
+    transition: $transition-default;
+
+    &:hover {
+      @include button-no-style;
+      text-decoration: underline;
+      color: $dark-blue-121;
+    }
+
+    &:active,
+    &:focus {
+      @include button-no-style;
+      color: $dark-blue-121;
+    }
+
+    &:disabled,
+    &.is-disabled {
+      @include button-no-style;
+      color: $blue-242;
+    }
+  }
+
+  // Modifiers
+  &.is-large {
+    padding: $large-button-padding;
+    @include font-size(5);
+    font-weight: $font-weight-regular;
+  }
+
+  &.is-width-100 {
+    width: 100%;
+  }
+
+  &:disabled,
+  &.is-disabled {
+    background: $disabled-button-bg-color;
+    border-color: $disabled-button-border-color;
+    color: $disabled-button-text-color;
+    pointer-events: none;
   }
 }
