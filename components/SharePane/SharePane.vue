@@ -44,8 +44,10 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {OuterClick} from '../../directives/outerClick';
 
   export default Vue.extend({
+    directives: {OuterClick},
     props: {
       isOpen: Boolean
     },

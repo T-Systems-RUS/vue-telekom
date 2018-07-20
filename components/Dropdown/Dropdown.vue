@@ -28,13 +28,16 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import {OuterClick} from '../../directives/outerClick';
 
   export default Vue.extend({
+    directives: {OuterClick},
     data() {
       return {
         isOpen: false
       };
     },
+    directives: {OuterClick},
     methods: {
       toggleDropdown() {
         this.isOpen = !this.isOpen;

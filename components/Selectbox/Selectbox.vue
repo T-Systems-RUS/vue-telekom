@@ -29,9 +29,11 @@
 <script lang="ts">
   import Vue from 'vue';
   import SelectboxItem from './SelectboxItem/SelectboxItem.vue';
+  import {OuterClick} from '../../directives/outerClick';
 
   export default Vue.extend({
     components: {SelectboxItem},
+    directives: {OuterClick},
     data() {
       return {
         isOpen: false
