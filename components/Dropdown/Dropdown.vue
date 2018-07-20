@@ -37,7 +37,6 @@
         isOpen: false
       };
     },
-    directives: {OuterClick},
     methods: {
       toggleDropdown() {
         this.isOpen = !this.isOpen;
