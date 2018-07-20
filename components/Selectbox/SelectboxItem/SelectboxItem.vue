@@ -54,8 +54,8 @@
   });
 </script>
 <style lang="scss" scoped>
-  @import '../../../../../styles/variables';
-  @import '../../../../../styles/mixins';
+  @import '../../../styles/base/variables';
+  @import '../../../styles/utilities/mixins';
 
   $item-padding: $building-unit-x0_5 $building-unit;
 

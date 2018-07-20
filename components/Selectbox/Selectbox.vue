@@ -91,8 +91,8 @@
   });
 </script>
 <style lang="scss" scoped>
-  @import '../../../../styles/variables';
-  @import '../../../../styles/mixins';
+  @import '../../styles/base/variables';
+  @import '../../styles/utilities/mixins';
 
   $arrow-size: 9px;
   $arrow-margin: -6px;
