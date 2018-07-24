@@ -1,10 +1,10 @@
 <template>
   <label class="radio">
     <input
-            :name="name"
-            :checked="checked"
-            @change="toggle"
-            type="radio">
+      :name="name"
+      :checked="checked"
+      @change="toggle"
+      type="radio">
     <span class="radio-icon"/>
     <span class="radio-label">{{ label }}</span>
   </label>

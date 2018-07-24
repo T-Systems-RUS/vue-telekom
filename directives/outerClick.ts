@@ -5,23 +5,23 @@ interface IOuterClickHTMLElement extends HTMLElement {
 }
 
 export const OuterClick = {
-    bind(el: IOuterClickHTMLElement, binding: VNodeDirective) {
-        const onOuterClickFn = binding.value;
-        if (onOuterClickFn instanceof Function) {
-            const handler: EventListener = (event: Event) => {
-                if (event.target instanceof Node && !el.contains(event.target)) {
-                    onOuterClickFn();
-                }
-            };
-            el.event = handler;
-            document.addEventListener('click', handler, true);
+  bind(el: IOuterClickHTMLElement, binding: VNodeDirective) {
+    const onOuterClickFn = binding.value;
+    if (onOuterClickFn instanceof Function) {
+      const handler: EventListener = (event: Event) => {
+        if (event.target instanceof Node && !el.contains(event.target)) {
+          onOuterClickFn();
         }
-    },
-    unbind(el: IOuterClickHTMLElement) {
-        if (el.event) {
-            document.removeEventListener('click', el.event, true);
-        }
+      };
+      el.event = handler;
+      document.addEventListener('click', handler, true);
     }
+  },
+  unbind(el: IOuterClickHTMLElement) {
+    if (el.event) {
+      document.removeEventListener('click', el.event, true);
+    }
+  }
 };
 
 Vue.directive('outer-click', OuterClick);
