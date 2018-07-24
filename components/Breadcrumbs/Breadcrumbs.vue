@@ -1,5 +1,3 @@
-<i18n src="./Breadcrumbs.yml"></i18n>
-
 <template>
   <div class="breadcrumbs is-flex">
     <div

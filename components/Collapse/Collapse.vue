@@ -1,8 +1,10 @@
 <template>
   <div
     class="collapse has-text-left"
-    @click="toggleExpanded">
-    <div class="collapse-header">
+    :class="background">
+    <div
+      class="collapse-header"
+      @click="toggleExpanded">
       <strong> {{ header }} </strong>
       <img
         class="expander"
@@ -35,7 +37,11 @@
       };
     },
     props: {
-      header: String
+      header: String,
+      background: {
+        type: String,
+        default: 'is-bg-grey'
+      }
     },
     computed: {
       isExpanded(): boolean {
@@ -56,26 +62,44 @@
   $collapse-padding: $building-unit-x2;
   $expander-size: $building-unit-x2;
 
+  .grey {
+    color: $magenta-238;
+  }
+
   .collapse {
     min-height: $collapse-padding * 2 + $expander-size;
-    padding: $collapse-padding;
-    background-color: $gray-248;
     position: relative;
+
+    &.is-bg-grey {
+      background-color: $gray-248;
+    }
+
+    &.is-bg-white {
+      background-color: $white;
+
+      .content {
+        border-top: 1px solid $gray-220;
+      }
+    }
 
     .expander {
       position: absolute;
       right: $collapse-padding;
-      width: $expander-size;
-      height: $expander-size;
+      width: $building-unit-x1_5;
+      height: $building-unit-x1_5;
 
       &.is-expanded {
         transform: rotate(180deg);
       }
     }
 
+    .collapse-header {
+      padding: $collapse-padding;
+      cursor: pointer;
+    }
+
     .content {
-      padding-top: $collapse-padding;
-      overflow: hidden;
+      padding: 0 $collapse-padding $collapse-padding;
     }
   }
 </style>

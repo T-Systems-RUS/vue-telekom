@@ -44,7 +44,9 @@ const components: { [key: string]: {} } = {
   SortingHeaderCell,
   Dropdown,
   Alert,
-  Pagination
+  Pagination,
+  Selectbox,
+  SelectboxItem
 };
 
 Object.keys(components)

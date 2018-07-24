@@ -3,9 +3,6 @@
 @import '../bulma/bulma-override-variables';
 @import '../utilities/mixins';
 
-$breadcrumb-margin: $building-unit 0;
-$breadcrumb-margin-mobile: $building-unit 0 $building-unit $building-unit;
-
 @mixin disabled-breadcrumb {
   color: $gray-56;
   pointer-events: none;
@@ -14,11 +11,6 @@ $breadcrumb-margin-mobile: $building-unit 0 $building-unit $building-unit;
 
 .breadcrumbs {
   flex-wrap: wrap;
-  margin: $breadcrumb-margin-mobile;
-
-  @include widescreen {
-    margin: $breadcrumb-margin;
-  }
 
   &.is-disabled {
     .breadcrumb-link {

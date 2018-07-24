@@ -1,26 +1,24 @@
-<i18n src="./Alert.yml"></i18n>
-
 <template>
   <transition name="fade">
     <div
-        v-if="alert"
-        class="alert"
-        :class="{'is-success': isAlertType(alertType.SUCCESS),
-           'is-warning': isAlertType(alertType.WARNING),
-           'is-hint': isAlertType(alertType.HINT)}">
+      v-if="alert"
+      class="alert"
+      :class="{'is-success': isAlertType(alertType.SUCCESS),
+               'is-warning': isAlertType(alertType.WARNING),
+               'is-hint': isAlertType(alertType.HINT)}">
       <div class="alert-inner container">
         <p
-            class="alert-text has-text-centered"
-            slot="alert-text">
+          class="alert-text has-text-centered"
+          slot="alert-text">
           <span>{{ $t(alert.text) }}</span>
           <a
-              v-if="alert.link"
-              @click="alert.link.method">{{ $t(alert.link.text) }}</a>
+            v-if="alert.link"
+            @click="alert.link.method">{{ $t(alert.link.text) }}</a>
         </p>
         <button
-            v-if="!alert.noCloseBtn"
-            @click="resetAlert"
-            class="alert-close"/>
+          v-if="!alert.noCloseBtn"
+          @click="resetAlert"
+          class="alert-close"/>
       </div>
     </div>
   </transition>
@@ -39,6 +37,9 @@
         alertType: AlertType
       };
     },
+    watch: {
+      alert: 'setLocaleMessages'
+    },
     computed: {
       ...mapGetters({
         alert: ALERT
@@ -50,6 +51,14 @@
       }),
       isAlertType(type: AlertType) {
         return this.alert.type === type;
+      },
+      setLocaleMessages() {
+        if (this.alert && this.alert.i18n) {
+          const locales = Object.keys(this.alert.i18n.messages);
+          locales.forEach((locale: string) => {
+            this.$i18n.setLocaleMessage(locale, this.alert.i18n.getLocaleMessage(locale));
+          });
+        }
       }
     }
   });
