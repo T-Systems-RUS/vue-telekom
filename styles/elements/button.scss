@@ -59,6 +59,15 @@ $primary-button-border-color: $magenta-160;
   // Button types
   &.is-icon {
     padding: $icon-button-padding;
+
+    &::after {
+      content: '';
+      width: $building-unit-x1_5;
+      height: $building-unit-x1_5;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 
   &.is-outline {
