@@ -1,4 +1,4 @@
-../<i18n src="./FileUploader.yml"></i18n>
+<i18n src="./FileUploader.yml"></i18n>
 
 <template>
   <div class="file-uploader">

@@ -1,4 +1,4 @@
-../<i18n src="./ConfirmModal.yml"></i18n>
+<i18n src="./ConfirmModal.yml"></i18n>
 
 <template>
   <transition name="opacity">

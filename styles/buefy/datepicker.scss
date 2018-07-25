@@ -1,0 +1,206 @@
+@import '../base/variables';
+@import '../bulma/bulma-override-variables';
+@import '../base/typography';
+@import '~buefy/src/scss/components/_datepicker.scss';
+
+$month-control-size: $building-unit-x2;
+$month-control-icon-hz-position: 9px;
+
+.datepicker {
+
+  .dropdown-content {
+    background: $white;
+    max-width: $form-field-width;
+    box-shadow: none;
+    border: 1px solid $gray-178;
+  }
+
+  .dropdown-trigger {
+    .control {
+      &::before {
+        content: '';
+        position: absolute;
+        width: $building-unit-x1_5;
+        height: $building-unit-x1_5;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 1;
+        right: $building-unit;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
+      input {
+        padding-right: $building-unit-x2_5;
+        cursor: pointer;
+
+        &:focus {
+          box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
+        }
+      }
+    }
+  }
+
+  .dropdown-item {
+    padding: $building-unit;
+  }
+
+  .datepicker-header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: 0;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+
+    .pagination-list {
+      padding: 0 $building-unit_x0_5;
+
+      .field {
+        margin-bottom: 0;
+      }
+
+      .select {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      width: $month-control-size;
+      height: $month-control-size;
+      position: relative;
+
+      &:hover {
+        &::after {
+          border-color: $gray-117;
+        }
+      }
+
+      span.icon {
+        display: none;
+      }
+
+      &::after {
+        border: 1px solid $gray-38;
+        border-right: 0;
+        border-top: 0;
+        content: "";
+        width: $building-unit;
+        height: $building-unit;
+        position: absolute;
+        top: 50%;
+        transform-origin: center;
+        transition: $transition-default;
+      }
+
+      &.pagination-previous {
+        order: 0;
+
+        &::after {
+          left: $month-control-icon-hz-position;
+          transform: translateY(-50%) rotate(45deg);
+        }
+      }
+
+      &.pagination-next {
+        order: 3;
+
+        &:after {
+          right: $month-control-icon-hz-position;
+          transform: translateY(-50%) rotate(225deg);
+        }
+      }
+    }
+  }
+
+  .datepicker-table {
+    width: 100%;
+    margin: 0 auto;
+
+    .datepicker-cell {
+      @include font-size(7);
+      border-radius: 0;
+    }
+
+    .datepicker-header {
+      .datepicker-cell {
+        padding: $building-unit-x0_5;
+        border-bottom: 2px solid $magenta;
+        font-weight: $font-weight-bold;
+        color: $gray-56;
+        text-transform: uppercase;
+      }
+    }
+
+    .datepicker-body {
+      .datepicker-row {
+        &:nth-child(2n) {
+          background-color: $gray-248;
+        }
+
+        .datepicker-cell {
+          padding: $building-unit-x0_5;
+          border: 1px solid transparent;
+          text-decoration: none;
+          transition: $transition-default;
+
+          &:not(.is-selected) {
+            &.is-selectable {
+              color: $gray-56;
+
+              &:hover,
+              &:focus {
+                // TODO: no design for hover available - ask designers
+                background-color: transparent;
+                border-color: $gray-220;
+              }
+            }
+
+            &.is-unselectable {
+              color: $gray-184;
+            }
+
+            &.is-today {
+              background-color: transparent;
+              border-color: transparent;
+              color: $magenta;
+
+              &:hover,
+              &:focus {
+                border-color: $gray-220;
+                color: $magenta;
+              }
+            }
+          }
+
+          &.is-selected {
+            background-color: transparent;
+            border: 1px solid $magenta;
+            color: $magenta;
+            // TODO: no design for selected available - ask designers
+
+            &:hover,
+            &:focus {
+              border-color: $magenta-238;
+              color: $magenta-238;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .datepicker-footer {
+    border: 0;
+    padding-top: $building-unit-x1_5;
+  }
+
+  .telekom-datepicker-today {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+}

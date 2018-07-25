@@ -22,6 +22,7 @@ import Alert from './Alert/Alert.vue';
 import Pagination from './Pagination/Pagination.vue';
 import Selectbox from './Selectbox/Selectbox.vue';
 import SelectboxItem from './Selectbox/SelectboxItem/SelectboxItem.vue';
+import Datepicker from './Datepicker/Datepicker.vue';
 
 const components: { [key: string]: {} } = {
   ActionsPane,
@@ -46,7 +47,8 @@ const components: { [key: string]: {} } = {
   Alert,
   Pagination,
   Selectbox,
-  SelectboxItem
+  SelectboxItem,
+  Datepicker
 };
 
 Object.keys(components)
