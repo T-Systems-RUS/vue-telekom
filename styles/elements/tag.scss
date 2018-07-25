@@ -1,0 +1,48 @@
+@import '../base/variables';
+@import '../utilities/mixins';
+@import '../base/typography';
+
+$tag-padding: 3px $building-unit 4px;
+$tag-border-width: 1px;
+$delete-tag-size: 16px;
+$delete-tag-icon-size: $delete-tag-size/2;
+$delete-tag-icon-height: 1px;
+
+.telekom-tag {
+  padding: $tag-padding;
+  border: $tag-border-width solid $gray-178;
+  border-radius: $telekom-radius;
+  color: $gray-38;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+
+  .delete-tag-btn {
+    @include font-size(6);
+    margin-left: $building-unit;
+    width: $delete-tag-size;
+    height: $delete-tag-size;
+    border-radius: 50%;
+    background-color: $gray-117;
+    position: relative;
+    cursor: pointer;
+
+    &::after,
+    &::before {
+      content: '';
+      width: $delete-tag-icon-size;
+      height: $delete-tag-icon-height;
+      @include absolute-xy-center;
+      background-color: $white;
+      transform-origin: center center;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+  }
+}

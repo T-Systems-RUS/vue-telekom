@@ -203,3 +203,32 @@ $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
     }
   }
 }
+
+.search-input {
+  max-width: $container-min-width;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: $building-unit-x4;
+
+  @include mobile {
+    margin-bottom: $building-unit-x2;
+  }
+
+  &::before {
+    content: '';
+    @include absolute-y-center;
+    width: $building-unit-x1_5;
+    height: $building-unit-x1_5;
+    z-index: 1;
+    left: $building-unit;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // NOTE please add background-image: url('PATH_TO_assets/images/search.svg');
+    // to your styles.scss where you import vue-telekom
+  }
+
+  .input {
+    padding-left: $building-unit-x3;
+  }
+}
