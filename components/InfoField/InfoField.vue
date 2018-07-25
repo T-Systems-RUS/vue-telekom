@@ -7,19 +7,21 @@
         :value="value"
         @input="updateInput($event.target.value)"
         :class="{'is-danger': invalid}">
-      <span
-        class="info-icon tooltip is-tooltip-multiline "
-        :tooltip="text">
+      <Tooltip
+        class="is-input is-absolute info-icon"
+        :text="text">
         <img src="./assets/information_outline_blue.svg">
-      </span>
+      </Tooltip>
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
+  import Tooltip from '../Tooltip/Tooltip.vue';
 
   export default Vue.extend({
+    components: {Tooltip},
     props: {
       name: String,
       value: {required: true},
@@ -37,7 +39,6 @@
 <style lang="scss" scoped>
   @import '../../styles/base/variables';
   @import '../../styles/utilities/mixins';
-  @import "../../styles/components/tooltip";
 
   $visible-image-size: $building-unit-x1_5;
 

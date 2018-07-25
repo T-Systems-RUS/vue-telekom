@@ -26,12 +26,15 @@ and use this file when importing to components that need mixins. (*vue-telekom* 
 ### Override required variables
 
 Most likely you will need to copy fonts from `styles/assets/fonts` to your local static folder.
-Otherwise fonts will be encoded in the CSS and cause bloat.
-To avoid this override `$font_path` variable like this:
+Otherwise fonts will be encoded in the CSS and cause bloat. (The same is for assets images that are used in styles)
+To avoid this override ***$font_path*** and ***$assets_path*** variables like this:
 
 ```css
 @import '../src/common/vue-telekom/styles/export-variables';
-$font_path: '/fonts/';
+
+$assets_path: './common/vue-telekom/styles/assets/';
+$font_path: './common/vue-telekom/styles/assets/fonts/';
+
 @import '../src/common/vue-telekom/styles/styles';
 ```
 

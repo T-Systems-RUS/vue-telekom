@@ -1,3 +1,5 @@
+@import '../export-variables';
+
 // Forms
 $label-margin-bottom: $building-unit-x0_25;
 $input-border-size: 1px;
@@ -218,8 +220,7 @@ $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    // NOTE please add background-image: url('PATH_TO_assets/images/search.svg');
-    // to your styles.scss where you import vue-telekom
+    background-image: url('#{$assets_path}/images/search.svg');
   }
 
   .input {

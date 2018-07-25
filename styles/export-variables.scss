@@ -1,1 +1,2 @@
-$font_path: '../assets/fonts/' !default;
+$assets_path: '../assets/' !default;
+$font_path: '#{$assets_path}fonts/';

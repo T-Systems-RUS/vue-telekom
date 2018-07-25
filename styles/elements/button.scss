@@ -133,6 +133,37 @@ $primary-button-border-color: $magenta-160;
     }
   }
 
+  &.is-round {
+    background-color: $magenta;
+    width: $building-unit-x4;
+    height: $building-unit-x4;
+    padding: 0;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: none;
+    border: 0;
+    transition: $transition-default;
+
+    &::before {
+      content: '';
+      @include absolute-xy-center;
+      width: $building-unit-x2;
+      height: $building-unit-x2;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    &.is-plus {
+      &::before {
+        background-image: url('#{$assets_path}images/plus.svg');
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 $building-unit $building-unit rgba($gray-56, .15);
+    }
+  }
+
   // Modifiers
   &.is-large {
     padding: $large-button-padding;

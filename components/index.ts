@@ -23,6 +23,7 @@ import Pagination from './Pagination/Pagination.vue';
 import Selectbox from './Selectbox/Selectbox.vue';
 import SelectboxItem from './Selectbox/SelectboxItem/SelectboxItem.vue';
 import Datepicker from './Datepicker/Datepicker.vue';
+import Tooltip from './Tooltip/Tooltip.vue';
 
 const components: { [key: string]: {} } = {
   ActionsPane,
@@ -48,7 +49,8 @@ const components: { [key: string]: {} } = {
   Pagination,
   Selectbox,
   SelectboxItem,
-  Datepicker
+  Datepicker,
+  Tooltip
 };
 
 Object.keys(components)
