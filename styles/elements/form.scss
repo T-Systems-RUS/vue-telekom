@@ -208,11 +208,6 @@ $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
   max-width: $container-min-width;
   margin: 0 auto;
   position: relative;
-  margin-bottom: $building-unit-x4;
-
-  @include mobile {
-    margin-bottom: $building-unit-x2;
-  }
 
   &::before {
     content: '';
