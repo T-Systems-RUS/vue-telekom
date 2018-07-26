@@ -3,7 +3,9 @@
     <div
       class="collapse-header"
       @click="toggleExpanded">
-      <strong> {{ header }} </strong>
+      <slot name="header">
+        <strong> {{ header }} </strong>
+      </slot>
       <img
         class="expander"
         v-if="!isExpanded"
@@ -93,6 +95,7 @@
 
     .collapse-header {
       padding: $collapse-padding;
+      padding-right: $building-unit-x5;
       cursor: pointer;
       position: relative;
     }
