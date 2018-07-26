@@ -24,6 +24,7 @@ import Selectbox from './Selectbox/Selectbox.vue';
 import SelectboxItem from './Selectbox/SelectboxItem/SelectboxItem.vue';
 import Datepicker from './Datepicker/Datepicker.vue';
 import Tooltip from './Tooltip/Tooltip.vue';
+import SimpleFileUploader from './SimpleFileUploader/SimpleFileUploader.vue';
 
 const components: { [key: string]: {} } = {
   ActionsPane,
@@ -50,7 +51,8 @@ const components: { [key: string]: {} } = {
   Selectbox,
   SelectboxItem,
   Datepicker,
-  Tooltip
+  Tooltip,
+  SimpleFileUploader
 };
 
 Object.keys(components)

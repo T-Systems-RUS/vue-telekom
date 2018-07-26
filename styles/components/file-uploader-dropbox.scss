@@ -1,0 +1,39 @@
+@import '../base/variables';
+@import '../export-variables';
+
+$dropbox-vertical-padding: $building-unit-x3;
+$dropbox-margin-bottom: $building-unit-x3;
+$drag-icon-size: 64px;
+
+.file-uploader-dropbox {
+  display: block;
+  width: 100%;
+  border: 1px solid $gray-220;
+  background-color: $gray-248;
+  padding: $dropbox-vertical-padding $building-unit;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: $dropbox-margin-bottom;
+
+  a {
+    display: block;
+  }
+
+  .file-uploader-input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .file-uploader-drag {
+    display: table;
+    width: $drag-icon-size;
+    height: $drag-icon-size;
+    background: center / cover url('#{$assets_path}images/drag-and-drop-outline.svg') no-repeat;
+    margin-bottom: $building-unit;
+  }
+}
+

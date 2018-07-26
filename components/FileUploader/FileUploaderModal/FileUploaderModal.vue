@@ -61,14 +61,14 @@
             <p class="is-size-6">{{ $t('filesInfo') }}</p>
           </slot>
         </div>
-        <label class="file-uploader-modal-dropbox has-text-centered is-size-6">
+        <label class="file-uploader-dropbox has-text-centered is-size-6">
           <input
             type="file"
             ref="fileInput"
             :multiple="isMultiple"
-            class="file-uploader-modal-input"
+            class="file-uploader-input"
             @change="onFilesChange($event.target.files)">
-          <span class="file-uploader-modal-drag centered"/>
+          <span class="file-uploader-drag centered"/>
           <p>{{ $t('dragFilesHere') }}</p>
           <a>{{ $t('selectFiles') }}</a>
         </label>
@@ -252,6 +252,10 @@
   @import '../../../styles/utilities/transitions';
   @import '../../../styles/utilities/mixins';
 
+  $assets_path: '../../../styles/assets/';
+
+  @import '../../../styles/components/file-uploader-dropbox';
+
   $modal-border-top: 4px solid $magenta;
   $modal-content-width: $container-min-width;
   $title-margin-bottom: $building-unit-x2;
@@ -259,9 +263,6 @@
   $subtitle-margin-bottom: $building-unit-x0_5;
   $info-margin-bottom: $building-unit-x2;
 
-  $dropbox-vertical-padding: $building-unit-x3;
-  $dropbox-margin-bottom: $building-unit-x3;
-  $drag-icon-size: 64px;
   $list-margin-bottom: 50px;
   $list-margin-bottom-mobile: $building-unit-x3;
   $add-margin-bottom: $building-unit-x1_5;
@@ -303,38 +304,6 @@
 
     &-info {
       margin-bottom: $info-margin-bottom;
-    }
-
-    &-dropbox {
-      display: block;
-      width: 100%;
-      border: 1px solid $gray-220;
-      background-color: $gray-248;
-      padding: $dropbox-vertical-padding $building-unit;
-      position: relative;
-      cursor: pointer;
-      margin-bottom: $dropbox-margin-bottom;
-
-      a {
-        display: block;
-      }
-
-      input {
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    &-drag {
-      display: table;
-      width: $drag-icon-size;
-      height: $drag-icon-size;
-      background: center / cover url('../assets/drag-and-drop-outline.svg') no-repeat;
-      margin-bottom: $building-unit;
     }
 
     &-list {
