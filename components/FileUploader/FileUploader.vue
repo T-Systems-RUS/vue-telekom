@@ -2,13 +2,18 @@
 
 <template>
   <div class="file-uploader">
-    <button
+    <div
       @click="setIsUploadModalOpen(true)"
-      class="file-uploader-btn button">
-      <slot name="button-text">
-        <span>{{ $t('addFiles') }}</span>
+      class="file-uploader-btn-wrap">
+      <slot name="open-modal-btn">
+        <button class="file-uploader-btn button">
+          <slot name="button-text">
+            <span>{{ $t('addFiles') }}</span>
+          </slot>
+        </button>
       </slot>
-    </button>
+    </div>
+
     <FileList
       class="outer-file-list"
       v-if="hasOuterFileList"/>
@@ -103,7 +108,11 @@
   $image-preview-size: $building-unit-x3;
 
   .file-uploader {
-    .button {
+    .file-uploader-btn-wrap {
+      display: table;
+    }
+
+    .file-uploader-btn {
       padding-left: $button-padding-left;
 
       span {
