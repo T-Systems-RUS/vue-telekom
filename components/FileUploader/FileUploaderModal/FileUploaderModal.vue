@@ -21,20 +21,20 @@
         v-if="hasError">
         <p
           class="title is-7 is-regular is-marginless"
-          v-if="fileSizeError.hasError">
-          <b>{{ getInvalidFileNames(fileSizeError.fileNames) }}</b>:
+          v-if="fileSizeError">
+          <b>{{ getInvalidFileNames(fileSizeError) }}</b>:
           {{ $t('fileSizeError') }}
         </p>
         <p
           class="title is-7 is-regular is-marginless"
-          v-if="fileExtensionError.hasError">
-          <b>{{ getInvalidFileNames(fileExtensionError.fileNames) }}</b>:
+          v-if="fileExtensionError">
+          <b>{{ getInvalidFileNames(fileExtensionError) }}</b>:
           {{ $t('fileExtensionError') }}
         </p>
         <p
           class="title is-7 is-regular"
-          v-if="imageExtensionError.hasError">
-          <b>{{ getInvalidFileNames(imageExtensionError.fileNames) }}</b>:
+          v-if="imageExtensionError">
+          <b>{{ getInvalidFileNames(imageExtensionError) }}</b>:
           {{ $t('imageExtensionError') }}
         </p>
       </ErrorMessage>
@@ -153,7 +153,6 @@
     HAS_UPLOAD_ERRORS, HAS_UPLOAD_REPLACEMENTS
   } from '../fileUploadStore/getter-types';
   import {IFileUpload, IImageUrl} from '../IFileUploadList';
-  import {IFileUploadError} from '../fileUploadStore';
 
   export default Vue.extend({
     components: {
@@ -186,13 +185,13 @@
       isMultiple(): boolean {
         return this.$store.getters[IS_UPLOAD_MULTIPLE];
       },
-      fileExtensionError(): IFileUploadError {
+      fileExtensionError(): string[] {
         return this.$store.getters[FILE_EXTENSION_ERROR];
       },
-      imageExtensionError(): IFileUploadError {
+      imageExtensionError(): string[] {
         return this.$store.getters[IMAGE_EXTENSION_ERROR];
       },
-      fileSizeError(): IFileUploadError {
+      fileSizeError(): string[] {
         return this.$store.getters[FILE_SIZE_ERROR];
       },
       isButtonActive(): boolean {

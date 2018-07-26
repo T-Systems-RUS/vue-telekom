@@ -24,13 +24,8 @@ export enum FileUploadErrorType {
   IMAGE_EXTENSION = 'IMAGE_EXTENSION'
 }
 
-export interface IFileUploadError {
-  hasError: boolean;
-  fileNames: string[];
-}
-
 export type IFileUploadErrors = {
-  [k in FileUploadErrorType]: IFileUploadError
+  [k in FileUploadErrorType]?: string[] // file names
 };
 
 export interface IFileUploadState {
@@ -65,20 +60,12 @@ const fileUploadState: Module<IFileUploadState, {}> = {
     imageUrl: IMAGE_URL_INITIAL,
     replacementFiles: [],
     replacementUrl: '',
-    errors: {
-      [FileUploadErrorType.FILE_SIZE]: {
-        hasError: false,
-        fileNames: []
-      },
-      [FileUploadErrorType.FILE_EXTENSION]: {
-        hasError: false,
-        fileNames: []
-      },
-      [FileUploadErrorType.IMAGE_EXTENSION]: {
-        hasError: false,
-        fileNames: []
-      }
-    }
+    errors: {}
+    //   {
+    //   [FileUploadErrorType.FILE_SIZE]: [],
+    //   [FileUploadErrorType.FILE_EXTENSION]: [],
+    //   [FileUploadErrorType.IMAGE_EXTENSION]: []
+    // }
   },
   mutations,
   actions,
@@ -93,8 +80,7 @@ const fileUploadState: Module<IFileUploadState, {}> = {
     [FILE_EXTENSION_ERROR]: state => state.errors[FileUploadErrorType.FILE_EXTENSION],
     [FILE_SIZE_ERROR]: state => state.errors[FileUploadErrorType.FILE_SIZE],
     [IMAGE_EXTENSION_ERROR]: state => state.errors[FileUploadErrorType.IMAGE_EXTENSION],
-    [HAS_UPLOAD_ERRORS]: state => Object.keys(state.errors)
-      .some(key => state.errors[key as FileUploadErrorType].hasError),
+    [HAS_UPLOAD_ERRORS]: state => Boolean(Object.keys(state.errors).length),
     [REPLACEMENT_FILES]: state => state.replacementFiles,
     [REPLACEMENT_URL]: state => state.replacementUrl,
     [HAS_UPLOAD_REPLACEMENTS]: state => state.replacementFiles.length || state.replacementUrl

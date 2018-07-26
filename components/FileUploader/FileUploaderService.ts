@@ -7,7 +7,7 @@ const harmfulFileExtensionRegex = new RegExp('(.|/)(bat|exe|cmd|sh|php([0-9])?|p
 const imageFileExtesionRegex = /\.(jpg|jpeg|png)$/;
 
 export class FileUploaderService {
-  public static fileListToFileUploadList(fileList: FileList): IFileUpload[] {
+  public static fileListToFileUploadList(fileList: FileList|File[]): IFileUpload[] {
     return Array.prototype.map.call(fileList, (item: File) => FileUploaderService.fileToFileUpload(item));
   }
 
@@ -50,5 +50,26 @@ export class FileUploaderService {
 
   public static validateImageExtension(fileName: string): boolean {
     return imageFileExtesionRegex.test(fileName);
+  }
+
+  public static readAsDataUrl(file: IFileUpload): Promise<string> {
+    return new Promise((resolve, _reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(file.file);
+    });
+  }
+
+  public static fileListToImageFileUploadList(fileList: FileList|File[]): Promise<IFileUpload[]> {
+    return Promise.all(Array.prototype.map.call(fileList, (file: File) => {
+      const fileUpload: IFileUpload = FileUploaderService.fileToFileUpload(file);
+      return this.readAsDataUrl(fileUpload)
+        .then((result: string) => {
+          fileUpload.imageDataUrl = result;
+          return fileUpload;
+        });
+    }));
   }
 }

@@ -95,15 +95,13 @@ export const mutations: MutationTree<IFileUploadState> = {
     state.imageUrl.loadingStatus = payload;
   },
   [RESET_UPLOAD_ERRORS](state) {
-    (Object.keys(state.errors) as FileUploadErrorType[])
-      .forEach(key => {
-        state.errors[key].hasError = false;
-        state.errors[key].fileNames = [];
-      });
+    state.errors = {};
   },
-  [SET_FILE_UPLOAD_ERROR](state, {errorType, fileName}: {errorType: FileUploadErrorType; fileName: string; }) {
-    state.errors[errorType].hasError = true;
-    state.errors[errorType].fileNames.push(fileName);
+  [SET_FILE_UPLOAD_ERROR](state, {errorType, fileName}: { errorType: FileUploadErrorType; fileName: string; }) {
+    const error = state.errors[errorType];
+    state.errors[errorType] = error instanceof Array ?
+      [...error, fileName] :
+      [fileName];
   },
   [SET_REPLACEMENT_FILES](state, payload) {
     state.replacementFiles = payload;
