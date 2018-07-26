@@ -82,7 +82,6 @@
         this.$emit('change', files);
       },
       emitErrors(errors: IFileUploadErrors) {
-        console.log(errors);
         this.$emit('error', errors);
       }
     }

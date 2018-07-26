@@ -1,0 +1,13 @@
+en:
+  delete: "Delete"
+  deleteFileQuestion: "Delete File?"
+  reallyDelete: "Do you really want to delete the file"
+  actionUndone: "This action cannot be undone."
+  deleteFileBtn: "Delete File"
+
+de:
+  delete: "Löschen"
+  deleteFileQuestion: "Datei löschen?"
+  reallyDelete: "Wollen Sie die folgende Datei wirklich löschen:"
+  actionUndone: "Diese Aktion kann nicht rückgängig gemacht werden."
+  deleteFileBtn: "Datei löschen"
