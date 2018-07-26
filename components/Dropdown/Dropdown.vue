@@ -50,7 +50,7 @@
 
   $content-border-size: 1px;
   $max-items-without-scroll: 5;
-  $item-height: $building-unit-x3;
+  $item-height: $building-unit-x4;
   $max-content-height: ($item-height * $max-items-without-scroll) + $content-border-size * 2;
 
   .dropdown-content {
@@ -68,8 +68,7 @@
     @include font-size(6);
     white-space: nowrap;
     height: $item-height;
-    line-height: $item-height;
-    padding: 0 $building-unit;
+    padding: $building-unit;
 
     &:hover {
       background-color: $gray-237;
