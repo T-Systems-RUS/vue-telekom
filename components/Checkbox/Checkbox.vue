@@ -1,10 +1,12 @@
 <template>
   <label
     class="checkbox"
+    :class="{'is-disabled': disabled}"
     @click="toggleCheck">
     <input
       :name="name"
       :checked="checked"
+      :disabled="disabled"
       type="checkbox"
       @click.stop.prevent>
     <span
@@ -22,7 +24,8 @@
   export default Vue.extend({
     props: {
       name: String,
-      checked: Boolean
+      checked: Boolean,
+      disabled: Boolean
     },
     computed: {
       checkedValue(): boolean {
@@ -31,7 +34,9 @@
     },
     methods: {
       toggleCheck() {
-        this.$emit('update:checked', !this.checked);
+        if (!this.disabled) {
+          this.$emit('update:checked', !this.checked);
+        }
       }
     }
   });
@@ -54,6 +59,28 @@
   label.checkbox {
     padding-left: $checkbox-label-padding-left;
     padding-top: $checkbox-label-padding-top;
+    min-height: 24px;
+
+    &.is-disabled {
+      pointer-events: none;
+
+      .checkbox-icon {
+        background-color: $gray-248;
+        border-color: $gray-220;
+        pointer-events: none;
+
+        &::after {
+          opacity: .5;
+        }
+      }
+
+      &:active,
+      &:hover {
+        background-color: $gray-248;
+        border-color: $gray-220;
+        pointer-events: none;
+      }
+    }
 
     &:hover {
       .checkbox-icon {
