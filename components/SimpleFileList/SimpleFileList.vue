@@ -7,8 +7,19 @@
     <!--Tiles-->
     <div
       v-if="isTile && isImageUpload"
-      class="simple-file-tiles">
-      test
+      class="simple-file-tiles is-flex">
+      <div
+        v-for="file in files"
+        class="simple-file-tile-wrap">
+        <div
+          :style="{backgroundImage: getBackgroundImage(file)}"
+          class="simple-file-tile">
+          <a
+            :class="{'is-disabled': isLoading(file.loadingStatus)}"
+            @click="handleDelete(file)"
+            class="tile-image-delete-btn"/>
+        </div>
+      </div>
     </div>
     <!--List-->
     <div
@@ -108,4 +119,53 @@
   $assets_path: '../../styles/assets/';
 
   @import '../../styles/components/file-list';
+
+  // TODO: might need to refactor explicit definition
+  $tile-width: 163px;
+  $tile-height: 192px;
+
+  .simple-file-tiles {
+    margin: -$building-unit;
+    flex-wrap: wrap;
+
+    .simple-file-tile-wrap {
+      padding: $building-unit;
+    }
+
+    .simple-file-tile {
+      position: relative;
+      width: $tile-width;
+      height: $tile-height;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: $white;
+
+      &::before {
+        content: '';
+        @include absolute-fit;
+        z-index: 1;
+        background-color: $gray-38;
+        opacity: 0.2;
+      }
+    }
+
+    .tile-image-delete-btn {
+      width: $building-unit-x3;
+      height: $building-unit-x3;
+      background-size: $building-unit-x2 $building-unit-x2;
+      background-color: $white;
+      border-radius: 50%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-image: url('./assets/trash.svg');
+      @include absolute-xy-center;
+      transition: $transition-default;
+      cursor: pointer;
+      z-index: 1;
+
+      &:hover {
+        background-color: $gray-237;
+      }
+    }
+  }
 </style>
