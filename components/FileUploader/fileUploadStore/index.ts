@@ -21,7 +21,8 @@ import {
 export enum FileUploadErrorType {
   FILE_SIZE = 'FILE_SIZE',
   FILE_EXTENSION = 'FILE_EXTENSION',
-  IMAGE_EXTENSION = 'IMAGE_EXTENSION'
+  IMAGE_EXTENSION = 'IMAGE_EXTENSION',
+  CUSTOM_FORMAT = 'CUSTOM_FORMAT'
 }
 
 export type IFileUploadErrors = {

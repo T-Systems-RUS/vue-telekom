@@ -2,8 +2,8 @@
 
 <template>
   <section
-    v-if="files.length"
-    class="simple-file-list">
+    v-if="files && files.length"
+    class="simple-file-list upload-file-list">
     <!--Tiles-->
     <div
       v-if="isTile && isImageUpload"
@@ -14,8 +14,15 @@
         <div
           :style="{backgroundImage: getBackgroundImage(file)}"
           class="simple-file-tile">
+          <span
+            v-if="isLoading(file.loadingStatus) || isCompleted(file.loadingStatus)"
+            class="tile-status">
+            <span
+              class="upload-file-status-icon"
+              :class="{'is-completed': isCompleted(file.loadingStatus), 'is-loading': isLoading(file.loadingStatus)}"/>
+          </span>
           <a
-            :class="{'is-disabled': isLoading(file.loadingStatus)}"
+            v-else
             @click="handleDelete(file)"
             class="tile-image-delete-btn"/>
         </div>
@@ -139,6 +146,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-color: $white;
+      background-position: center;
 
       &::before {
         content: '';
@@ -165,6 +173,22 @@
 
       &:hover {
         background-color: $gray-237;
+      }
+    }
+
+    .tile-status {
+      @include absolute-xy-center;
+      z-index: 1;
+      width: $building-unit-x3;
+      height: $building-unit-x3;
+      background-color: $white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .upload-file-status-icon {
+        margin-right: 0;
       }
     }
   }

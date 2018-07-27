@@ -52,6 +52,12 @@ export class FileUploaderService {
     return imageFileExtesionRegex.test(fileName);
   }
 
+  public static validateCustomExtension(extensions: string[], fileName: string): boolean {
+    const fileNameParsed = fileName.split('.');
+    const fileExtension = fileNameParsed[fileNameParsed.length - 1];
+    return extensions.findIndex(ext => ext.toLowerCase() === fileExtension.toLowerCase()) > -1;
+  }
+
   public static readAsDataUrl(file: IFileUpload): Promise<string> {
     return new Promise((resolve, _reject) => {
       const reader = new FileReader();

@@ -25,23 +25,20 @@
   export default Vue.extend({
     props: {
       isMultiple: Boolean,
-      isImageUpload: Boolean
+      isImageUpload: Boolean,
+      allowedFormats: {}
     },
     methods: {
       onFilesChange(files: FileList) {
-        const validFiles: File[] = this.validateFiles(files);
+        const {validFiles, errors} = this.validateFiles(files);
         if (this.isImageUpload) {
           FileUploaderService.fileListToImageFileUploadList(validFiles)
-            .then((fileUploads: IFileUpload[]) => {
-              this.emitFiles(fileUploads);
-              this.resetFileInput();
-            });
+            .then((fileUploads: IFileUpload[]) => this.emitEvents(fileUploads, errors));
         } else {
-          this.emitFiles(FileUploaderService.fileListToFileUploadList(validFiles));
-          this.resetFileInput();
+          this.emitEvents(FileUploaderService.fileListToFileUploadList(validFiles), errors);
         }
       },
-      validateFiles(files: FileList): File[] {
+      validateFiles(files: FileList): {validFiles: File[], errors: IFileUploadErrors} {
         let errors: IFileUploadErrors = {};
 
         const validFiles: File[] = Array.prototype.filter.call(files, (file: File) => {
@@ -50,7 +47,14 @@
             errors = this.updateErrors(errors, FileUploadErrorType.FILE_SIZE, file.name);
             isValid = false;
           }
-          if (this.isImageUpload && !FileUploaderService.validateImageExtension(file.name)) {
+          if (
+            this.allowedFormats &&
+            this.allowedFormats instanceof Array &&
+            !FileUploaderService.validateCustomExtension(this.allowedFormats, file.name)
+          ) {
+            errors = this.updateErrors(errors, FileUploadErrorType.CUSTOM_FORMAT, file.name);
+            isValid = false;
+          } else if (this.isImageUpload && !FileUploaderService.validateImageExtension(file.name)) {
             errors = this.updateErrors(errors, FileUploadErrorType.IMAGE_EXTENSION, file.name);
             isValid = false;
           } else if (!FileUploaderService.validateFileExtension(file.name)) {
@@ -60,16 +64,7 @@
           return isValid;
         });
 
-        if (Object.keys(errors).length) {
-          this.emitErrors(errors);
-        }
-        return validFiles;
-      },
-      resetFileInput() {
-        // ref is used because v-model and value cannot be binded to file input
-        if (this.$refs.fileInput instanceof HTMLInputElement) {
-          this.$refs.fileInput.value = '';
-        }
+        return {validFiles, errors};
       },
       updateErrors(errors: IFileUploadErrors, errorType: FileUploadErrorType, fileName: string): IFileUploadErrors {
         const error = errors[errorType];
@@ -78,11 +73,18 @@
           [fileName];
         return errors;
       },
-      emitFiles(files: IFileUpload[]) {
+      emitEvents(files: IFileUpload[], errors: IFileUploadErrors) {
         this.$emit('change', files);
+        if (Object.keys(errors).length) {
+          this.$emit('error', errors);
+        }
+        this.resetFileInput();
       },
-      emitErrors(errors: IFileUploadErrors) {
-        this.$emit('error', errors);
+      resetFileInput() {
+        // ref is used because v-model and value cannot be binded to file input
+        if (this.$refs.fileInput instanceof HTMLInputElement) {
+          this.$refs.fileInput.value = '';
+        }
       }
     }
   });

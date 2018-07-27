@@ -322,6 +322,10 @@
       margin-bottom: $building-unit-x3;
     }
 
+    .file-uploader-dropbox {
+      margin-bottom: $dropbox-margin-bottom;
+    }
+
     .image-uploader-tabs {
       padding: $image-tabs-padding;
       border-bottom: $image-tabs-border-size solid $gray-220;
