@@ -3,19 +3,21 @@
     <div class="modal common-modal is-active">
       <div class="modal-background"/>
       <div class="modal-card">
-        <header class="modal-card-head">
-          <h3 class="common-modal-title modal-card-title title is-2 is-3-mobile has-text-centered">
-            <slot name="modal-title"/>
-          </h3>
-          <slot name="modal-subtitle">
-            <p class="common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"/>
-          </slot>
-          <button
-            @click="exit"
-            class="common-modal-close"/>
-        </header>
         <section class="modal-card-body">
-          <slot name="modal-content"/>
+          <div class="common-modal-body">
+            <header class="common-modal-header">
+              <h3 class="common-modal-title modal-card-title title is-2 is-3-mobile has-text-centered">
+                <slot name="modal-title"/>
+              </h3>
+              <slot name="modal-subtitle">
+                <p class="common-modal-subtitle has-text-centered is-size-5 is-size-6-mobile"/>
+              </slot>
+              <button
+                @click="exit"
+                class="common-modal-close"/>
+            </header>
+            <slot name="modal-content"/>
+          </div>
         </section>
       </div>
     </div>
@@ -53,11 +55,10 @@
   $title-margin-bottom: $building-unit-x2;
   $subtitle-margin-bottom: $building-unit-x3;
 
-  $close-size: 64px;
-  $close-top: 52px;
-  $close-right: 84px;
+  $close-size: $building-unit-x4;
+  $close-top: $building-unit-x4;
+  $close-right: -$close-size - $building-unit-x3;
   $close-right-mobile: 18px;
-  $close-size-mobile: 48px;
   $close-bg-size: 32px;
 
   .common-modal {
@@ -72,25 +73,33 @@
       max-height: 100vh;
       height: 100vh;
       position: relative;
-      max-width: $container-max-size;
+      //max-width: $container-max-size;
       width: 100%;
     }
 
-    .modal-card-head {
+    .common-modal-header {
       background-color: $common-bg-color;
       border-bottom: 0;
       padding-top: $modal-card-padding-top;
+      display: flex;
+      align-items: center;
       flex-direction: column;
       padding-bottom: 0;
+      position: relative;
     }
 
     .modal-card-body {
       padding: 0 $building-unit;
-      margin-bottom: $building-unit-x2;
+      padding-bottom: $building-unit-x2;
 
       @include mobile {
         padding: 0 $building-unit;
       }
+    }
+
+    .common-modal-body {
+      max-width: $container-min-width;
+      margin: 0 auto;
     }
 
     &-title {
@@ -113,14 +122,16 @@
       outline: none;
       background: $gray-38 center / $close-bg-size $close-bg-size url('./assets/close.svg') no-repeat;
 
-      @include widescreen {
-        right: $close-right;
+      @include mobile {
+        right: $close-right-mobile;
       }
 
-      @include mobile {
-        width: $close-size-mobile;
-        height: $close-size-mobile;
+      @include tablet {
         right: $close-right-mobile;
+      }
+
+      @include desktop {
+        right: $close-right;
       }
     }
   }
