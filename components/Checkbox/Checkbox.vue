@@ -69,8 +69,10 @@
         border-color: $gray-220;
         pointer-events: none;
 
-        &::after {
-          opacity: .5;
+        &.is-checked {
+          &::after {
+            opacity: .5;
+          }
         }
       }
 
