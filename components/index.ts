@@ -9,7 +9,6 @@ import ConfirmModal from './ConfirmModal/ConfirmModal.vue';
 import ErrorMessage from './ErrorMessage/ErrorMessage.vue';
 import FileUploader from './FileUploader/FileUploader.vue';
 import InfoField from './InfoField/InfoField.vue';
-import PageTemplate from './PageTemplate/PageTemplate.vue';
 import RadioButton from './RadioButton/RadioButton.vue';
 import ScrolledIntoView from './ScrolledIntoView/ScrolledIntoView.vue';
 import SharePane from './SharePane/SharePane.vue';
@@ -36,7 +35,6 @@ const components: { [key: string]: {} } = {
   Tabs,
   Tab,
   Breadcrumbs,
-  PageTemplate,
   BackToTop,
   ConfirmModal,
   CommonModal,
