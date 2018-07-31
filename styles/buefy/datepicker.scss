@@ -1,4 +1,5 @@
 @import '../base/variables';
+@import '../utilities/mixins';
 @import '../bulma/bulma-override-variables';
 @import '../base/typography';
 @import '~buefy/src/scss/components/_datepicker.scss';
@@ -8,9 +9,14 @@ $month-control-icon-hz-position: 9px;
 
 .datepicker {
 
+  .dropdown-menu {
+    width: 100%;
+  }
+
   .dropdown-content {
     background: $white;
     max-width: $form-field-width;
+    width: 100%;
     box-shadow: none;
     border: 1px solid $gray-178;
   }
@@ -55,6 +61,7 @@ $month-control-icon-hz-position: 9px;
   .pagination {
     display: flex;
     align-items: center;
+    justify-content: center;
 
     .pagination-list {
       padding: 0 $building-unit_x0_5;
@@ -143,9 +150,26 @@ $month-control-icon-hz-position: 9px;
 
         .datepicker-cell {
           padding: $building-unit-x0_5;
-          border: 1px solid transparent;
           text-decoration: none;
           transition: $transition-default;
+          position: relative;
+          z-index: 1;
+          border: none!important;
+
+          &:hover,
+          &:focus {
+            background-color: transparent!important;
+          }
+
+          &::before {
+            content: '';
+            border-radius: 50%;
+            width: $building-unit-x2;
+            height: $building-unit-x2;
+            @include absolute-xy-center;
+            z-index: -1;
+            transition: $transition-default;
+          }
 
           &:not(.is-selected) {
             &.is-selectable {
@@ -153,9 +177,9 @@ $month-control-icon-hz-position: 9px;
 
               &:hover,
               &:focus {
-                // TODO: no design for hover available - ask designers
-                background-color: transparent;
-                border-color: $gray-220;
+                &::before {
+                  background-color: $gray-237;
+                }
               }
             }
 
@@ -165,27 +189,41 @@ $month-control-icon-hz-position: 9px;
 
             &.is-today {
               background-color: transparent;
-              border-color: transparent;
               color: $magenta;
 
               &:hover,
               &:focus {
-                border-color: $gray-220;
                 color: $magenta;
+              }
+
+              &.is-unselectable {
+                color: $magenta-238;
+
+                &:hover,
+                &:focus {
+                  color: $magenta-238;
+                }
               }
             }
           }
 
           &.is-selected {
             background-color: transparent;
-            border: 1px solid $magenta;
-            color: $magenta;
-            // TODO: no design for selected available - ask designers
+            color: $gray-56;
+
+            &::before {
+              background-color: $gray-220;
+            }
 
             &:hover,
             &:focus {
-              border-color: $magenta-238;
-              color: $magenta-238;
+              &::before {
+                background-color: $gray-199;
+              }
+            }
+
+            &.is-selected {
+              color: $magenta;
             }
           }
         }
