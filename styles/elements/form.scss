@@ -60,11 +60,13 @@ $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
   label {
     font-size: $base-font-size;
     color: $gray-56;
+  }
+}
 
-    &.is-required {
-      &::after {
-        content: "*";
-      }
+label {
+  &.is-required {
+    &::after {
+      content: "*";
     }
   }
 }
@@ -84,6 +86,12 @@ $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
     background-color: $gray-220;
     border-color: $gray-178;
     box-shadow: none;
+  }
+
+  &:disabled {
+    background-color: $white;
+    border-color: $gray-220;
+    color: $gray-184;
   }
 
   &::-webkit-input-placeholder { /* Chrome/Opera/Safari */

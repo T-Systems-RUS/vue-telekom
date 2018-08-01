@@ -1,8 +1,11 @@
 <template>
-  <label class="radio">
+  <label
+    class="radio"
+    :class="{'is-disabled': disabled}">
     <input
       :name="name"
       :checked="checked"
+      :disabled="disabled"
       @change="toggle"
       type="radio">
     <span class="radio-icon"/>
@@ -17,7 +20,8 @@
     props: {
       name: String,
       checked: Boolean,
-      label: String
+      label: String,
+      disabled: Boolean
     },
     methods: {
       toggle() {
@@ -72,6 +76,20 @@
         border-color: $blue;
         box-shadow: $input-focus-box-shadow-size rgba($blue, .5);
         outline: 0;
+      }
+    }
+
+    &.is-disabled {
+      pointer-events: none;
+
+      &:hover .radio-icon,
+      .radio-icon {
+        border-color: $gray-220;
+        background-color: $gray-248;
+
+        &::after {
+          background-color: $magenta-238;
+        }
       }
     }
   }

@@ -1,10 +1,12 @@
 <template>
   <div
     v-outer-click="close"
-    :class="{'is-active': isOpen}"
+    :class="{'is-active': isOpen, 'is-disabled': disabled}"
     class="selectbox">
     <button
       class="button selectbox-toggle"
+      :class="{'is-disabled': disabled}"
+      @blur="handleBlur"
       @click.stop="toggle">
       <slot name="placeholder"/>
       <span class="selectbox-toggle-arrow"/>
@@ -48,6 +50,9 @@
       },
       hasReset: {
         default: false
+      },
+      disabled: {
+        default: false
       }
     },
     mounted() {
@@ -57,7 +62,12 @@
     },
     methods: {
       toggle() {
-        this.isOpen = !this.isOpen;
+        if (!this.disabled) {
+          this.isOpen = !this.isOpen;
+        }
+      },
+      handleBlur() {
+        this.$emit('blur');
       },
       close() {
         this.isOpen = false;
@@ -104,6 +114,12 @@
     width: 100%;
     position: relative;
 
+    &.is-danger {
+      .selectbox-toggle {
+        border-color: $red;
+      }
+    }
+
     .selectbox-toggle {
       width: 100%;
       justify-content: flex-start;
@@ -135,7 +151,7 @@
       border-radius: $telekom-radius;
       overflow-y: auto;
       max-height: 5 * $building-unit-x3;
-      z-index: 1;
+      z-index: 2;
     }
 
     &.is-active {
@@ -145,6 +161,12 @@
 
       .selectbox-toggle-arrow {
         transform: translateY(-20%) rotate(-135deg);
+      }
+    }
+
+    &.is-disabled {
+      .selectbox-toggle-arrow {
+        opacity: .5;
       }
     }
 

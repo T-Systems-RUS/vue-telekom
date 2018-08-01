@@ -3,7 +3,8 @@
 <template>
   <section
     v-if="files && files.length"
-    class="simple-file-list upload-file-list">
+    class="simple-file-list upload-file-list"
+    :class="{'is-disabled': disabled}">
     <!--Tiles-->
     <div
       v-if="isTile && isImageUpload"
@@ -24,7 +25,8 @@
           <a
             v-else
             @click="handleDelete(file)"
-            class="tile-image-delete-btn"/>
+            class="tile-image-delete-btn"
+            :class="{'is-disabled': disabled}"/>
         </div>
       </div>
     </div>
@@ -53,7 +55,7 @@
             :class="{'is-completed': isCompleted(file.loadingStatus), 'is-loading': isLoading(file.loadingStatus)}"/>
           <a
             class="upload-file-delete-btn"
-            :class="{'is-disabled': isLoading(file.loadingStatus)}"
+            :class="{'is-disabled': disabled || isLoading(file.loadingStatus)}"
             @click="handleDelete(file)"
             role="button">{{ $t('delete') }}</a>
         </div>
@@ -94,7 +96,8 @@
     props: {
       files: {},
       isImageUpload: Boolean,
-      isTile: Boolean
+      isTile: Boolean,
+      disabled: Boolean
     },
     methods: {
       getBackgroundImage(file: IFileUpload) {
@@ -130,6 +133,12 @@
   // TODO: might need to refactor explicit definition
   $tile-width: 163px;
   $tile-height: 192px;
+
+  .simple-file-list {
+    &.is-disabled {
+      opacity: .5;
+    }
+  }
 
   .simple-file-tiles {
     margin: -$building-unit;
@@ -173,6 +182,11 @@
 
       &:hover {
         background-color: $gray-237;
+      }
+
+      &.is-disabled {
+        opacity: .5;
+        pointer-events: none;
       }
     }
 

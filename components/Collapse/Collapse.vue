@@ -1,5 +1,7 @@
 <template>
-  <div class="collapse has-text-left">
+  <div
+    class="collapse has-text-left"
+    :class="{'is-expanded': expanded}">
     <div
       class="collapse-header"
       @click="toggleExpanded">
@@ -37,7 +39,13 @@
       };
     },
     props: {
-      header: String
+      header: String,
+      isOpen: Boolean // initial value of expanded
+    },
+    created() {
+      if (this.isOpen) {
+        this.expanded = this.isOpen;
+      }
     },
     computed: {
       isExpanded(): boolean {
@@ -77,6 +85,10 @@
 
       .content {
         padding: $collapse-padding $collapse-padding $building-unit-x3;
+      }
+
+      &.is-expanded {
+        margin-bottom: $building-unit;
       }
     }
 

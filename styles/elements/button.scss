@@ -104,7 +104,7 @@ $primary-button-border-color: $magenta-160;
     &:disabled,
     &.is-disabled {
       background-color: $disabled-button-bg-color;
-      border-color: $disabled-button-border-color;
+      border-color: $disabled-button-border-color!important;
       color: $disabled-button-text-color;
     }
   }
@@ -178,7 +178,7 @@ $primary-button-border-color: $magenta-160;
   &:disabled,
   &.is-disabled {
     background: $disabled-button-bg-color;
-    border-color: $disabled-button-border-color;
+    border-color: $disabled-button-border-color!important;
     color: $disabled-button-text-color;
     pointer-events: none;
   }

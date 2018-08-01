@@ -1,10 +1,13 @@
 <i18n src="./SimpleFileUploader.yml"></i18n>
 
 <template>
-  <section class="simple-file-uploader">
+  <section
+    class="simple-file-uploader"
+    :class="{'is-disabled': disabled}">
     <label class="file-uploader-dropbox has-text-centered is-size-6">
       <input
         type="file"
+        :disabled="disabled"
         ref="fileInput"
         :multiple="isMultiple"
         class="file-uploader-input"
@@ -26,16 +29,21 @@
     props: {
       isMultiple: Boolean,
       isImageUpload: Boolean,
-      allowedFormats: {}
+      allowedFormats: {},
+      disabled: Boolean
     },
     methods: {
       onFilesChange(files: FileList) {
-        const {validFiles, errors} = this.validateFiles(files);
-        if (this.isImageUpload) {
-          FileUploaderService.fileListToImageFileUploadList(validFiles)
-            .then((fileUploads: IFileUpload[]) => this.emitEvents(fileUploads, errors));
+        if (this.disabled) {
+          this.resetFileInput();
         } else {
-          this.emitEvents(FileUploaderService.fileListToFileUploadList(validFiles), errors);
+          const {validFiles, errors} = this.validateFiles(files);
+          if (this.isImageUpload) {
+            FileUploaderService.fileListToImageFileUploadList(validFiles)
+              .then((fileUploads: IFileUpload[]) => this.emitEvents(fileUploads, errors));
+          } else {
+            this.emitEvents(FileUploaderService.fileListToFileUploadList(validFiles), errors);
+          }
         }
       },
       validateFiles(files: FileList): {validFiles: File[], errors: IFileUploadErrors} {
@@ -93,4 +101,11 @@
 <style lang="scss" scoped>
   $assets_path: '../../styles/assets/';
   @import '../../styles/components/file-uploader-dropbox';
+
+  .simple-file-uploader {
+    &.is-disabled {
+      opacity: .5;
+      pointer-events: none;
+    }
+  }
 </style>
