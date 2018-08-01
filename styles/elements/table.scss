@@ -59,6 +59,10 @@ $table-cell-max-width: $building-unit * 15;
       padding-top: 0;
       padding-bottom: $head-cell-vertical-padding;
       white-space: nowrap;
+      position: sticky;
+      top: 0;
+      background-color: $white;
+      z-index: 1;
     }
 
     &.is-head.is-sortable {
