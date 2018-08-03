@@ -16,3 +16,7 @@ export interface IImageUrl {
   loadingStatus: FileUploadStatus;
 }
 
+export interface IFileUrl extends IImageUrl {
+  imageDataUrl: string;
+}
+
