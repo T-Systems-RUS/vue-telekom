@@ -62,11 +62,6 @@ const fileUploadState: Module<IFileUploadState, {}> = {
     replacementFiles: [],
     replacementUrl: '',
     errors: {}
-    //   {
-    //   [FileUploadErrorType.FILE_SIZE]: [],
-    //   [FileUploadErrorType.FILE_EXTENSION]: [],
-    //   [FileUploadErrorType.IMAGE_EXTENSION]: []
-    // }
   },
   mutations,
   actions,
