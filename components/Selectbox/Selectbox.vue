@@ -16,8 +16,7 @@
         <SelectboxItem
           v-if="hasReset && isMultiple"
           is-reset="true"
-          :value="null"
-          @reset="reset">
+          :value="null">
           <slot
             name="reset"
             slot="item-text"/>
@@ -55,10 +54,9 @@
         default: false
       }
     },
-    mounted() {
-      this.$children.forEach(child => {
-        child.$on('itemClick', (value: {}) => this.handleChange(value));
-      });
+    created() {
+      this.$on('itemClick', (value: {}) => this.handleChange(value));
+      this.$on('reset', () => this.reset());
     },
     methods: {
       toggle() {

@@ -48,7 +48,7 @@
     },
     methods: {
       handleItemClick() {
-        this.$emit(this.isReset ? 'reset' : 'itemClick', this.value);
+        this.$parent.$emit(this.isReset ? 'reset' : 'itemClick', this.value);
       }
     }
   });
