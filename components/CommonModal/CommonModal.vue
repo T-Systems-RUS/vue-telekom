@@ -1,6 +1,7 @@
 <template>
   <transition name="opacity">
     <div class="modal common-modal is-active">
+      <LoadingOverlay :loading-state-getter="'GET_LOADING_STATE'"/>
       <div class="modal-background"/>
       <div class="modal-card">
         <section class="modal-card-body">
@@ -49,8 +50,8 @@
   @import '../../styles/utilities/mixins';
 
   $common-bg-color: $white;
-  $modal-border-top: 4px solid $magenta;
   $modal-card-padding-top: 160px;
+  $modal-padding-top: 4px;
 
   $title-margin-bottom: $building-unit-x2;
   $subtitle-margin-bottom: $building-unit-x3;
@@ -62,13 +63,13 @@
   $close-bg-size: 32px;
 
   .common-modal {
-    border-top: $modal-border-top;
 
     .modal-background {
       background-color: $common-bg-color;
     }
 
     .modal-card {
+      padding-top: $modal-padding-top;
       margin: 0;
       max-height: 100vh;
       height: 100vh;
