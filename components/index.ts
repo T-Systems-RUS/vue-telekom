@@ -25,6 +25,7 @@ import Datepicker from './Datepicker/Datepicker.vue';
 import Tooltip from './Tooltip/Tooltip.vue';
 import SimpleFileUploader from './SimpleFileUploader/SimpleFileUploader.vue';
 import SimpleFileList from './SimpleFileList/SimpleFileList.vue';
+import LoadingOverlay from './LoadingOverlay/LoadingOverlay.vue';
 
 const components: { [key: string]: {} } = {
   ActionsPane,
@@ -52,7 +53,8 @@ const components: { [key: string]: {} } = {
   Datepicker,
   Tooltip,
   SimpleFileUploader,
-  SimpleFileList
+  SimpleFileList,
+  LoadingOverlay
 };
 
 Object.keys(components)
