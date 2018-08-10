@@ -1,7 +1,7 @@
 <template>
   <transition name="opacity">
     <div class="modal common-modal is-active">
-      <LoadingOverlay :loading-state-getter="'GET_LOADING_STATE'"/>
+      <LoadingOverlay :is-loading="loadingState"/>
       <div class="modal-background"/>
       <div class="modal-card">
         <section class="modal-card-body">
@@ -29,6 +29,12 @@
   import Vue from 'vue';
 
   export default Vue.extend({
+    props: {
+      loadingState: {
+        type: Boolean,
+        default: false
+      }
+    },
     created() {
       document.documentElement.classList.add('is-clipped');
     },

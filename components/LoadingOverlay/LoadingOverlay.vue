@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      :class="{'progress-bar-animation': loading}"
+      :class="{'progress-bar-animation': isLoading}"
       class="header-bar-top"/>
     <div
-      v-if="loading"
+      v-if="isLoading"
       class="loading-state-overlay"/>
   </div>
 </template>
@@ -14,16 +14,9 @@
 
   export default Vue.extend({
     props: {
-      loadingStateGetter: {
-        type: String,
+      isLoading: {
+        type: Boolean,
         required: true
-      }
-    },
-    computed: {
-      loading: {
-        get(): boolean {
-          return this.$store.getters[this.loadingStateGetter];
-        }
       }
     }
   });
