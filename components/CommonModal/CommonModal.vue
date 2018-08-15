@@ -81,6 +81,7 @@
       height: 100vh;
       position: relative;
       //max-width: $container-max-size;
+      overflow: auto;
       width: 100%;
     }
 
@@ -98,6 +99,7 @@
     .modal-card-body {
       padding: 0 $building-unit;
       padding-bottom: $building-unit-x2;
+      overflow: visible;
 
       @include mobile {
         padding: 0 $building-unit;
