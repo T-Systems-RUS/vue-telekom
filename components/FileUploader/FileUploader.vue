@@ -99,9 +99,9 @@
   @import '../../styles/utilities/mixins';
 
   $button-padding-left: $building-unit-x3;
-  $button-icon-left: -21px;
+  $button-icon-left: -25px;
   $button-icon-width: 20px;
-  $button-icon-height: 15px;
+  $button-icon-height: 20px;
   $file-list-margin-top: 28px;
 
   $file-icon-size: $building-unit-x2;
@@ -125,7 +125,7 @@
           left: $button-icon-left;
           width: $button-icon-width;
           height: $button-icon-height;
-          background: center / cover url('assets/download-outline.svg');
+          background: center / cover url('./assets/cloud-upload.svg');
         }
       }
     }
