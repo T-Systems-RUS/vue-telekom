@@ -10,18 +10,20 @@ $tooltip-offset: 0px;
 
 .tooltip {
   position: relative;
+  display: inline-flex;
+  cursor: default;
+  z-index: 1;
 
   &:hover {
-    &::after,
+    .tooltip-text,
     &::before {
       visibility: visible;
       opacity: 1;
     }
   }
 
-  &::after {
+  .tooltip-text {
     position: absolute;
-    content: attr(tooltip);
     padding: $building-unit;
     background: $tooltip-bg-color;
     bottom: calc(100% + #{$tooltip-arrow-height} + #{$tooltip-offset});
@@ -37,6 +39,7 @@ $tooltip-offset: 0px;
     transition: $transition-default;
   }
 
+  // tooltip arrow
   &::before {
     content: '';
     position: absolute;
@@ -52,7 +55,7 @@ $tooltip-offset: 0px;
   }
 
   &:not(.is-input) {
-    &::after {
+    .tooltip-text {
       left: 50%;
       transform: translateX(-50%);
       white-space: nowrap;
@@ -63,6 +66,37 @@ $tooltip-offset: 0px;
     &::after {
       right: -$building-unit;
       width: $tooltip-max-width;
+    }
+  }
+
+  &.is-bottom {
+    .tooltip-text {
+      bottom: auto;
+      top: calc(100% + #{$tooltip-arrow-height} + #{$tooltip-offset});
+    }
+
+    &::before  {
+      border-top: none;
+      border-bottom: $tooltip-arrow-height solid $tooltip-bg-color;
+      border-left: $tooltip-arrow-width/2 solid transparent;
+      border-right: $tooltip-arrow-width/2 solid transparent;
+      bottom: auto;
+      top: calc(100% + #{$tooltip-offset});
+    }
+  }
+
+  &.is-left {
+    .tooltip-text {
+      transform: none;
+      left: 0;
+    }
+  }
+
+  &.is-right {
+    .tooltip-text {
+      transform: none;
+      left: auto;
+      right: 0;
     }
   }
 
