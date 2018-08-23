@@ -1,5 +1,9 @@
 .container {
   max-width: $container-max-size;
+
+  @include desktop {
+    width: $container-max-size;
+  }
 }
 
 .columns {
