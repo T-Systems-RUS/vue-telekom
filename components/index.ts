@@ -26,6 +26,8 @@ import Tooltip from './Tooltip/Tooltip.vue';
 import SimpleFileUploader from './SimpleFileUploader/SimpleFileUploader.vue';
 import SimpleFileList from './SimpleFileList/SimpleFileList.vue';
 import LoadingOverlay from './LoadingOverlay/LoadingOverlay.vue';
+import Slider from './Slider/Slider.vue';
+import Slide from './Slider/Slide/Slide.vue';
 
 const components: { [key: string]: {} } = {
   ActionsPane,
@@ -54,7 +56,9 @@ const components: { [key: string]: {} } = {
   Tooltip,
   SimpleFileUploader,
   SimpleFileList,
-  LoadingOverlay
+  LoadingOverlay,
+  Slider,
+  Slide
 };
 
 Object.keys(components)
