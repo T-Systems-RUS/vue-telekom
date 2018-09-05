@@ -76,11 +76,11 @@
 
     .modal-card {
       position: relative;
+      margin: 0;
 
       @include mobile {
         width: 100%;
         height: 100%;
-        margin: 0;
         max-height: 100vh;
         background: $white;
       }
