@@ -27,8 +27,10 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import LoadingOverlay from '../LoadingOverlay/LoadingOverlay.vue';
 
   export default Vue.extend({
+    components: {LoadingOverlay},
     props: {
       loadingState: {
         type: Boolean,
