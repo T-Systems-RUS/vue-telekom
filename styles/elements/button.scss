@@ -181,5 +181,7 @@ $primary-button-border-color: $magenta-160;
     border-color: $disabled-button-border-color!important;
     color: $disabled-button-text-color;
     pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
