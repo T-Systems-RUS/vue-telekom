@@ -37,9 +37,6 @@
         alertType: AlertType
       };
     },
-    watch: {
-      alert: 'setLocaleMessages'
-    },
     computed: {
       ...mapGetters({
         alert: ALERT
@@ -51,14 +48,6 @@
       }),
       isAlertType(type: AlertType) {
         return this.alert.type === type;
-      },
-      setLocaleMessages() {
-        if (this.alert && this.alert.i18n) {
-          const locales = Object.keys(this.alert.i18n.messages);
-          locales.forEach((locale: string) => {
-            this.$i18n.setLocaleMessage(locale, this.alert.i18n.getLocaleMessage(locale));
-          });
-        }
       }
     }
   });

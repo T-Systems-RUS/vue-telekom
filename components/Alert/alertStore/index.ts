@@ -1,5 +1,4 @@
 import {Module} from 'vuex';
-import {IVueI18n} from 'vue-i18n';
 import {ALERT} from './getter-types';
 import {RESET_ALERT, SET_ALERT} from './mutation-types';
 
@@ -20,7 +19,6 @@ export interface IAlertItem {
   type: AlertType;
   noCloseBtn?: boolean;
   link?: IAlertItemLink;
-  i18n?: IVueI18n;
 }
 
 interface IAlertState {
