@@ -19,6 +19,7 @@ export interface IAlertItem {
   type: AlertType;
   noCloseBtn?: boolean;
   link?: IAlertItemLink;
+  skipReset?: boolean; // on router change reset will be implemented later
 }
 
 interface IAlertState {
