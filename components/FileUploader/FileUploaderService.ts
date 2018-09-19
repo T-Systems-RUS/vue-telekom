@@ -45,11 +45,11 @@ export class FileUploaderService {
   }
 
   public static validateFileExtension(fileName: string): boolean {
-    return !harmfulFileExtensionRegex.test(fileName);
+    return !harmfulFileExtensionRegex.test(fileName.toLowerCase());
   }
 
   public static validateImageExtension(fileName: string): boolean {
-    return imageFileExtesionRegex.test(fileName);
+    return imageFileExtesionRegex.test(fileName.toLowerCase());
   }
 
   public static validateCustomExtension(extensions: string[], fileName: string): boolean {
