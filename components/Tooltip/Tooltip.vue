@@ -61,7 +61,7 @@
       },
       isOutsideRight(): boolean {
         return this.getTooltipPosition().right + this.initialPosition.right >
-          (window.innerWidth || document.documentElement.clientWidth);
+          document.documentElement.clientWidth;
       },
       setInitial() {
         this.initialCssClass = (this.$refs.tooltip as HTMLElement).className;
