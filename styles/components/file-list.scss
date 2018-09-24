@@ -28,6 +28,10 @@ $status-icon-margin-right: 11px;
     align-items: center;
   }
 
+  .upload-file-name-text {
+    @include break-word;
+  }
+
   .upload-file-actions {
     flex-shrink: 0;
   }
