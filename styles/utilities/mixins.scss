@@ -53,3 +53,10 @@ $custom-scroll-width: 8px;
     border-radius: $custom-scroll-width;
   }
 }
+
+@mixin break-word {
+  word-break: break-all;
+  /* Non standard for WebKit */
+  word-break: break-word;
+  hyphens: auto;
+}

@@ -21,6 +21,10 @@ a {
   }
 }
 
+.break-word {
+  @include break-word;
+}
+
 .centered {
   margin: 0 auto;
 }
