@@ -9,7 +9,9 @@
       <Checkbox :checked="isSelected"/>
     </div>
     <div class="selectbox-item-content">
-      <span class="selectbox-item-text">
+      <span
+        ref="itemText"
+        class="selectbox-item-text">
         <slot name="item-text"/>
       </span>
       <span class="selectbox-item-label is-size-6"><slot name="item-label"/></span>

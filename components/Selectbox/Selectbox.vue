@@ -11,7 +11,9 @@
       <slot name="placeholder"/>
       <span class="selectbox-toggle-arrow"/>
     </button>
-    <div class="selectbox-menu">
+    <div
+      ref="menu"
+      class="selectbox-menu">
       <div class="selectbox-content is-size-6">
         <SelectboxItem
           v-if="hasReset && isMultiple"
@@ -31,6 +33,17 @@
   import Vue from 'vue';
   import SelectboxItem from './SelectboxItem/SelectboxItem.vue';
   import {OuterClick} from '../../directives/outerClick';
+
+  function getChar(event: KeyboardEvent): string {
+    const keyCode = event.which ? event.which : event.keyCode;
+    let char = '';
+    if (event.key && keyCode >= 32) {
+      char = event.key;
+    } else if (keyCode >= 32) {
+      char = String.fromCharCode(keyCode);
+    }
+    return char.toLowerCase();
+  }
 
   export default Vue.extend({
     components: {SelectboxItem},
@@ -61,14 +74,21 @@
     methods: {
       toggle() {
         if (!this.disabled) {
-          this.isOpen = !this.isOpen;
+          (this.isOpen ? this.close : this.open)();
         }
       },
       handleBlur() {
         this.$emit('blur');
       },
+      open() {
+        this.isOpen = true;
+        document.addEventListener('keydown', this.handleKeydown);
+        // wait for DOM update
+        Vue.nextTick(() => this.scrollMenuToSelectedElement());
+      },
       close() {
         this.isOpen = false;
+        document.removeEventListener('keydown', this.handleKeydown);
       },
       handleChange(value: {}) {
         if (this.isMultiple) {
@@ -96,6 +116,59 @@
       },
       reset() {
         this.emitValue([]);
+      },
+      handleKeydown(event: KeyboardEvent) {
+        const char = getChar(event);
+        if (event.keyCode === 27) {
+          // close when ESC is pressed
+          this.close();
+        } else if (char) {
+          // scroll to first element which label starts with char
+          const selectItem = this.getSelectItemElementByText(char);
+          if (selectItem) {
+            this.scrollMenuToElement(selectItem);
+          }
+        }
+      },
+      scrollMenuToElement(element: HTMLElement) {
+        const menu = this.$refs.menu as HTMLElement;
+        const scrollValue: number = element.getBoundingClientRect().top - menu.getBoundingClientRect().top;
+        menu.scrollTop += scrollValue;
+      },
+      scrollMenuToTop() {
+        (this.$refs.menu as HTMLElement).scrollTop = 0;
+      },
+      scrollMenuToSelectedElement() {
+        const item = this.getSelectItemElementByValue(this.value);
+        if (item) {
+          this.scrollMenuToElement(item);
+        } else {
+          this.scrollMenuToTop();
+        }
+      },
+      getSelectItemElementByValue(value: {}): HTMLElement | undefined {
+        let matchedItemElement;
+        const matchedItem = this.$children.find((selectItem: Vue) => {
+          const selectItemValue = selectItem.$props.value;
+          return value instanceof Array ?
+            value.indexOf(selectItemValue) > -1 :
+            selectItemValue === value;
+        });
+        if (matchedItem) {
+          matchedItemElement = matchedItem.$el;
+        }
+        return matchedItemElement;
+      },
+      getSelectItemElementByText(text: string): HTMLElement | undefined {
+        let matchedItemElement;
+        const matchedItem = this.$children.find((selectItem: Vue) => {
+          const textContent = (selectItem.$refs.itemText as HTMLElement).textContent || '';
+          return textContent.toLowerCase().trim().indexOf(text) === 0;
+        });
+        if (matchedItem) {
+          matchedItemElement = matchedItem.$el;
+        }
+        return matchedItemElement;
       }
     }
   });
