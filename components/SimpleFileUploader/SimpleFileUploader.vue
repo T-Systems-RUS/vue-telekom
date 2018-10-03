@@ -30,7 +30,8 @@
       isMultiple: Boolean,
       isImageUpload: Boolean,
       allowedFormats: {},
-      disabled: Boolean
+      disabled: Boolean,
+      fileMaxSize: Number // Mb
     },
     methods: {
       onFilesChange(files: FileList) {
@@ -51,7 +52,7 @@
 
         const validFiles: File[] = Array.prototype.filter.call(files, (file: File) => {
           let isValid = true;
-          if (!FileUploaderService.validateFileSize(file, FILE_MAX_SIZE)) {
+          if (!FileUploaderService.validateFileSize(file, this.fileMaxSize || FILE_MAX_SIZE)) {
             errors = this.updateErrors(errors, FileUploadErrorType.FILE_SIZE, file.name);
             isValid = false;
           }

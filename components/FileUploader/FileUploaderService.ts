@@ -40,8 +40,8 @@ export class FileUploaderService {
     return new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
   }
 
-  public static validateFileSize(file: File, maxSize: number): boolean {
-    return file.size <= maxSize;
+  public static validateFileSize(file: File, maxSizeMb: number): boolean {
+    return file.size <= this.mbToBytes(maxSizeMb);
   }
 
   public static validateFileExtension(fileName: string): boolean {
@@ -77,5 +77,9 @@ export class FileUploaderService {
           return fileUpload;
         });
     }));
+  }
+
+  private static mbToBytes(mb: number) {
+    return mb * 1024 * 1024;
   }
 }

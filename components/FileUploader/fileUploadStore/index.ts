@@ -48,7 +48,7 @@ export const IMAGE_URL_INITIAL = {
   loadingStatus: FileUploadStatus.NULL
 };
 
-export const FILE_MAX_SIZE = 10485760; // 10Mb
+export const FILE_MAX_SIZE = 10; // Mb
 
 const fileUploadState: Module<IFileUploadState, {}> = {
   state: {
