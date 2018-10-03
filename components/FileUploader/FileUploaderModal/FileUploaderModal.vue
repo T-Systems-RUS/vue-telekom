@@ -107,7 +107,9 @@
         slot="modal-cancel-btn"
         v-if="!isImageUpload"
         class="file-uploader-modal-skip has-text-centered">
-        <a @click="closeWithoutSaving">{{ $t('skipThisStep') }}</a>
+        <a @click="closeWithoutSaving">
+          <slot name="modal-cancel-btn-text">{{ $t('skipThisStep') }}</slot>
+        </a>
       </div>
       <ConfirmModal
         v-if="isReplaceModalOpen && !isMultiple"

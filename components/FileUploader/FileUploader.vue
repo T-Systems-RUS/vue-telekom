@@ -38,6 +38,9 @@
       <slot
         name="modal-cancel-btn"
         slot="modal-cancel-btn"/>
+      <slot
+        name="modal-cancel-btn-text"
+        slot="modal-cancel-btn-text"/>
     </FileUploaderModal>
   </div>
 </template>
