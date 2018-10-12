@@ -64,5 +64,13 @@ $tab-border-height: $building-unit / 3;
         }
       }
     }
+
+    @include mobile {
+      padding: 0;
+
+      .tab {
+        margin-right: $building-unit;
+      }
+    }
   }
 }
