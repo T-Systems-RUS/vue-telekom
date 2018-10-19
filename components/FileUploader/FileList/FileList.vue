@@ -124,7 +124,7 @@
         this.isConfirmModalOpen = false;
       },
       getBackgroundImage(file: IFileUpload) {
-        return file.imageDataUrl ? `url(${file.imageDataUrl})` : '';
+        return file.imageDataUrl ? `url('${file.imageDataUrl}')` : '';
       },
       handleUrlDelete() {
         this.urlToDelete = true;

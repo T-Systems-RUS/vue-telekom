@@ -96,7 +96,13 @@
         class="upload-file-item is-flex">
         <div class="upload-file-name is-flex">
           <div class="upload-file-icon">
-            <span class="upload-file-preview"/>
+            <span
+              v-if="isImageUpload"
+              class="upload-image-preview"
+              :style="{backgroundImage: getBackgroundImage(fileUrl)}"/>
+            <span
+              v-if="!isImageUpload"
+              class="upload-file-preview"/>
           </div>
           <span class="upload-file-name-text">{{ fileUrl.name }}</span>
         </div>
@@ -157,7 +163,7 @@
     },
     methods: {
       getBackgroundImage(file: IFileUpload|IFileUrl) {
-        return file.imageDataUrl ? `url(${file.imageDataUrl})` : '';
+        return file.imageDataUrl ? `url('${file.imageDataUrl}')` : '';
       },
       isLoading(status: FileUploadStatus): boolean {
         return status === FileUploadStatus.LOADING;
