@@ -2,7 +2,7 @@
   <span
     @click="handleTabClick"
     class="tab"
-    :class="{'is-active': isActive}">
+    :class="{'is-active': isActive, 'is-disabled': disabled}">
     <slot/>
   </span>
 </template>
@@ -15,6 +15,10 @@
       value: {
         type: String,
         required: true
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -24,7 +28,9 @@
     },
     methods: {
       handleTabClick() {
-        this.$emit('tabClick', this.value);
+        if (!this.disabled) {
+          this.$emit('tabClick', this.value);
+        }
       }
     }
   });

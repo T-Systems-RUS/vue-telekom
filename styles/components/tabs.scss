@@ -63,6 +63,19 @@ $tab-border-height: $building-unit / 3;
           background: $magenta;
         }
       }
+
+      &.is-disabled {
+        opacity: .5;
+        cursor: default;
+
+        &:hover {
+          color: $gray-117;
+
+          &::after {
+            background: transparent;
+          }
+        }
+      }
     }
 
     @include mobile {
