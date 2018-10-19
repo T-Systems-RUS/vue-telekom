@@ -12,9 +12,11 @@
         :multiple="isMultiple"
         class="file-uploader-input"
         @change="onFilesChange($event.target.files)">
-      <span class="file-uploader-drag centered"/>
-      <p>{{ $t('dragFilesHere') }}</p>
-      <a>{{ $t('selectFiles') }}</a>
+      <slot>
+        <span class="file-uploader-drag centered"/>
+        <p>{{ $t('dragFilesHere') }}</p>
+        <a>{{ $t('selectFiles') }}</a>
+      </slot>
     </label>
   </section>
 </template>
