@@ -50,7 +50,10 @@ export const actions: ActionTree<IFileUploadState, {}> = {
         commit(SET_FILE_UPLOAD_ERROR, {errorType: FileUploadErrorType.FILE_SIZE, fileName: item.file.name});
         isValid = false;
       }
-      if (state.isImageUpload && !FileUploaderService.validateImageExtension(item.file.name)) {
+      if (!FileUploaderService.validateFileName(item.file.name)) {
+        commit(SET_FILE_UPLOAD_ERROR, {errorType: FileUploadErrorType.FILE_NAME, fileName: item.file.name});
+        isValid = false;
+      } else if (state.isImageUpload && !FileUploaderService.validateImageExtension(item.file.name)) {
         commit(SET_FILE_UPLOAD_ERROR, {errorType: FileUploadErrorType.IMAGE_EXTENSION, fileName: item.file.name});
         isValid = false;
       } else if (!FileUploaderService.validateFileExtension(item.file.name)) {

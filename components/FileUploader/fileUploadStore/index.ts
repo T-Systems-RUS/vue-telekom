@@ -15,11 +15,14 @@ import {
   IMAGE_EXTENSION_ERROR,
   REPLACEMENT_URL,
   REPLACEMENT_FILES,
-  HAS_UPLOAD_REPLACEMENTS, IS_UPLOAD_MODAL_OPEN
+  HAS_UPLOAD_REPLACEMENTS,
+  IS_UPLOAD_MODAL_OPEN,
+  FILE_NAME_ERROR
 } from './getter-types';
 
 export enum FileUploadErrorType {
   FILE_SIZE = 'FILE_SIZE',
+  FILE_NAME = 'FILE_NAME',
   FILE_EXTENSION = 'FILE_EXTENSION',
   IMAGE_EXTENSION = 'IMAGE_EXTENSION',
   CUSTOM_FORMAT = 'CUSTOM_FORMAT'
@@ -73,6 +76,7 @@ const fileUploadState: Module<IFileUploadState, {}> = {
     [IS_UPLOAD_MULTIPLE]: state => state.isMultiple,
     [IS_UPLOAD_MODAL_OPEN]: state => state.isUploadModalOpen,
     [FILE_UPLOAD_ERRORS]: state => state.errors,
+    [FILE_NAME_ERROR]: state => state.errors[FileUploadErrorType.FILE_NAME],
     [FILE_EXTENSION_ERROR]: state => state.errors[FileUploadErrorType.FILE_EXTENSION],
     [FILE_SIZE_ERROR]: state => state.errors[FileUploadErrorType.FILE_SIZE],
     [IMAGE_EXTENSION_ERROR]: state => state.errors[FileUploadErrorType.IMAGE_EXTENSION],
