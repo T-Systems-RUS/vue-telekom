@@ -18,7 +18,6 @@ en:
   fileNotUploadedError: "The following files cannot be uploaded:"
   fileSizeError: "The file size is bigger than 10 MB."
   fileExtensionError: "The file extension is not allowed."
-  fileNameError: "The file name may contain letters, numbers and the special characters -, _ and ."
   imageExtensionError: "The file format is not supported. Supported formats: .jpg, .jpeg, .png"
 
 de:
@@ -41,5 +40,4 @@ de:
   fileNotUploadedError: "Die folgenden Dateien konnten nicht hochgeladen werden:"
   fileSizeError: "Die Datei ist größer als 10 MB."
   fileExtensionError: "Die Dateierweiterung ist nicht zulässig."
-  fileNameError: "Der Name darf Buchstaben, Zahlen und die Sonderzeichen -, _ und . enthalten."
   imageExtensionError: "Das Dateiformat wird nicht unterstützt. Unterstützte Formate: .jpg, .jpeg, .png"

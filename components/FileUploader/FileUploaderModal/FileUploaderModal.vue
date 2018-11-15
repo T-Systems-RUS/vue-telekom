@@ -32,12 +32,6 @@
           {{ $t('fileExtensionError') }}
         </p>
         <p
-          class="title is-7 is-regular is-marginless"
-          v-if="fileNameError">
-          <b>{{ getInvalidFileNames(fileNameError) }}</b>:
-          {{ $t('fileNameError') }}
-        </p>
-        <p
           class="title is-7 is-regular"
           v-if="imageExtensionError">
           <b>{{ getInvalidFileNames(imageExtensionError) }}</b>:
@@ -159,8 +153,7 @@
     IS_IMAGE_UPLOAD,
     IS_UPLOAD_MULTIPLE,
     HAS_UPLOAD_ERRORS,
-    HAS_UPLOAD_REPLACEMENTS,
-    FILE_NAME_ERROR
+    HAS_UPLOAD_REPLACEMENTS
   } from '../fileUploadStore/getter-types';
   import {IFileUpload, IImageUrl} from '../IFileUploadList';
 
@@ -197,9 +190,6 @@
       },
       fileExtensionError(): string[] {
         return this.$store.getters[FILE_EXTENSION_ERROR];
-      },
-      fileNameError(): string[] {
-        return this.$store.getters[FILE_NAME_ERROR];
       },
       imageExtensionError(): string[] {
         return this.$store.getters[IMAGE_EXTENSION_ERROR];

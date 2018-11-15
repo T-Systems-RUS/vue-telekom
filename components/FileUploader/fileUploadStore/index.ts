@@ -16,8 +16,7 @@ import {
   REPLACEMENT_URL,
   REPLACEMENT_FILES,
   HAS_UPLOAD_REPLACEMENTS,
-  IS_UPLOAD_MODAL_OPEN,
-  FILE_NAME_ERROR
+  IS_UPLOAD_MODAL_OPEN
 } from './getter-types';
 
 export enum FileUploadErrorType {
@@ -76,7 +75,6 @@ const fileUploadState: Module<IFileUploadState, {}> = {
     [IS_UPLOAD_MULTIPLE]: state => state.isMultiple,
     [IS_UPLOAD_MODAL_OPEN]: state => state.isUploadModalOpen,
     [FILE_UPLOAD_ERRORS]: state => state.errors,
-    [FILE_NAME_ERROR]: state => state.errors[FileUploadErrorType.FILE_NAME],
     [FILE_EXTENSION_ERROR]: state => state.errors[FileUploadErrorType.FILE_EXTENSION],
     [FILE_SIZE_ERROR]: state => state.errors[FileUploadErrorType.FILE_SIZE],
     [IMAGE_EXTENSION_ERROR]: state => state.errors[FileUploadErrorType.IMAGE_EXTENSION],
