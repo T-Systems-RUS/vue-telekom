@@ -31,7 +31,7 @@
     props: {
       isMultiple: Boolean,
       isImageUpload: Boolean,
-      isFilenameCheck: Boolean,
+      filenameValidator: Function,
       allowedFormats: {},
       disabled: Boolean,
       fileMaxSize: Number // Mb
@@ -60,7 +60,7 @@
             isValid = false;
           }
 
-          if (this.isFilenameCheck && !FileUploaderService.validateFileName(file.name)) {
+          if (this.filenameValidator && !this.filenameValidator(file.name)) {
             errors = this.updateErrors(errors, FileUploadErrorType.FILE_NAME, file.name);
             isValid = false;
           } else if (

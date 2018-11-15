@@ -44,10 +44,6 @@ export class FileUploaderService {
     return file.size <= this.mbToBytes(maxSizeMb);
   }
 
-  public static validateFileName(fileName: string): boolean {
-    return /^[A-zäöüÄÖÜß\s-\d.]*$/.test(fileName);
-  }
-
   public static validateFileExtension(fileName: string): boolean {
     return !harmfulFileExtensionRegex.test(fileName.toLowerCase());
   }
