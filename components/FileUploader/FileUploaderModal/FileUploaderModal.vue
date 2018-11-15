@@ -152,7 +152,8 @@
     IS_IMAGE_URL,
     IS_IMAGE_UPLOAD,
     IS_UPLOAD_MULTIPLE,
-    HAS_UPLOAD_ERRORS, HAS_UPLOAD_REPLACEMENTS
+    HAS_UPLOAD_ERRORS,
+    HAS_UPLOAD_REPLACEMENTS
   } from '../fileUploadStore/getter-types';
   import {IFileUpload, IImageUrl} from '../IFileUploadList';
 
