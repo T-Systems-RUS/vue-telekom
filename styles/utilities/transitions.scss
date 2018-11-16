@@ -11,13 +11,16 @@
 
 
 // fade
-.fade-vertical-enter-active, .fade-leave-active {
+.fade-vertical-enter-active, .fade-vertical-leave-active {
   transition: .2s;
 }
 
 .fade-vertical-enter, .fade-vertical-leave-to {
+  overflow: hidden;
   opacity: 0;
-  height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  height: 0!important;
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  margin-top: 0!important;
+  margin-bottom: 0!important;
 }

@@ -1,7 +1,7 @@
 // TODO investigate broken bulma mixins after importing single component
 
 @import '../bulma/bulma-override-variables';
-@import '~bulma/sass/utilities/mixins';
+//@import '~bulma/sass/utilities/mixins';
 
 $custom-scroll-width: 8px;
 
@@ -51,6 +51,10 @@ $custom-scroll-width: 8px;
   &::-webkit-scrollbar-thumb {
     background: $gray-194;
     border-radius: $custom-scroll-width;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: $custom-scroll-width;
   }
 }
 

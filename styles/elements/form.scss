@@ -24,6 +24,7 @@ $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
 @mixin placeholder-style() {
   @include font-size(6);
   color: $gray-184;
+  font-family: $family-serif;
 }
 
 .field {

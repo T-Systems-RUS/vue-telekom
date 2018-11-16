@@ -69,6 +69,7 @@ $primary-button-border-color: $magenta-160;
       background-size: cover;
     }
 
+    &[disabled],
     &:disabled,
     &.is-disabled {
       &::after {
@@ -88,6 +89,7 @@ $primary-button-border-color: $magenta-160;
       background-color: $gray-220;
     }
 
+    &[disabled],
     &:disabled,
     &.is-disabled {
       background-color: transparent;
@@ -108,6 +110,7 @@ $primary-button-border-color: $magenta-160;
       border-color: $magenta-140;
     }
 
+    &[disabled],
     &:disabled,
     &.is-disabled {
       background-color: $disabled-button-bg-color;
@@ -133,6 +136,7 @@ $primary-button-border-color: $magenta-160;
       color: $dark-blue-121;
     }
 
+    &[disabled],
     &:disabled,
     &.is-disabled {
       @include button-no-style;
@@ -182,6 +186,7 @@ $primary-button-border-color: $magenta-160;
     width: 100%;
   }
 
+  &[disabled],
   &:disabled,
   &.is-disabled {
     background: $disabled-button-bg-color;
@@ -189,5 +194,6 @@ $primary-button-border-color: $magenta-160;
     color: $disabled-button-text-color;
     pointer-events: none;
     cursor: not-allowed;
+    opacity: 1;
   }
 }

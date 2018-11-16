@@ -62,7 +62,7 @@
         required: true,
         type: Number
       },
-      // max pages count between spreads (only odd numbers allowed)
+      // max pages count between spreads (odd numbers preferred) < 1 ... (5 6 [7] 8 9) ... 500>
       maxPagesInRow: {
         type: Number,
         default: MAX_PAGES_IN_ROW_DEFAULT
