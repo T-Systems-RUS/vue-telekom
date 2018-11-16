@@ -3,16 +3,21 @@
     <div class="icon-element-wrap">
       <input
         class="input"
+        ref="input"
+        :value="value"
+        :placeholder="placeholder"
+        @input="emitInput"
+        @blur="$emit('blur')"
         :type="fieldType">
       <span
         class="toggle-visible"
         @click="toggleVisible">
-        <img
-          v-if="!isVisible"
-          src="./assets/visible_outline.svg">
-        <img
-          v-if="isVisible"
-          src="./assets/invisible_outline.svg">
+        <span
+          :class="{'is-hidden': isVisible}"
+          class="action-icon is-show"/>
+        <span
+          :class="{'is-hidden': !isVisible}"
+          class="action-icon is-hide"/>
       </span>
     </div>
   </div>
@@ -28,7 +33,8 @@
       };
     },
     props: {
-      header: String
+      placeholder: String,
+      value: String
     },
     computed: {
       isVisible(): boolean {
@@ -41,6 +47,9 @@
     methods: {
       toggleVisible() {
         this.visible = !this.visible;
+      },
+      emitInput() {
+        this.$emit('input', (this.$refs.input as HTMLInputElement).value);
       }
     }
   });
@@ -50,7 +59,8 @@
   @import '../../styles/base/variables';
   @import '../../styles/utilities/mixins';
 
-  $visible-image-size: $building-unit-x1_5;
+  $toggle-visible-size: $building-unit-x2;
+  $action-icon-size: $building-unit-x1_5;
 
   // Circle bullets for hidden passwords
   input[type='password'] {
@@ -66,12 +76,28 @@
   .toggle-visible {
     @include absolute-y-center;
     right: $building-unit;
-    height: $visible-image-size;
-    width: $visible-image-size;
+    height: $toggle-visible-size;
+    width: $toggle-visible-size;
+    padding: $building-unit_x0_25;
+    cursor: pointer;
 
-    img {
-      width: 100%;
-      height: auto;
+    .action-icon {
+      @include absolute-fit;
+      background: center center / $action-icon-size $action-icon-size no-repeat;
+      opacity: 1;
+      transition: $transition-default;
+
+      &.is-show {
+        background-image: url('./assets/visible_outline.svg');
+      }
+
+      &.is-hide {
+        background-image: url('./assets/invisible_outline.svg');
+      }
+
+      &.is-hidden {
+        opacity: 1;
+      }
     }
   }
 
