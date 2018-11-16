@@ -1,13 +1,16 @@
 <template>
-  <div
-    v-if="scrolled"
-    class="back-to-top container centered">
+  <transition name="opacity">
     <div
-      @click="scrollToTop()"
-      class="back-to-top-arrow">
-      <img src="./export_outline.svg">
+      v-if="isVisible"
+      class="back-to-top"
+      :class="{'is-absolute': isFooterVisible}">
+      <div class="container centered">
+        <button
+          @click="scrollToTop()"
+          class="back-to-top-button button is-icon"/>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -15,43 +18,38 @@
 
   const SCROLL_DURATION = 200;
   const SCROLL_STEP = 5;
-  const SCROLLED_HEIGHT = window.innerHeight;
-  const VIEWPORT_L = window.matchMedia('(min-width: 1024px)');
 
   export default Vue.extend({
     data() {
       return {
-        scrolled: false,
-        currentScrollPosition: 0,
-        viewHeight: 0
+        scrolled: 0,
+        isFooterVisible: false,
+        isVisible: false
       };
     },
     methods: {
-      getCurrentScrollPosition() {
-        this.currentScrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+      setIsFooterVisible() {
+        const footer = document.querySelector('footer.footer');
+        this.isFooterVisible = footer ?
+          footer.getBoundingClientRect().top < window.innerHeight :
+          false;
       },
-      getPageSizes() {
-        const page = document.querySelector('.page');
-        this.viewHeight = page ? page.scrollHeight : 0;
-        this.getCurrentScrollPosition();
-      },
-      largeViewportScrollHandle() {
-        this.scrolled = window.pageYOffset > SCROLLED_HEIGHT;
-      },
-      smallViewportScrollHandle() {
-        if (document.documentElement.scrollTop < this.currentScrollPosition && window.pageYOffset > 0) {
-          this.scrolled = true;
+      setIsVisible() {
+        const isScrolledEnough = document.documentElement.scrollTop > window.innerHeight;
+
+        if (this.isDesktop()) {
+          // on desktop show when one viewport is scrolled
+          this.isVisible = isScrolledEnough;
         } else {
-          this.scrolled = window.pageYOffset > this.viewHeight - window.innerHeight;
+          // on touch screens show when reached footer or when scrolled up and more that one viewport
+          const isScrolledUp = document.documentElement.scrollTop < this.scrolled;
+          this.isVisible = (this.isFooterVisible && Boolean(this.scrolled)) || (isScrolledUp && isScrolledEnough);
         }
       },
-      handleScroll() {
-        if (VIEWPORT_L.matches) {
-          this.largeViewportScrollHandle();
-        } else {
-          this.smallViewportScrollHandle();
-        }
-        this.getCurrentScrollPosition();
+      processPosition() {
+        this.setIsFooterVisible();
+        this.setIsVisible();
+        this.scrolled = document.documentElement.scrollTop;
       },
       scrollToTop() {
         const step = window.pageYOffset / (SCROLL_DURATION / SCROLL_STEP);
@@ -62,16 +60,18 @@
             clearInterval(timer);
           }
         }, SCROLL_STEP);
+      },
+      isDesktop(): boolean {
+        return window.innerWidth >= 1024;
       }
     },
     mounted() {
-      this.getPageSizes();
-      window.addEventListener('scroll', this.handleScroll);
-      window.addEventListener('resize', this.getPageSizes);
+      window.addEventListener('scroll', this.processPosition);
+      window.addEventListener('resize', this.processPosition);
     },
     destroyed() {
-      window.removeEventListener('scroll', this.handleScroll);
-      window.removeEventListener('resize', this.getPageSizes);
+      window.removeEventListener('scroll', this.processPosition);
+      window.removeEventListener('resize', this.processPosition);
     }
   });
 </script>
@@ -80,35 +80,34 @@
   @import '../../styles/base/variables';
   @import '../../styles/utilities/mixins';
 
-  .back-to-top {
-    position: sticky;
-    bottom: 18px;
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: -$building-unit-x1_5;
+  $btt-bottom-position: $building-unit-x1_5;
 
-    @include mobile {
-      margin-bottom: 0;
+  .back-to-top {
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 0 $building-unit;
+    width: 100%;
+    bottom: $btt-bottom-position;
+    z-index: 1;
+    height: 0;
+
+    .container {
+      position: relative;
     }
 
-    .back-to-top-arrow {
-      width: $building-unit * 3.5;
-      height: $building-unit-x3;
-      border: 1px solid $gray-178;
-      border-radius: $telekom-radius;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: $gray-237;
+    &.is-absolute {
+      position: absolute;
+      bottom: calc(100% + #{$btt-bottom-position});
+    }
 
-      @include mobile {
-        margin-right: $building-unit;
-      }
+    &-button {
+      position: absolute;
+      right: 0;
+      bottom: 0;
 
-      img {
-        height: $building-unit-x1_5;
-        width: auto;
+      &::after {
+        background-image: url('./export_outline.svg');
       }
     }
   }
