@@ -139,6 +139,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {FileUploadStatus, IFileUpload, IFileUrl} from '../FileUploader/IFileUploadList';
+  import ConfirmModal from '../ConfirmModal/ConfirmModal.vue';
 
   interface ISimpleFileListData {
     fileToDelete: IFileUpload|null;
@@ -147,6 +148,7 @@
   }
 
   export default Vue.extend({
+    components: {ConfirmModal},
     data(): ISimpleFileListData {
       return {
         fileToDelete: null,

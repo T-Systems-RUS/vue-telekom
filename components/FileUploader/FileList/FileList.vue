@@ -73,6 +73,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {mapGetters} from 'vuex';
+  import ConfirmModal from '../../ConfirmModal/ConfirmModal.vue';
   import {
     ALL_UPLOAD_FILES,
     UPLOAD_IMAGE_URL,
@@ -85,6 +86,7 @@
   import {IMAGE_URL_INITIAL} from '../fileUploadStore';
 
   export default Vue.extend({
+    components: {ConfirmModal},
     data() {
       return {
         fileToDelete: {},

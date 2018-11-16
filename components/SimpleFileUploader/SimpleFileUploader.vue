@@ -14,8 +14,10 @@
         @change="onFilesChange($event.target.files)">
       <slot>
         <span class="file-uploader-drag centered"/>
-        <p>{{ $t('dragFilesHere') }}</p>
-        <a>{{ $t('selectFiles') }}</a>
+        <slot name="drop-text-area">
+          <p>{{ $t('dragFilesHere') }}</p>
+          <a>{{ $t('selectFiles') }}</a>
+        </slot>
       </slot>
     </label>
   </section>

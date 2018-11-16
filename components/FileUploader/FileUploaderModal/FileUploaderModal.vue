@@ -96,7 +96,7 @@
       <div class="file-uploader-modal-add has-text-centered">
         <slot name="upload-btn">
           <button
-            :disabled="!isButtonActive"
+            :class="{'is-disabled': !hasAnyFiles}"
             class="button is-primary is-large"
             @click="addFiles">
             <slot name="upload-btn-text">{{ $t('addFilesBtn') }}</slot>
@@ -132,6 +132,9 @@
 <script lang="ts">
   import Vue from 'vue';
   import FileList from '../FileList/FileList.vue';
+  import CommonModal from '../../CommonModal/CommonModal.vue';
+  import ConfirmModal from '../../ConfirmModal/ConfirmModal.vue';
+  import ErrorMessage from '../../ErrorMessage/ErrorMessage.vue';
   import {
     RESET_TEMP_FILES, SET_IS_IMAGE_URL,
     RESET_UPLOAD_ERRORS, RESET_UPLOAD_REPLACEMENTS
@@ -159,7 +162,10 @@
 
   export default Vue.extend({
     components: {
-      FileList
+      FileList,
+      CommonModal,
+      ConfirmModal,
+      ErrorMessage
     },
     destroyed() {
       this.resetErrors();
@@ -197,7 +203,7 @@
       fileSizeError(): string[] {
         return this.$store.getters[FILE_SIZE_ERROR];
       },
-      isButtonActive(): boolean {
+      hasAnyFiles(): boolean {
         return Boolean(
           this.isImageUpload ?
             this.imageUrl.url || this.files.length :
@@ -229,8 +235,10 @@
         this.$store.commit(RESET_UPLOAD_REPLACEMENTS);
       },
       addFiles() {
-        this.$store.dispatch(ADD_TEMP_TO_FILES);
-        this.$emit('close');
+        if (this.hasAnyFiles) {
+          this.$store.dispatch(ADD_TEMP_TO_FILES);
+          this.$emit('close');
+        }
       },
       closeWithoutSaving() {
         this.$store.commit(RESET_TEMP_FILES);

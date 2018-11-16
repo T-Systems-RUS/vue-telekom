@@ -7,11 +7,11 @@ const harmfulFileExtensionRegex = new RegExp('(.|/)(bat|exe|cmd|sh|php([0-9])?|p
 const imageFileExtesionRegex = /\.(jpg|jpeg|png)$/;
 
 export class FileUploaderService {
-  public static fileListToFileUploadList(fileList: FileList|File[]): IFileUpload[] {
+  static fileListToFileUploadList(fileList: FileList|File[]): IFileUpload[] {
     return Array.prototype.map.call(fileList, (item: File) => FileUploaderService.fileToFileUpload(item));
   }
 
-  public static fileToFileUpload(file: File): IFileUpload {
+  static fileToFileUpload(file: File): IFileUpload {
     return {
       file,
       loadingStatus: FileUploadStatus.NULL,
@@ -19,15 +19,15 @@ export class FileUploaderService {
     };
   }
 
-  public static isFileInUploadList(file: File, fileUploadList: IFileUpload[]): boolean {
+  static isFileInUploadList(file: File, fileUploadList: IFileUpload[]): boolean {
     return fileUploadList.some((item: IFileUpload) => item.file.name === file.name);
   }
 
-  public static getFileNameFromUrl(url: string): string {
+  static getFileNameFromUrl(url: string): string {
     return url.split('/').slice(-1)[0];
   }
 
-  public static urlToImageUrl(url: string): IImageUrl {
+  static urlToImageUrl(url: string): IImageUrl {
     return {
       url,
       name: FileUploaderService.getFileNameFromUrl(url),
@@ -36,29 +36,30 @@ export class FileUploaderService {
   }
 
   // TODO: should be removed when API is working
-  public static fakeUploadFiles(): Promise<boolean> {
+  static fakeUploadFiles(): Promise<boolean> {
     return new Promise(resolve => setTimeout(resolve, Math.random() * 2000));
   }
 
-  public static validateFileSize(file: File, maxSizeMb: number): boolean {
+  static validateFileSize(file: File, maxSizeMb: number): boolean {
     return file.size <= this.mbToBytes(maxSizeMb);
   }
 
-  public static validateFileExtension(fileName: string): boolean {
+  static validateFileExtension(fileName: string): boolean {
     return !harmfulFileExtensionRegex.test(fileName.toLowerCase());
   }
 
-  public static validateImageExtension(fileName: string): boolean {
+  static validateImageExtension(fileName: string): boolean {
     return imageFileExtesionRegex.test(fileName.toLowerCase());
   }
 
-  public static validateCustomExtension(extensions: string[], fileName: string): boolean {
+  static validateCustomExtension(extensions: string[], fileName: string): boolean {
     const fileNameParsed = fileName.split('.');
     const fileExtension = fileNameParsed[fileNameParsed.length - 1];
     return extensions.findIndex(ext => ext.toLowerCase() === fileExtension.toLowerCase()) > -1;
   }
 
-  public static readAsDataUrl(file: IFileUpload): Promise<string> {
+  static readAsDataUrl(file: IFileUpload): Promise<string> {
+    // tslint:disable-next-line
     return new Promise((resolve, _reject) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -68,14 +69,14 @@ export class FileUploaderService {
     });
   }
 
-  public static fileListToImageFileUploadList(fileList: FileList|File[]): Promise<IFileUpload[]> {
+  static fileListToImageFileUploadList(fileList: FileList|File[]): Promise<IFileUpload[]> {
+    // to avoid strange type error:
+    // Type 'Promise<[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]>' is not assignable to type 'Promise<IFileUpload[]>'
+    // @ts-ignore
     return Promise.all(Array.prototype.map.call(fileList, (file: File) => {
       const fileUpload: IFileUpload = FileUploaderService.fileToFileUpload(file);
       return this.readAsDataUrl(fileUpload)
-        .then((result: string) => {
-          fileUpload.imageDataUrl = result;
-          return fileUpload;
-        });
+        .then((imageDataUrl: string): IFileUpload => ({...fileUpload, imageDataUrl}));
     }));
   }
 
