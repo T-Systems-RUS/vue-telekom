@@ -63,7 +63,7 @@ export class FileUploaderService {
     return new Promise((resolve, _reject) => {
       const reader = new FileReader();
       reader.onload = () => {
-        resolve(reader.result);
+        resolve(reader.result as string);
       };
       reader.readAsDataURL(file.file);
     });
