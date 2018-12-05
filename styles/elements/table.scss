@@ -75,7 +75,7 @@ $table-cell-max-width: $building-unit * 15;
     width: $sorting-width;
     height: $sorting-height;
     display: inline-block;
-    margin-left: $building-unit;
+    margin-right: $building-unit_x0_5;
 
     &::before {
       content: '';

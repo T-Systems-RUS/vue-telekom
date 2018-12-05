@@ -2,10 +2,10 @@
   <div
     @click="applySorting"
     class="table-cell is-head is-sortable">
-    <slot/>
     <span
       :class="{'is-asc': isFieldAscending(), 'is-desc': isFieldDescending()}"
       class="table-sorting"/>
+    <slot/>
   </div>
 </template>
 
