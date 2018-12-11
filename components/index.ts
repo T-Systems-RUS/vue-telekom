@@ -22,6 +22,7 @@ import Pagination from './Pagination/Pagination.vue';
 import Selectbox from './Selectbox/Selectbox.vue';
 import SelectboxItem from './Selectbox/SelectboxItem/SelectboxItem.vue';
 import Datepicker from './Datepicker/Datepicker.vue';
+import DateRangePicker from './DateRangePicker/DateRangePicker.vue';
 import Tooltip from './Tooltip/Tooltip.vue';
 import SimpleFileUploader from './SimpleFileUploader/SimpleFileUploader.vue';
 import SimpleFileList from './SimpleFileList/SimpleFileList.vue';
@@ -58,7 +59,8 @@ const components: { [key: string]: {} } = {
   SimpleFileList,
   LoadingOverlay,
   Slider,
-  Slide
+  Slide,
+  DateRangePicker
 };
 
 Object.keys(components)
