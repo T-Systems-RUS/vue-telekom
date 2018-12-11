@@ -1,5 +1,5 @@
 declare module 'v-calendar' {
-  import { default as _Vue}  from 'vue';
+  import Vue from 'vue';
 
   /**
    * Represents an instance of v-calendar formats
@@ -47,5 +47,5 @@ declare module 'v-calendar' {
 
   export function setupCalendar(options: IVCalendarSetupOptions): void;
 
-  export class DatePicker extends _Vue {}
+  export class DatePicker extends Vue {}
 }
