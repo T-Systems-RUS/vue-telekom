@@ -1,7 +1,7 @@
 <template>
   <transition name="slide">
     <section
-      v-if="isActive"
+      :class="{'is-active': isActive}"
       class="slide">
       <slot/>
     </section>
@@ -23,8 +23,11 @@
 <style lang="scss" scoped>
   @import '../../../styles/base/variables';
 
+  .slide {
+    flex-shrink: 0;
+  }
   .slide-enter-active, .slide-leave-active {
-    transition: opacity $transition-default;
+    transition: opacity 2s;
   }
 
   .slide-enter, .slide-leave-to {

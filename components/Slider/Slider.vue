@@ -1,6 +1,11 @@
 <template>
   <section class="slider">
-    <div class="slider-slides">
+    <div
+      ref="track"
+      @transitionend="onTransitionend"
+      :style="trackTransform"
+      :class="{'is-dragging': isDragging}"
+      class="track">
       <slot/>
     </div>
     <div class="slider-controls">
@@ -28,19 +33,48 @@
 
   interface ISliderData {
     slides: Vue[];
+    slidesHTML: HTMLElement[]
     activeSlide: Vue | undefined;
+    trackEl: HTMLElement;
+    slideWidth: number;
+    delta: number;
+    startPosition: number;
+    endPosition: number;
+    isDragging: boolean;
+    isSliding: boolean;
   }
 
   export default Vue.extend({
+    props: {
+      hasDots: {
+        default: true,
+        type: Boolean
+      },
+      hasArrows: {
+        default: false,
+        type: Boolean
+      }
+    },
     data(): ISliderData {
       return {
         slides: [],
-        activeSlide: undefined
+        slidesHTML: [],
+        activeSlide: undefined,
+        trackEl: this.$refs.track as HTMLElement,
+        slideWidth: 0,
+        delta: 0,
+        startPosition: 0,
+        endPosition: 0,
+        isDragging: false,
+        isSliding: false
       };
     },
     mounted() {
-      this.slides = this.$children;
-      this.setSlide(0);
+      this.initSlider();
+      this.$nextTick(() => {
+        this.updateWidth();
+        this.setSlide(0);
+      });
     },
     computed: {
       activeSlideIndex(): number {
@@ -52,6 +86,9 @@
       },
       isRightArrowDisabled(): boolean {
         return this.activeSlideIndex >= this.slides.length - 1;
+      },
+      trackTransform(): string {
+        return `transform: translate(${this.delta - (this.activeSlideIndex * this.slideWidth)}px, 0);`;
       }
     },
     methods: {
@@ -59,6 +96,48 @@
         if (index >= 0 && index < this.slides.length) {
           this.activeSlide = this.slides[index];
         }
+      },
+      initSlider() {
+        this.slides = this.$children;
+        this.trackEl = this.$refs.track as HTMLElement;
+        this.slidesHTML = Array.from(this.trackEl.children as HTMLCollection) as HTMLElement[];
+        document.addEventListener('touchstart', this.onDragStart, {passive: true});
+        window.addEventListener('resize', this.updateWidth);
+      },
+      updateWidth() {
+        const rect = this.$el.getBoundingClientRect();
+        this.slideWidth = rect.width;
+        this.slidesHTML.forEach((slide: HTMLElement) => {
+          slide.style.width = `${this.slideWidth}px`;
+        });
+      },
+      onDragStart(event: TouchEvent) {
+        if (this.isSliding) {
+          return;
+        }
+        this.startPosition = event.touches[0].clientX;
+        this.isDragging = true;
+        document.addEventListener('touchmove', this.onDrag);
+        document.addEventListener('touchend', this.onDragEnd);
+      },
+      onDrag(event: TouchEvent) {
+        this.endPosition = event.touches[0].clientX;
+        this.delta = this.endPosition - this.startPosition;
+      },
+      onDragEnd() {
+        const tolerance = 0.5;
+        const direction = Math.sign(this.delta);
+        const draggedSlide = Math.round(Math.abs(this.delta / this.slideWidth) + tolerance);
+        this.setSlide(this.activeSlideIndex - (direction * draggedSlide));
+        this.delta = 0;
+        this.isDragging = false;
+        this.isSliding = true;
+        document.removeEventListener('touchmove', this.onDrag);
+        document.removeEventListener('touchend', this.onDragEnd);
+      },
+      onTransitionend() {
+        this.trackEl.style.transition = '';
+        this.isSliding = false;
       }
     }
   });
@@ -74,12 +153,19 @@
   $arrow-size: 8px;
 
   .slider {
+    position: relative;
+    overflow: hidden;
     width: 100%;
   }
 
-  .slider-slides {
-    position: relative;
-    overflow: hidden;
+  .track {
+    display: flex;
+    width: 100%;
+    transition: $transition-default;
+
+    &.is-dragging {
+      transition: none;
+    }
   }
 
   .slider-controls {
