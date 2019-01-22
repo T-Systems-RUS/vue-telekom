@@ -4,8 +4,8 @@
       ref="track"
       @transitionend="onTransitionend"
       @touchstart="onDragStart"
-      :style="trackTransform"
-      :class="{'is-dragging': isDragging}"
+      :style="{transform: `translate(${transform}px, 0)`}"
+      :class="{'is-dragging': isDragging, 'is-sliding': isSliding}"
       class="track">
       <slot/>
     </div>
@@ -92,7 +92,9 @@
       this.initSlider();
       this.$nextTick(() => {
         this.updateWidth();
-        this.setSlide(0);
+        if (this.slides.length) {
+          this.activeSlide = this.slides[0];
+        }
       });
     },
     computed: {
@@ -106,13 +108,14 @@
       isRightArrowDisabled(): boolean {
         return this.activeSlideIndex >= this.slides.length - 1;
       },
-      trackTransform(): string {
-        return `transform: translate(${this.delta - (this.activeSlideIndex * this.slideWidth)}px, 0);`;
+      transform(): number {
+        return this.delta - (this.activeSlideIndex * this.slideWidth);
       }
     },
     methods: {
       setSlide(index: number) {
         if (index >= 0 && index < this.slides.length) {
+          this.isSliding = true;
           this.activeSlide = this.slides[index];
         }
       },
@@ -146,11 +149,10 @@
         const tolerance = 0.5;
         const direction = Math.sign(this.delta);
         const draggedSlide = Math.round(Math.abs(this.delta / this.slideWidth) + tolerance);
-        this.setSlide(this.activeSlideIndex - (direction * draggedSlide));
-        this.delta = 0;
         if (this.isDragging) {
-          this.isSliding = true;
+          this.setSlide(this.activeSlideIndex - (direction * draggedSlide));
         }
+        this.delta = 0;
         this.isDragging = false;
         document.removeEventListener('touchmove', this.onDrag);
         document.removeEventListener('touchend', this.onDragEnd);
@@ -182,7 +184,10 @@
   .track {
     display: flex;
     width: 100%;
-    transition: $transition-default;
+
+    &.is-sliding {
+      transition: $transition-default;
+    }
 
     &.is-dragging {
       transition: none;
