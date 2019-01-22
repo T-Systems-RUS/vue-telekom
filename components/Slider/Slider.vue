@@ -3,12 +3,31 @@
     <div
       ref="track"
       @transitionend="onTransitionend"
+      @touchstart="onDragStart"
       :style="trackTransform"
       :class="{'is-dragging': isDragging}"
       class="track">
       <slot/>
     </div>
-    <div class="slider-controls">
+    <div
+      v-if="isGallery"
+      class="gallery-controls">
+      <div class="gallery-arrow-container is-left">
+        <div
+          @click="setSlide(activeSlideIndex - 1)"
+          :class="{'is-disabled': isLeftArrowDisabled}"
+          class="slider-arrow is-left"/>
+      </div>
+      <div class="gallery-arrow-container is-right">
+        <div
+          @click="setSlide(activeSlideIndex + 1)"
+          :class="{'is-disabled': isRightArrowDisabled}"
+          class="slider-arrow is-right"/>
+      </div>
+    </div>
+    <div
+      v-if="hasDots"
+      class="slider-controls">
       <div
         @click="setSlide(activeSlideIndex - 1)"
         :class="{'is-disabled': isLeftArrowDisabled}"
@@ -50,7 +69,7 @@
         default: true,
         type: Boolean
       },
-      hasArrows: {
+      isGallery: {
         default: false,
         type: Boolean
       }
@@ -101,7 +120,6 @@
         this.slides = this.$children;
         this.trackEl = this.$refs.track as HTMLElement;
         this.slidesHTML = Array.from(this.trackEl.children as HTMLCollection) as HTMLElement[];
-        document.addEventListener('touchstart', this.onDragStart, {passive: true});
         window.addEventListener('resize', this.updateWidth);
       },
       updateWidth() {
@@ -116,11 +134,11 @@
           return;
         }
         this.startPosition = event.touches[0].clientX;
-        this.isDragging = true;
         document.addEventListener('touchmove', this.onDrag);
         document.addEventListener('touchend', this.onDragEnd);
       },
       onDrag(event: TouchEvent) {
+        this.isDragging = true;
         this.endPosition = event.touches[0].clientX;
         this.delta = this.endPosition - this.startPosition;
       },
@@ -130,8 +148,10 @@
         const draggedSlide = Math.round(Math.abs(this.delta / this.slideWidth) + tolerance);
         this.setSlide(this.activeSlideIndex - (direction * draggedSlide));
         this.delta = 0;
+        if (this.isDragging) {
+          this.isSliding = true;
+        }
         this.isDragging = false;
-        this.isSliding = true;
         document.removeEventListener('touchmove', this.onDrag);
         document.removeEventListener('touchend', this.onDragEnd);
       },
@@ -156,6 +176,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    border-radius: $telekom-radius;
   }
 
   .track {
@@ -168,58 +189,67 @@
     }
   }
 
-  .slider-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .gallery-controls {
 
-    .slider-arrow {
-      width: $slider-control-size;
-      height: $slider-control-size;
-      position: relative;
-      display: block;
-      cursor: pointer;
-      transition: $transition-default;
+    .gallery-arrow-container {
+      position: absolute;
+      background-color: rgba($black, 0.75);
+      width: $building-unit_x6;
+      height: 100%;
+      top: 0;
 
-      &.is-disabled {
-        pointer-events: none;
-
-        &::before {
-          border-color: $gray-220;
-        }
+      @include mobile {
+        width: $building-unit-x2_5;
       }
 
-      &:not(.is-disabled):hover {
-        &::before {
-          border-color: $gray-178;
-        }
-      }
-
-      &::before {
-        content: '';
-        width: $arrow-size;
-        height: $arrow-size;
-        border-bottom: 1px solid $gray-117;
-        border-left: 1px solid $gray-117;
+      .slider-arrow {
+        width: $building-unit_x3;
+        height: $building-unit_x3;
         @include absolute-xy-center;
-      }
 
-      &.is-left {
-        margin-right: $building-unit-x0_5;
+        @include mobile {
+          width: $building-unit;
+          height: $building-unit;
+        }
 
         &::before {
-          transform: translate(-30%, -60%) rotate(45deg);
+          width: $building-unit-x1_5;
+          height: $building-unit-x1_5;
+          border-bottom: 2px solid $white;
+          border-left: 2px solid $white;
+
+          @include mobile {
+            width: $building-unit-x0_5;
+            height: $building-unit-x0_5;
+            border-bottom: 1px solid $white;
+            border-left: 1px solid $white;
+          }
+        }
+
+        &.is-disabled {
+          pointer-events: none;
+
+          &::before {
+            border-color: $gray-220;
+          }
+        }
+
+        &.is-right {
+          margin-left: 0;
         }
       }
 
       &.is-right {
-        margin-left: $building-unit-x0_5;
-
-        &::before {
-          transform: translate(-70%, -60%) rotate(225deg);
-        }
+        right: 0;
       }
     }
+
+  }
+
+  .slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .slider-dots {
       display: flex;
@@ -255,6 +285,54 @@
         border-radius: 50%;
         background-color: $gray-199;
         transition: $transition-default;
+      }
+    }
+  }
+
+  .slider-arrow {
+    width: $slider-control-size;
+    height: $slider-control-size;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    transition: $transition-default;
+
+    &.is-disabled {
+      pointer-events: none;
+
+      &::before {
+        border-color: $gray-220;
+      }
+    }
+
+    &:not(.is-disabled):hover {
+      &::before {
+        border-color: $gray-178;
+      }
+    }
+
+    &::before {
+      content: '';
+      width: $arrow-size;
+      height: $arrow-size;
+      border-bottom: 1px solid $gray-117;
+      border-left: 1px solid $gray-117;
+      @include absolute-xy-center;
+    }
+
+    &.is-left {
+      margin-right: $building-unit-x0_5;
+
+      &::before {
+        transform: translate(-30%, -60%) rotate(45deg);
+      }
+    }
+
+    &.is-right {
+      margin-left: $building-unit-x0_5;
+
+      &::before {
+        transform: translate(-70%, -60%) rotate(225deg);
       }
     }
   }

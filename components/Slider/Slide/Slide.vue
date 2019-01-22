@@ -1,11 +1,9 @@
 <template>
-  <transition name="slide">
-    <section
-      :class="{'is-active': isActive}"
-      class="slide">
-      <slot/>
-    </section>
-  </transition>
+  <section
+    :class="{'is-active': isActive}"
+    class="slide">
+    <slot/>
+  </section>
 </template>
 
 <script lang="ts">
@@ -26,14 +24,5 @@
   .slide {
     flex-shrink: 0;
   }
-  .slide-enter-active, .slide-leave-active {
-    transition: opacity 2s;
-  }
 
-  .slide-enter, .slide-leave-to {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 </style>
