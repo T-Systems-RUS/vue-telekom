@@ -1,11 +1,9 @@
 <template>
-  <transition name="slide">
-    <section
-      v-if="isActive"
-      class="slide">
-      <slot/>
-    </section>
-  </transition>
+  <section
+    :class="{'is-active': isActive}"
+    class="slide">
+    <slot/>
+  </section>
 </template>
 
 <script lang="ts">
@@ -23,14 +21,8 @@
 <style lang="scss" scoped>
   @import '../../../styles/base/variables';
 
-  .slide-enter-active, .slide-leave-active {
-    transition: opacity $transition-default;
+  .slide {
+    flex-shrink: 0;
   }
 
-  .slide-enter, .slide-leave-to {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 </style>
