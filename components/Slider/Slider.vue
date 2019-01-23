@@ -54,7 +54,6 @@
     slides: Vue[];
     slidesHTML: HTMLElement[]
     activeSlide: Vue | undefined;
-    trackEl: HTMLElement;
     slideWidth: number;
     delta: number;
     startPosition: number;
@@ -79,7 +78,6 @@
         slides: [],
         slidesHTML: [],
         activeSlide: undefined,
-        trackEl: this.$refs.track as HTMLElement,
         slideWidth: 0,
         delta: 0,
         startPosition: 0,
@@ -90,12 +88,10 @@
     },
     mounted() {
       this.initSlider();
-      this.$nextTick(() => {
-        this.updateWidth();
-        if (this.slides.length) {
-          this.activeSlide = this.slides[0];
-        }
-      });
+      this.updateWidth();
+      if (this.slides.length) {
+        this.activeSlide = this.slides[0];
+      }
     },
     computed: {
       activeSlideIndex(): number {
@@ -121,8 +117,9 @@
       },
       initSlider() {
         this.slides = this.$children;
-        this.trackEl = this.$refs.track as HTMLElement;
-        this.slidesHTML = Array.from(this.trackEl.children as HTMLCollection) as HTMLElement[];
+        if (this.$refs.track instanceof HTMLElement) {
+          this.slidesHTML = Array.from(this.$refs.track.children as HTMLCollection) as HTMLElement[];
+        }
         window.addEventListener('resize', this.updateWidth);
       },
       updateWidth() {
@@ -148,6 +145,7 @@
       onDragEnd() {
         const tolerance = 0.5;
         const direction = Math.sign(this.delta);
+        // find index offset while dragging
         const draggedSlide = Math.round(Math.abs(this.delta / this.slideWidth) + tolerance);
         if (this.isDragging) {
           this.setSlide(this.activeSlideIndex - (direction * draggedSlide));
@@ -158,7 +156,9 @@
         document.removeEventListener('touchend', this.onDragEnd);
       },
       onTransitionend() {
-        this.trackEl.style.transition = '';
+        if (this.$refs.track instanceof HTMLElement) {
+          this.$refs.track.style.transition = '';
+        }
         this.isSliding = false;
       }
     }
