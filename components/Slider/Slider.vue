@@ -64,10 +64,12 @@
 
   export default Vue.extend({
     props: {
+      // enable bottom menu
       hasDots: {
         default: true,
         type: Boolean
       },
+      // enable black bars with arrows
       isGallery: {
         default: false,
         type: Boolean
@@ -79,11 +81,11 @@
         slidesHTML: [],
         activeSlide: undefined,
         slideWidth: 0,
-        delta: 0,
-        startPosition: 0,
-        endPosition: 0,
+        delta: 0, // offset of slider
+        startPosition: 0, // drag start position
+        endPosition: 0, // drag end position
         isDragging: false,
-        isSliding: false
+        isSliding: false // is animation of dragging not ended
       };
     },
     mounted() {
@@ -130,6 +132,7 @@
         });
       },
       onDragStart(event: TouchEvent) {
+        // if animation is not ended or only one slide then not allow dragging
         if (this.isSliding || (this.slides.length <= 1)) {
           return;
         }
