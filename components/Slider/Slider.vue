@@ -10,7 +10,7 @@
       <slot/>
     </div>
     <div
-      v-if="isGallery"
+      v-if="isGallery && slides.length > 1"
       class="gallery-controls">
       <div class="gallery-arrow-container is-left">
         <div
@@ -130,7 +130,7 @@
         });
       },
       onDragStart(event: TouchEvent) {
-        if (this.isSliding) {
+        if (this.isSliding || (this.slides.length <= 1)) {
           return;
         }
         this.startPosition = event.touches[0].clientX;
@@ -143,7 +143,7 @@
         this.delta = this.endPosition - this.startPosition;
       },
       onDragEnd() {
-        const tolerance = 0.5;
+        const tolerance = 0.15;
         const direction = Math.sign(this.delta);
         // find index offset while dragging
         const draggedSlide = Math.round(Math.abs(this.delta / this.slideWidth) + tolerance);
@@ -179,6 +179,18 @@
     overflow: hidden;
     width: 100%;
     border-radius: $telekom-radius;
+
+    &:hover {
+      .gallery-controls {
+        opacity: 1;
+      }
+    }
+
+    @include mobile {
+      .gallery-controls {
+        opacity: 1;
+      }
+    }
   }
 
   .track {
@@ -195,6 +207,8 @@
   }
 
   .gallery-controls {
+    opacity: 0;
+    transition: $transition-default;
 
     .gallery-arrow-container {
       position: absolute;
