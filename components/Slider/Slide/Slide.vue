@@ -22,6 +22,7 @@
   @import '../../../styles/base/variables';
 
   .slide {
+    width: 100%;
     flex-shrink: 0;
   }
 
