@@ -125,11 +125,7 @@
         window.addEventListener('resize', this.updateWidth);
       },
       updateWidth() {
-        const rect = this.$el.getBoundingClientRect();
-        this.slideWidth = rect.width;
-        this.slidesHTML.forEach((slide: HTMLElement) => {
-          slide.style.width = `${this.slideWidth}px`;
-        });
+        this.slideWidth = this.$el.getBoundingClientRect().width;
       },
       onDragStart(event: TouchEvent) {
         // if animation is not ended or only one slide then not allow dragging
@@ -163,6 +159,9 @@
           this.$refs.track.style.transition = '';
         }
         this.isSliding = false;
+      },
+      beforeDestroy() {
+        window.removeEventListener('resize', this.updateWidth);
       }
     }
   });
@@ -180,6 +179,7 @@
   .slider {
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
     width: 100%;
     border-radius: $telekom-radius;
 
@@ -198,6 +198,7 @@
 
   .track {
     display: flex;
+    box-sizing: border-box;
     width: 100%;
 
     &.is-sliding {
