@@ -1,13 +1,17 @@
 <template>
   <section class="slider">
     <div
-      ref="track"
-      @transitionend="onTransitionend"
-      @touchstart="onDragStart"
-      :style="{transform: `translate(${transform}px, 0)`}"
-      :class="{'is-dragging': isDragging, 'is-sliding': isSliding}"
-      class="track">
-      <slot/>
+      ref="trackWrapper"
+      class="track-wrapper">
+      <div
+        ref="track"
+        @transitionend="onTransitionend"
+        @touchstart="onDragStart"
+        :style="{transform: `translate(${transform}px, 0)`}"
+        :class="{'is-dragging': isDragging, 'is-sliding': isSliding}"
+        class="track">
+        <slot/>
+      </div>
     </div>
     <div
       v-if="isGallery && slides.length > 1"
@@ -56,11 +60,20 @@
     activeSlide: Vue | undefined;
     slideWidth: number;
     delta: number;
-    startPosition: number;
+    startPositionX: number;
+    startPositionY: number;
     endPosition: number;
     isDragging: boolean;
     isSliding: boolean;
+    isScrolled: boolean;
   }
+
+  const preventScrollFunction = (event: TouchEvent) => {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+    event.stopPropagation();
+  };
 
   export default Vue.extend({
     props: {
@@ -82,10 +95,12 @@
         activeSlide: undefined,
         slideWidth: 0,
         delta: 0, // offset of slider
-        startPosition: 0, // drag start position
+        startPositionX: 0, // drag start position
+        startPositionY: 0, // drag start position
         endPosition: 0, // drag end position
         isDragging: false,
-        isSliding: false // is animation of dragging not ended
+        isSliding: false, // is animation of dragging not ended,
+        isScrolled: false
       };
     },
     mounted() {
@@ -122,6 +137,10 @@
         if (this.$refs.track instanceof HTMLElement) {
           this.slidesHTML = Array.from(this.$refs.track.children as HTMLCollection) as HTMLElement[];
         }
+        // wrapper for preventing iphone bug
+        if (this.$refs.trackWrapper instanceof HTMLElement) {
+          this.$refs.trackWrapper.addEventListener('touchstart', this.onDragStart, {passive: true});
+        }
         window.addEventListener('resize', this.updateWidth);
       },
       updateWidth() {
@@ -132,14 +151,29 @@
         if (this.isSliding || (this.slides.length <= 1)) {
           return;
         }
-        this.startPosition = event.touches[0].clientX;
+        this.startPositionX = event.touches[0].clientX;
+        this.startPositionY = event.touches[0].clientY;
         document.addEventListener('touchmove', this.onDrag);
         document.addEventListener('touchend', this.onDragEnd);
       },
       onDrag(event: TouchEvent) {
-        this.isDragging = true;
-        this.endPosition = event.touches[0].clientX;
-        this.delta = this.endPosition - this.startPosition;
+        // count angle for recognizing scroll or swipe
+        const offsetY = event.touches[0].clientY - this.startPositionY;
+        const offsetX = event.touches[0].clientX - this.startPositionX;
+        const angle = Math.atan(offsetY / offsetX);
+        const degrees = 180 * (angle / Math.PI);
+
+        // if user scrolled content he will not be able to swipe until drag end
+        if (!this.isDragging && !this.isScrolled) {
+          this.isScrolled = (degrees > 45 && degrees <= 90) || (degrees >= -90 && degrees < -45);
+        }
+
+        if (!this.isScrolled) {
+          document.addEventListener('touchmove', preventScrollFunction, {passive: false});
+          this.isDragging = true;
+          this.endPosition = event.touches[0].clientX;
+          this.delta = this.endPosition - this.startPositionX;
+        }
       },
       onDragEnd() {
         const tolerance = 0.15;
@@ -148,9 +182,11 @@
         const draggedSlide = Math.round(Math.abs(this.delta / this.slideWidth) + tolerance);
         if (this.isDragging) {
           this.setSlide(this.activeSlideIndex - (direction * draggedSlide));
+          document.removeEventListener('touchmove', preventScrollFunction);
         }
         this.delta = 0;
         this.isDragging = false;
+        this.isScrolled = false;
         document.removeEventListener('touchmove', this.onDrag);
         document.removeEventListener('touchend', this.onDragEnd);
       },
