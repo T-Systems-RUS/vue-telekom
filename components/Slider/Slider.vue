@@ -52,7 +52,7 @@
 
   interface ISliderData {
     slides: Vue[];
-    slidesHTML: HTMLElement[]
+    slidesHTML: HTMLElement[];
     activeSlide: Vue | undefined;
     slideWidth: number;
     delta: number;
