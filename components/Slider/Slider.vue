@@ -134,7 +134,7 @@
         this.slides = this.$children;
         // wrapper for preventing iphone bug
         if (this.$refs.trackWrapper instanceof HTMLElement) {
-          this.$refs.trackWrapper.addEventListener('touchstart', this.onDragStart, {passive: true});
+          this.$refs.trackWrapper.addEventListener('touchstart', this.onDragStart);
         }
         window.addEventListener('resize', this.updateWidth);
       },
