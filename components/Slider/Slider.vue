@@ -56,7 +56,6 @@
 
   interface ISliderData {
     slides: Vue[];
-    slidesHTML: HTMLElement[];
     activeSlide: Vue | undefined;
     slideWidth: number;
     delta: number;
@@ -91,7 +90,6 @@
     data(): ISliderData {
       return {
         slides: [],
-        slidesHTML: [],
         activeSlide: undefined,
         slideWidth: 0,
         delta: 0, // offset of slider
@@ -134,9 +132,6 @@
       },
       initSlider() {
         this.slides = this.$children;
-        if (this.$refs.track instanceof HTMLElement) {
-          this.slidesHTML = Array.from(this.$refs.track.children as HTMLCollection) as HTMLElement[];
-        }
         // wrapper for preventing iphone bug
         if (this.$refs.trackWrapper instanceof HTMLElement) {
           this.$refs.trackWrapper.addEventListener('touchstart', this.onDragStart, {passive: true});
