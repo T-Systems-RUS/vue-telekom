@@ -1,5 +1,7 @@
-$table-border-color: $gray-237;
-$table-head-border-width: 2px;
+@import '../export-variables';
+
+$table-border-color: $gray-220;
+$table-head-border-width: 1px;
 $table-border-width: 1px;
 $cell-horizontal-padding: $building-unit;
 $cell-vertical-padding: $building-unit * 1.5;
@@ -52,6 +54,7 @@ $table-cell-max-width: $building-unit * 15;
     padding: $head-cell-vertical-padding $cell-horizontal-padding;
     text-align: left;
     vertical-align: middle;
+    background-color: $white;
 
     &.is-head {
       font-weight: 700;
@@ -61,12 +64,13 @@ $table-cell-max-width: $building-unit * 15;
       white-space: nowrap;
       position: sticky;
       top: 0;
-      background-color: $white;
       z-index: 1;
+      background-color: transparent;
     }
 
     &.is-head.is-sortable {
       cursor: pointer;
+      user-select: none;
     }
   }
 
@@ -75,7 +79,7 @@ $table-cell-max-width: $building-unit * 15;
     width: $sorting-width;
     height: $sorting-height;
     display: inline-block;
-    margin-left: $building-unit;
+    margin-left: $building-unit_x0_25;
 
     &::before {
       content: '';
