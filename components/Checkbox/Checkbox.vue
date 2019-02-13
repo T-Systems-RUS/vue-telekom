@@ -49,7 +49,7 @@
   $checkbox-size: $building-unit-x2;
   $checkbox-background-color: $gray-237;
   $checkbox-border-color: $gray-178;
-  $checkbox-label-padding-left: $checkbox-size + $building-unit;
+  $checkbox-label-padding-left: $checkbox-size;
   $checkbox-label-padding-top: $building-unit-x0_25;
 
   input[type="checkbox"] {
