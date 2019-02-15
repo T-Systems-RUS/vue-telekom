@@ -12,9 +12,7 @@
     <span
       class="checkbox-icon"
       :class="{'is-checked': checkedValue}"/>
-    <span class="checkbox-label">
-      <slot/>
-    </span>
+    <span class="checkbox-label"><slot/></span>
   </label>
 </template>
 
@@ -49,7 +47,7 @@
   $checkbox-size: $building-unit-x2;
   $checkbox-background-color: $gray-237;
   $checkbox-border-color: $gray-178;
-  $checkbox-label-padding-left: $checkbox-size + $building-unit;
+  $checkbox-label-padding-left: $checkbox-size;
   $checkbox-label-padding-top: $building-unit-x0_25;
 
   input[type="checkbox"] {
@@ -135,5 +133,9 @@
         opacity: 1;
       }
     }
+  }
+
+  .checkbox-icon + .checkbox-label:not(:empty) {
+    margin-left: $building-unit;
   }
 </style>
