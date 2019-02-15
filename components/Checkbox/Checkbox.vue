@@ -12,9 +12,7 @@
     <span
       class="checkbox-icon"
       :class="{'is-checked': checkedValue}"/>
-    <span class="checkbox-label">
-      <slot/>
-    </span>
+    <span class="checkbox-label"><slot/></span>
   </label>
 </template>
 
@@ -135,5 +133,9 @@
         opacity: 1;
       }
     }
+  }
+
+  .checkbox-icon + .checkbox-label:not(:empty) {
+    margin-left: $building-unit;
   }
 </style>

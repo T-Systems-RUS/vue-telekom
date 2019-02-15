@@ -21,6 +21,8 @@ import Alert from './Alert/Alert.vue';
 import Pagination from './Pagination/Pagination.vue';
 import Selectbox from './Selectbox/Selectbox.vue';
 import SelectboxItem from './Selectbox/SelectboxItem/SelectboxItem.vue';
+import SearchSelect from './SearchSelect/SearchSelect.vue';
+import SearchSelectItem from './SearchSelect/SearchSelectItem/SearchSelectItem.vue';
 import Datepicker from './Datepicker/Datepicker.vue';
 import DateRangePicker from './DateRangePicker/DateRangePicker.vue';
 import Tooltip from './Tooltip/Tooltip.vue';
@@ -53,6 +55,8 @@ const components: { [key: string]: {} } = {
   Pagination,
   Selectbox,
   SelectboxItem,
+  SearchSelect,
+  SearchSelectItem,
   Datepicker,
   Tooltip,
   SimpleFileUploader,
