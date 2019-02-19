@@ -53,7 +53,6 @@
       },
       isSelected(): boolean {
         const selectboxValue = this.$parent.$props.value;
-
         if (this.isMultiple) {
           return selectboxValue.indexOf(this.value) > -1;
         }
@@ -124,6 +123,7 @@
     .selectbox-item-checkbox {
       height: $building-unit-x2;
       flex-shrink: 0;
+      margin-right: $building-unit;
 
       label {
         height: $building-unit-x2;
