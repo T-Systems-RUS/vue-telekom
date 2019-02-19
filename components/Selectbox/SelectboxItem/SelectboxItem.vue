@@ -89,6 +89,7 @@
     .selectbox-item-checkbox {
       height: $building-unit-x2;
       flex-shrink: 0;
+      margin-right: $building-unit;
 
       label {
         height: $building-unit-x2;
