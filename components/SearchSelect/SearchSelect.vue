@@ -9,6 +9,7 @@
     <div
       @click="toggle"
       @keydown.enter.prevent="toggle"
+      @keydown.down.prevent="handleArrowSelection(-1, true)"
       tabindex="0"
       class="selectbox-toggle input">
       <div class="selectbox-toggle-content">
@@ -35,7 +36,9 @@
         </div>
         <span
           v-else
-          class="selectbox-placeholder">{{ placeholder }} </span>
+          class="selectbox-placeholder">
+          <slot name="placeholder">{{ placeholder }}</slot>
+        </span>
       </div>
       <span class="selectbox-toggle-arrow"/>
     </div>
@@ -44,7 +47,9 @@
       <div
         v-if="hasItems"
         class="selectbox-filter">
-        <div class="search-input">
+        <div
+          v-if="hasSearch"
+          class="search-input">
           <input
             ref="search"
             v-model="search"
@@ -103,7 +108,10 @@
       disabled: {
         default: false
       },
-      placeholder: String
+      placeholder: String,
+      hasSearch: {
+        default: true
+      }
     },
     created() {
       this.$on('itemClick', (value: {}) => this.handleChange(value));
@@ -153,7 +161,9 @@
         this.search = '';
       },
       focusOnSearch() {
-        (this.$refs.search as HTMLInputElement).focus();
+        if (this.hasSearch) {
+          (this.$refs.search as HTMLInputElement).focus();
+        }
       },
       handleArrowSelection(index: number, isDown: boolean) {
         const itemToFocus = this.getNextFilteredElement(index, isDown);

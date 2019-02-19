@@ -2,8 +2,8 @@
   <div
     @click="handleItemClick"
     @keydown.enter="handleItemClick"
-    @keydown.down="handleDownClick"
-    @keydown.up="handleUpClick"
+    @keydown.down.prevent="handleDownClick"
+    @keydown.up.prevent="handleUpClick"
     :class="{'is-selected': isSelected, 'is-hidden': !isFiltered}"
     tabindex="0"
     class="selectbox-item is-size-6">
