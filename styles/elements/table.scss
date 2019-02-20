@@ -21,7 +21,7 @@ $header-cell-font-size: 13px;
 
 .table-container {
   width: 100%;
-  overflow-x: auto;
+  overflow: visible;
   padding-bottom: $building-unit;
 }
 
@@ -29,6 +29,7 @@ $header-cell-font-size: 13px;
   display: table;
   @include font-size(6);
   border-spacing: $table-border-spacing;
+  width: 100%;
 
   &.is-small {
     width: 100%;

@@ -16,6 +16,10 @@ $active-button-bg-color: $gray-199;
 
 // icon button
 $icon-button-padding: 9px 15px;
+$big-button-icon-size: 30px;
+$big-button-size: 80px;
+$big-button-icon-shadow: 0 0 0 20px rgba(226, 0, 116, .07) !important;
+$big-button-icon-shadow-hover: 0 0 0 30px rgba(226, 0, 116, .07) !important;
 
 // primary button
 $primary-button-bg-color: $magenta;
@@ -169,7 +173,24 @@ $primary-button-border-color: $magenta-160;
 
     &.is-plus {
       &::before {
-        background-image: url('#{$assets_path}images/plus.svg');
+        background-image: url('#{$assets_path}images/plus_icon.svg');
+      }
+
+      &.is-big {
+        width: $big-button-size;
+        height: $big-button-size;
+        background: linear-gradient(214.28deg, #FB0885 0%, #E20074 100%);
+        box-shadow: $big-button-icon-shadow;
+        transition: $transition-default;
+
+        &:hover {
+          box-shadow: $big-button-icon-shadow-hover;
+        }
+
+        &::before {
+          width: $big-button-icon-size;
+          height: $big-button-icon-size;
+        }
       }
     }
 
