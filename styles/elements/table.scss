@@ -64,7 +64,7 @@ $header-cell-font-size: 13px;
     vertical-align: middle;
     background-color: $white;
 
-    &:first-child  {
+    &:first-child {
       border-left: $table-border-width solid $table-border-color;
       border-top-left-radius: $table-row-border-radius;
       border-bottom-left-radius: $table-row-border-radius;
@@ -91,9 +91,30 @@ $header-cell-font-size: 13px;
       background-color: transparent;
     }
 
-    &.is-head.is-sortable {
-      cursor: pointer;
-      user-select: none;
+    &.is-head {
+      &.is-sortable {
+        cursor: pointer;
+        user-select: none;
+      }
+      &.is-checkbox {
+        padding-bottom: $building-unit;
+      }
+    }
+
+    &.is-checkbox {
+      padding-left: $building-unit-x2;
+      padding-right: $building-unit-x0_5;
+      width: 1%;
+    }
+
+    &.is-icon {
+      width: 1%;
+      padding-right: $building-unit-x0_5;
+    }
+
+    &.is-title {
+      width: 50%;
+      font-weight: $font-weight-medium;
     }
   }
 
