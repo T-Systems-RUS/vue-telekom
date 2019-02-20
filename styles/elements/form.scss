@@ -9,6 +9,7 @@ $input-group-header-margin-bottom: $building-unit-x1_5;
 $input-group-header-item-mb: $building-unit-x0_5;
 $select-padding: $building-unit-x2_5;
 $between-input-group-margin: $building-unit-x3;
+$search-input-icon-size: 16px;
 
 // input addon
 $addon-bg-color: $gray-237;
@@ -222,8 +223,8 @@ label {
   &::before {
     content: '';
     @include absolute-y-center;
-    width: $building-unit-x1_5;
-    height: $building-unit-x1_5;
+    width: $search-input-icon-size;
+    height: $search-input-icon-size;
     z-index: 1;
     left: $building-unit;
     background-position: center;
@@ -234,5 +235,6 @@ label {
 
   .input {
     padding-left: $building-unit-x3;
+    border-color: $gray-237;
   }
 }

@@ -1,11 +1,15 @@
 @import '../export-variables';
 
-$table-border-color: $gray-220;
+$table-border-color: $gray-237;
 $table-head-border-width: 1px;
 $table-border-width: 1px;
-$cell-horizontal-padding: $building-unit;
+$table-row-border-radius: 3px;
+$table-border-spacing-y: 4px;
+$table-border-spacing-x: 0;
+$table-border-spacing: $table-border-spacing-x $table-border-spacing-y;
+$cell-horizontal-padding: $building-unit * 1.5;
 $cell-vertical-padding: $building-unit * 1.5;
-$head-cell-vertical-padding: $building-unit;
+$head-cell-vertical-padding: $cell-vertical-padding - $table-border-spacing-y;
 $sorting-height: $building-unit;
 $sorting-width: $building-unit / 1.5;
 $sorting-icon-padding: $building-unit / 4;
@@ -13,6 +17,7 @@ $sorting-icon-height: ($sorting-height - $sorting-icon-padding) / 2;
 $table-min-width: $container-min-width;
 $table-max-width: $container-max-size;
 $table-cell-max-width: $building-unit * 15;
+$header-cell-font-size: 13px;
 
 .table-container {
   width: 100%;
@@ -23,6 +28,7 @@ $table-cell-max-width: $building-unit * 15;
 .table {
   display: table;
   @include font-size(6);
+  border-spacing: $table-border-spacing;
 
   &.is-small {
     width: 100%;
@@ -46,20 +52,37 @@ $table-cell-max-width: $building-unit * 15;
 
   &-row {
     display: table-row;
+    border-radius: $table-row-border-radius;
   }
 
   &-cell {
     display: table-cell;
     border-bottom: $table-border-width solid $table-border-color;
-    padding: $head-cell-vertical-padding $cell-horizontal-padding;
+    border-top: $table-border-width solid $table-border-color;
+    padding: $cell-vertical-padding $cell-horizontal-padding;
     text-align: left;
     vertical-align: middle;
     background-color: $white;
 
+    &:first-child  {
+      border-left: $table-border-width solid $table-border-color;
+      border-top-left-radius: $table-row-border-radius;
+      border-bottom-left-radius: $table-row-border-radius;
+    }
+
+    &:last-child {
+      border-right: $table-border-width solid $table-border-color;
+      border-top-right-radius: $table-row-border-radius;
+      border-bottom-right-radius: $table-row-border-radius;
+    }
+
     &.is-head {
       font-weight: 700;
-      border-bottom: $table-head-border-width solid $table-border-color;
+      border: none;
       padding-top: 0;
+      text-transform: uppercase;
+      font-size: $header-cell-font-size;
+      color: $gray-178;
       padding-bottom: $head-cell-vertical-padding;
       white-space: nowrap;
       position: sticky;
@@ -84,7 +107,7 @@ $table-cell-max-width: $building-unit * 15;
     &::before {
       content: '';
       position: absolute;
-      top: 0;
+      top: 1px;
       left: 0;
       border: $sorting-width / 2 solid transparent;
       border-top: 0;

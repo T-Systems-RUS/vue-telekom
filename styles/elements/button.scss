@@ -15,7 +15,7 @@ $active-button-border-color: $gray-117;
 $active-button-bg-color: $gray-199;
 
 // icon button
-$icon-button-padding: ($building-unit-x0_25 * 3 - $button-border-size) $building-unit;
+$icon-button-padding: 9px 15px;
 
 // primary button
 $primary-button-bg-color: $magenta;
@@ -58,6 +58,7 @@ $primary-button-border-color: $magenta-160;
 
   // Button types
   &.is-icon {
+    border: none;
     padding: $icon-button-padding;
 
     &::after {
@@ -72,6 +73,8 @@ $primary-button-border-color: $magenta-160;
     &[disabled],
     &:disabled,
     &.is-disabled {
+      background-color: $gray-237;
+
       &::after {
         opacity: .5;
       }
