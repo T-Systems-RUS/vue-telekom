@@ -71,7 +71,7 @@ $primary-button-border-color: $magenta-160;
       height: $building-unit-x1_5;
       background-position: center;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: contain;
     }
 
     &[disabled],
