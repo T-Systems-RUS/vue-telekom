@@ -17,6 +17,7 @@ $sorting-icon-height: ($sorting-height - $sorting-icon-padding) / 2;
 $table-min-width: $container-min-width;
 $table-max-width: $container-max-size;
 $table-cell-max-width: $building-unit * 15;
+$table-cell-max-width-mobile: $building-unit * 12;
 $header-cell-font-size: 13px;
 
 .table-container {
@@ -163,7 +164,14 @@ $header-cell-font-size: 13px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    display: block;
     max-width: $table-cell-max-width;
+
+    @include touch {
+      max-width: $table-cell-max-width / 2;
+    }
+
+    @include mobile {
+      max-width: $table-cell-max-width-mobile;
+    }
   }
 }
