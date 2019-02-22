@@ -137,5 +137,6 @@
 
   .checkbox-icon + .checkbox-label:not(:empty) {
     margin-left: $building-unit;
+    display: block;
   }
 </style>
