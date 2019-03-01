@@ -230,7 +230,7 @@ label {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('#{$assets_path}/images/search.svg');
+    background-image: url('#{$image_path}search.svg');
   }
 
   .input {
