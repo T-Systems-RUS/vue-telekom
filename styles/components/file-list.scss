@@ -40,7 +40,7 @@ $status-icon-margin-right: 11px;
     display: block;
     width: $upload-file-icon-size;
     height: $upload-file-icon-size;
-    background: center / contain url('#{$assets_path}images/file-solid.svg') no-repeat;
+    background: center / contain url('#{$image_path}file-solid.svg') no-repeat;
     margin-right: $upload-file-icon-margin-right;
   }
 
@@ -62,7 +62,7 @@ $status-icon-margin-right: 11px;
     background: center / cover no-repeat;
 
     &.is-completed {
-      background-image: url('#{$assets_path}images/check.svg');
+      background-image: url('#{$image_path}check.svg');
     }
 
     @keyframes loading-animation {
@@ -72,7 +72,7 @@ $status-icon-margin-right: 11px;
     }
 
     &.is-loading {
-      background-image: url('#{$assets_path}images/loading.svg');
+      background-image: url('#{$image_path}loading.svg');
       animation: loading-animation ease .5s infinite;
     }
   }
