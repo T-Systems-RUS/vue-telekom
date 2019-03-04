@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 53 (72520) - https://sketchapp.com -->
+    <title>7EAB0F63-278E-4885-9071-4F4891E13108</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M10.7874999,14.2499995 L5.11999989,14.2499995 C4.9128931,14.2499995 4.74499989,14.4178927 4.74499989,14.6249995 C4.74499989,14.8321063 4.9128931,14.9999995 5.11999989,14.9999995 L10.7874999,14.9999995 C10.9946067,14.9999995 11.1624999,14.8321063 11.1624999,14.6249995 C11.1624999,14.4178927 10.9946067,14.2499995 10.7874999,14.2499995 Z M11.2499999,9.24999964 L8.37499989,9.24999964 L8.37499989,1.43499993 C8.37499989,1.22789316 8.20710667,1.05999994 7.99999989,1.05999994 C7.7928931,1.05999994 7.62499989,1.22789316 7.62499989,1.43499993 L7.62499989,9.24999964 L4.74999989,9.24999964 L7.99999989,12.4999995 L11.2499999,9.24999964 Z" id="path-1"></path>
+    </defs>
+    <g id="#-Neue-Listen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="#8-Advanced-Data-Control---New-List----My-Data" transform="translate(-470.000000, -309.000000)">
+            <g id="Padding-Group" transform="translate(450.000000, 298.000000)">
+                <g id="Icon" transform="translate(16.000000, 10.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="-↳-icon🎨" mask="url(#mask-2)" fill="#00000">
+                        <rect id="Rectangle-2" x="0" y="0" width="16" height="16"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
