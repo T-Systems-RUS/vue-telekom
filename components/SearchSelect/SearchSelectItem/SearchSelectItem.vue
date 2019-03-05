@@ -6,7 +6,7 @@
     @keydown.up.prevent="handleUpClick"
     :class="{'is-selected': isSelected, 'is-hidden': !isFiltered}"
     tabindex="0"
-    class="selectbox-item is-size-7">
+    class="selectbox-item">
     <Checkbox
       v-if="isMultiple"
       class="selectbox-item-checkbox is-small"
@@ -105,6 +105,7 @@
     transition: $transition-default;
     cursor: pointer;
     white-space: nowrap;
+    @include font-size(7);
     line-height: $lh-6;
     border: $item-border-size solid transparent;
     outline: none;
