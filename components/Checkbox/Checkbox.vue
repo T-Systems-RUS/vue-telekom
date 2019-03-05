@@ -45,9 +45,11 @@
   @import '../../styles/bulma/bulma-override-variables';
 
   $checkbox-size: $building-unit-x2;
+  $checkbox-small-size: $building-unit-x1_33;
   $checkbox-background-color: $gray-237;
   $checkbox-border-color: $gray-178;
   $checkbox-label-padding-left: $checkbox-size;
+  $checkbox-small-label-padding-left: $checkbox-small-size;
   $checkbox-label-padding-top: $building-unit-x0_25;
 
   input[type="checkbox"] {
@@ -57,7 +59,7 @@
   label.checkbox {
     padding-left: $checkbox-label-padding-left;
     padding-top: $checkbox-label-padding-top;
-    min-height: 24px;
+    min-height: $checkbox-size;
 
     &.is-disabled {
       pointer-events: none;
@@ -79,6 +81,21 @@
         background-color: $gray-248;
         border-color: $gray-220;
         pointer-events: none;
+      }
+    }
+
+    &.is-small {
+      padding-left: $checkbox-small-label-padding-left;
+      min-height: $checkbox-small-size;
+
+      .checkbox-icon {
+        width: $checkbox-small-size;
+        height: $checkbox-small-size;
+
+        &::after {
+          width: $checkbox-small-size;
+          height: $checkbox-small-size;
+        }
       }
     }
 
@@ -121,7 +138,7 @@
       content: '';
       width: $checkbox-size;
       height: $checkbox-size;
-      background: url('./assets/check.svg') no-repeat center center;
+      background: url('./assets/check.svg') no-repeat center / cover;
       position: absolute;
       top: -1px;
       left: -1px;

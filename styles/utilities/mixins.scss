@@ -4,6 +4,7 @@
 //@import '~bulma/sass/utilities/mixins';
 
 $custom-scroll-width: 8px;
+$custom-scroll-thin-width: 3px;
 
 @mixin centered {
   position: relative;
@@ -55,6 +56,26 @@ $custom-scroll-width: 8px;
 
   &::-webkit-scrollbar:horizontal {
     height: $custom-scroll-width;
+  }
+}
+
+@mixin custom-scroll-thin {
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: $custom-scroll-thin-width;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gray-208;
+    border-radius: $custom-scroll-thin-width / 2;
+  }
+
+  &::-webkit-scrollbar:horizontal {
+    height: $custom-scroll-thin-width;
   }
 }
 

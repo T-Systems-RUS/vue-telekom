@@ -6,19 +6,18 @@
     @keydown.up.prevent="handleUpClick"
     :class="{'is-selected': isSelected, 'is-hidden': !isFiltered}"
     tabindex="0"
-    class="selectbox-item is-size-6">
-    <div
+    class="selectbox-item is-size-7">
+    <Checkbox
       v-if="isMultiple"
-      class="selectbox-item-checkbox">
-      <Checkbox :checked="isSelected"/>
-    </div>
+      class="selectbox-item-checkbox is-small"
+      :checked="isSelected"/>
     <div class="selectbox-item-content">
       <span
         ref="itemText"
         class="selectbox-item-text">
         <slot name="item-text"/>
       </span>
-      <span class="selectbox-item-label is-size-6"><slot name="item-label"/></span>
+      <span class="selectbox-item-label"><slot name="item-label"/></span>
     </div>
   </div>
 </template>
@@ -85,11 +84,18 @@
     }
   });
 </script>
+
 <style lang="scss" scoped>
   @import '../../../styles/base/variables';
+  @import '../../../styles/base/typography';
   @import '../../../styles/utilities/mixins';
 
-  $item-padding: $building-unit $building-unit;
+  $item-border-size: 1px;
+  $item-padding: ($building-unit_x0_5 - $item-border-size) ($building-unit-x0_66 - $item-border-size);
+  $active-color: $gray-208;
+  $hover-color: $gray-237;
+  $focus-color: $blue-83;
+  $label-height: $building-unit-x1_5;
 
   .selectbox-item {
     display: flex;
@@ -99,20 +105,31 @@
     transition: $transition-default;
     cursor: pointer;
     white-space: nowrap;
+    line-height: $lh-6;
+    border: $item-border-size solid transparent;
+    outline: none;
 
-    &:hover,
-    &:focus {
-      background-color: $gray-237;
-      outline: none;
+    &.is-selected:hover,
+    &:hover {
+      background-color: $hover-color;
+      border-color: $hover-color;
+    }
+
+    &:focus:not(:active) {
+      background-color: $hover-color;
+      border-color: $focus-color;
+    }
+
+    &:active {
+      background-color: $active-color;
+      border-color: $active-color;
     }
 
     &.is-selected {
-      background-color: $gray-248;
+      background-color: $gray-230;
 
-      &:hover,
       &:focus {
-        background-color: $gray-237;
-        outline: none;
+        background-color: $gray-230;
       }
     }
 
@@ -121,20 +138,20 @@
     }
 
     .selectbox-item-checkbox {
-      height: $building-unit-x2;
       flex-shrink: 0;
       margin-right: $building-unit;
-
-      label {
-        height: $building-unit-x2;
-      }
     }
 
     .selectbox-item-label {
+      @include font-size(8);
+      line-height: $label-height;
       color: $white;
-      background-color: $gray-56;
-      padding: 0 $building-unit;
+      background-color: $gray-164;
+      padding: 0 $building-unit-x0_5;
       margin-left: $building-unit;
+      font-weight: $font-weight-bold;
+      height: $label-height;
+      border-radius: $label-height;
 
       &:empty {
         display: none;

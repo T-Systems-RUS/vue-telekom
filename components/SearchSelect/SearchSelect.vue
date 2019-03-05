@@ -3,77 +3,90 @@
 <template>
   <div
     v-outer-click="close"
-    :class="{'is-active': isOpen, 'is-disabled': disabled}"
+    :class="{'is-disabled': disabled}"
     class="selectbox">
-    <!--input-->
     <div
-      @click="toggle"
-      @keydown.enter.prevent="toggle"
-      @keydown.down.prevent="handleArrowSelection(-1, true)"
-      tabindex="0"
-      class="selectbox-toggle input">
-      <div class="selectbox-toggle-content">
-        <div
-          v-if="hasValue"
-          class="selectbox-value-tag is-size-7">
-          <div class="selectbox-value">
-            <!--when single item is selected -> show single item value-->
-            <slot
-              name="single-value"
-              v-if="!atLeastTwoSelected"/>
-            <!--for multiselect: when multiple items are selected
-            show single label (e.g 'users') instead of all values-->
-            <slot
-              name="multiple-value"
-              v-else/>
-            <span
-              v-if="atLeastTwoSelected"
-              class="selectbox-value-count">{{ value.length }}</span>
-          </div>
+      :class="{'is-open': isOpen}"
+      class="selectbox-inner">
+      <!--input-->
+      <div
+        @click="toggle"
+        @keydown.enter.prevent="toggle"
+        @keydown.down.prevent="handleArrowSelection(-1, true)"
+        tabindex="0"
+        :class="{'is-open': isOpen}"
+        class="selectbox-toggle">
+        <div class="selectbox-toggle-content">
+          <slot
+            v-if="hasValue"
+            name="value">
+            <div class="selectbox-tag">
+              <div class="selectbox-tag-value">
+                <!--when single item is selected -> show single item value-->
+                <slot
+                  name="tag-single-value"
+                  v-if="!atLeastTwoSelected"/>
+                <!--for multiselect: when multiple items are selected
+                show single label (e.g 'users') instead of all values-->
+                <slot
+                  name="tag-multiple-value"
+                  v-else/>
+                <span
+                  v-if="atLeastTwoSelected"
+                  class="selectbox-tag-value-count">{{ value.length }}</span>
+              </div>
+              <span
+                @click.stop="reset"
+                class="selectbox-tag-value-reset"/>
+            </div>
+          </slot>
           <span
-            @click.stop="reset"
-            class="selectbox-value-reset"/>
+            v-else
+            class="selectbox-placeholder">
+            <slot name="placeholder">{{ placeholder }}</slot>
+          </span>
         </div>
         <span
-          v-else
-          class="selectbox-placeholder">
-          <slot name="placeholder">{{ placeholder }}</slot>
-        </span>
+          :class="{'is-open': isOpen}"
+          class="selectbox-toggle-arrow"/>
       </div>
-      <span class="selectbox-toggle-arrow"/>
-    </div>
-    <!--flyout-->
-    <div class="selectbox-menu">
+      <!--flyout-->
       <div
-        v-if="hasItems"
-        class="selectbox-filter">
+        :class="{'is-open': isOpen}"
+        class="selectbox-menu">
         <div
-          v-if="hasSearch"
-          class="search-input">
-          <input
-            ref="search"
-            v-model="search"
-            @keydown.down.prevent="handleArrowSelection(-1, true)"
-            @keydown.enter.prevent="handleArrowSelection(-1, true)"
-            :placeholder="$t('Search')"
-            class="input"
-            type="text">
+          v-if="hasItems && hasSearch"
+          class="selectbox-filter">
+          <div class="search-input">
+            <input
+              ref="search"
+              v-model="search"
+              @keydown.down.prevent="handleArrowSelection(-1, true)"
+              @keydown.enter.prevent="handleArrowSelection(-1, true)"
+              :placeholder="$t('Search')"
+              class="input"
+              type="text">
+            <span
+              v-if="search"
+              @click="resetSearchString"
+              class="search-input-reset"/>
+          </div>
         </div>
-      </div>
-      <div
-        ref="menu"
-        class="selectbox-content is-size-6">
-        <slot/>
-        <span
-          class="selectbox-no-results is-size-7"
-          v-if="!isAnyItemFiltered || !hasItems">
-          <slot
-            v-if="!hasItems"
-            name="no-items">{{ $t('noOptions') }}</slot>
-          <slot
-            v-else-if="!isAnyItemFiltered"
-            name="no-results">{{ $t('noResults') }}</slot>
-        </span>
+        <div
+          ref="menu"
+          class="selectbox-content is-size-6">
+          <slot/>
+          <span
+            class="selectbox-no-results is-size-7"
+            v-if="!isAnyItemFiltered || !hasItems">
+            <slot
+              v-if="!hasItems"
+              name="no-items">{{ $t('noOptions') }}</slot>
+            <slot
+              v-else-if="!isAnyItemFiltered"
+              name="no-results">{{ $t('noResults') }}</slot>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -250,39 +263,52 @@
     }
   });
 </script>
+
 <style lang="scss" scoped>
   @import '../../styles/base/variables';
   @import '../../styles/utilities/mixins';
+  @import '../../styles/base/typography';
 
-  $selectbox-padding: 5px $building-unit-x3 5px $building-unit;
   $selectbox-height: $building-unit-x3;
+  $selectbox-shadow-focus: 0 0 8px 0 rgba($blue-83, 0.25);
   $arrow-container-width: 40px;
   $arrow-size: 9px;
-  $menu-shadow: 0 $building-unit $building-unit-x3 0 rgba($black, .12);
+  $selectbox-open: 0 $building-unit $building-unit-x3 0 rgba($black, 0.24);
   $search-icon-size: 14px;
-  $tag-height: 30px;
-  $tag-bg-color: $gray-220;
-  $reset-size: $building-unit;
+  $tag-height: $building-unit-x2;
+  $tag-bg-color: $gray-75;
+  $reset-size: $building-unit-x1_5;
   $reset-icon-width: 9px;
   $reset-icon-height: 1px;
   $count-dot-margin: 4px;
 
-  $select-item-height: $building-unit-x4;
-  $max-select-items: 4;
+  $select-item-height: $building-unit-x3;
+  $max-select-items: 6;
 
   .selectbox {
     width: 100%;
     position: relative;
+    height: $selectbox-height;
+
+    .selectbox-inner {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      transition: box-shadow $transition-default;
+      border-radius: $telekom-radius;
+      overflow: hidden;
+
+      &.is-open {
+        box-shadow: $selectbox-open;
+        z-index: 2;
+      }
+    }
 
     &.is-danger {
       .selectbox-toggle {
         border-color: $red;
-      }
-    }
-
-    &.is-active {
-      .selectbox-menu {
-        display: block;
       }
     }
 
@@ -297,16 +323,44 @@
     }
 
     .selectbox-toggle {
+      position: relative;
       height: $selectbox-height;
+      background-color: $white;
       overflow: hidden;
       padding-right: $arrow-container-width;
+      padding-left: $building-unit;
       padding-top: 2px;
       padding-bottom: 2px;
+      border: 1px solid $gray-237;
+      border-radius: $telekom-radius;
       cursor: pointer;
+      transition: $transition-default;
+      font-size: $size-7;
+      line-height: $lh-4;
+      outline: none;
+
+      &:hover {
+        background-color: $gray-237;
+      }
+
+      &:active {
+        background-color: $gray-208;
+      }
+
+      &:focus:not(.is-open):not(:active) {
+        background-color: $gray-237;
+        box-shadow: $selectbox-shadow-focus;
+        border-color: $blue-83;
+      }
+
+      &.is-open {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
 
     .selectbox-placeholder {
-      color: $gray-184;
+      color: $gray-75;
     }
 
     .selectbox-toggle-arrow {
@@ -315,15 +369,18 @@
       height: 100%;
       right: 0;
       top: 0;
-      background-color: $gray-237;
+
+      &.is-open {
+        transform: rotate(180deg);
+      }
 
       &::after {
         content: '';
         position: absolute;
         width: $arrow-size;
         height: $arrow-size;
-        border-right: 1px solid $gray-56;
-        border-bottom: 1px solid $gray-56;
+        border-right: 1px solid $gray-75;
+        border-bottom: 1px solid $gray-75;
         top: 30%;
         left: 50%;
         transform: translateX(-50%) rotate(45deg);
@@ -331,33 +388,67 @@
     }
 
     .selectbox-filter {
-      padding: $building-unit-x0_5 $building-unit;
+      padding: $building-unit-x0_33 $building-unit-x0_33 $building-unit-x0_66;
 
       .search-input {
         &::before {
           width: $search-icon-size;
           height: $search-icon-size;
         }
+
+        @mixin placeholder-style() {
+          @include font-size(7);
+          line-height: $lh-6;
+          color: $gray-184;
+          font-family: $family-serif;
+        }
+
+        .input {
+          @include font-size(7);
+          line-height: $lh-6;
+          padding-right: $building-unit-x3;
+
+          &:not(:focus) {
+            border-color: $gray-237;
+          }
+
+          &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            @include placeholder-style;
+          }
+          &::-moz-placeholder { /* Firefox 19+ */
+            @include placeholder-style;
+          }
+          &:-ms-input-placeholder { /* IE 10+ */
+            @include placeholder-style;
+          }
+          &:-moz-placeholder { /* Firefox 18- */
+            @include placeholder-style;
+          }
+        }
       }
     }
 
-    .selectbox-value-tag {
+    .selectbox-tag {
+      @include font-size(8);
+      line-height: $tag-height;
+      border-radius: $tag-height;
       background-color: $tag-bg-color;
       height: $tag-height;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      padding: $building-unit-x0_5 $building-unit;
+      padding-left: $building-unit-x0_5;
+      padding-right: $building-unit-x0_25;
       position: relative;
       cursor: default;
     }
 
-    .selectbox-value {
+    .selectbox-tag-value {
       margin-right: $building-unit;
-      color: $gray-56;
+      color: $white;
       display: flex;
     }
 
-    .selectbox-value-count {
+    .selectbox-tag-value-count {
       display: flex;
       align-items: center;
 
@@ -366,17 +457,17 @@
         width: 3px;
         height: 3px;
         border-radius: 50%;
-        background-color: $gray-56;
+        background-color: $white;
         margin: -$count-dot-margin $count-dot-margin 0;
       }
     }
 
-    .selectbox-value-reset {
+    .selectbox-tag-value-reset {
       position: relative;
       width: $reset-size;
       height: $reset-size;
       border-radius: 50%;
-      background-color: $gray-117;
+      background-color: $gray-164;
       cursor: pointer;
       transition: $transition-default;
 
@@ -399,29 +490,33 @@
       }
 
       &:hover {
-        background-color: $gray-56;
+        background-color: $gray-124;
       }
     }
 
     .selectbox-menu {
       display: none;
-      position: absolute;
       background: $white;
-      top: calc(100% + #{$building-unit-x0_5});
-      left: 0;
+      margin-top: -1px;
       min-width: 100%;
       max-width: $form-field-width;
       border: 1px solid $gray-237;
-      border-radius: $telekom-radius;
+      border-bottom-left-radius: $telekom-radius;
+      border-bottom-right-radius: $telekom-radius;
       z-index: 2;
-      box-shadow: $menu-shadow;
+      padding: $building-unit-x0_33;
+
+      &.is-open {
+        display: block;
+      }
     }
 
     .selectbox-content {
-      @include custom-scroll;
+      @include custom-scroll-thin;
       width: 100%;
       max-height: $max-select-items * $select-item-height;
       overflow-y: auto;
+      padding-right: $building-unit-x0_33;
     }
 
     .selectbox-no-results {
