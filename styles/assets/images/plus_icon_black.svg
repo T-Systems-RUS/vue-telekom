@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="30px" viewBox="0 0 31 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>Plus icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="#7-Advanced-Organization-Creation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="#7---Advanced-Orga-Creation_Profile-View---Empty---L" transform="translate(-705.000000, -483.000000)" fill="#000000">
+            <g id="Group" transform="translate(468.000000, 314.000000)">
+                <g id="Btn" transform="translate(192.000000, 124.000000)">
+                    <g id="Plus-icon" transform="translate(45.000000, 45.000000)">
+                        <rect id="Rectangle" transform="translate(15.500000, 15.000000) rotate(-90.000000) translate(-15.500000, -15.000000) " x="14" y="0" width="3" height="30" rx="1.5"></rect>
+                        <rect id="Rectangle" transform="translate(15.500000, 15.000000) rotate(-180.000000) translate(-15.500000, -15.000000) " x="14" y="0" width="3" height="30" rx="1.5"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
