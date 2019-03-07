@@ -4,12 +4,15 @@ $black: #000000;
 
 $gray-38: #262626;
 $gray-56: #383838;
+$gray-75: #4B4B4B;
 $gray-117: #757575;
 $gray-124: #7C7C7C;
+$gray-164: #A4A4A4;
 $gray-178: #B2B2B2;
 $gray-184: #B8B8B8;
 $gray-194: #C2C2C2;
 $gray-199: #C7C7C7;
+$gray-208: #D0D0D0;
 $gray-220: #DCDCDC;
 $gray-230: #E6E6E6;
 $gray-237: #EDEDED;
@@ -40,6 +43,7 @@ $blue: #00A0DE; // $light-blue: #00A0DE; in DIH DPG it is the same as blue
 $dark-blue: #007FAF;
 $dark-blue-121: #005879;
 $blue-16: #1063AD;
+$blue-83: #53BAF2;
 $blue-242: #F2FAFD;
 
 $purple-151: #5A4C97;
@@ -51,7 +55,10 @@ $yellow-255: #FFD329;
 // Building Units
 $building-unit: 12px;
 $building-unit-x0_25: $building-unit / 4; // 3px
+$building-unit-x0_33: $building-unit / 3; // 4px
 $building-unit-x0_5: $building-unit / 2; // 6px
+$building-unit-x0_66: $building-unit * (2 / 3); // 8px
+$building-unit-x1_33: $building-unit + $building-unit-x0_33; // 16px
 $building-unit-x1_5: $building-unit * 1.5; // 18px
 $building-unit-x2: $building-unit * 2; // 24px
 $building-unit-x2_5: $building-unit * 2.5; // 30px

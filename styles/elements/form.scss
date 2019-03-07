@@ -17,6 +17,11 @@ $addon-border-color: $gray-178;
 $border-radius-round-left: $telekom-radius 0 0 $telekom-radius;
 $border-radius-round-right: 0 $telekom-radius $telekom-radius 0;
 
+// search
+$search-reset-size: $building-unit;
+$search-reset-icon-width: 10px;
+$search-reset-icon-height: 2px;
+
 @mixin input-style() {
   @include font-size(6);
   padding: $input-padding;
@@ -235,5 +240,52 @@ label {
 
   .input {
     padding-left: $building-unit-x3;
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &::-webkit-clear-button {
+      display: none;
+    }
+  }
+
+  .search-input-reset {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: $building-unit;
+    transform: translateY(-50%);
+    width: $search-reset-size;
+    height: $search-reset-size;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: $transition-default;
+
+    &::after,
+    &::before {
+      @include absolute-xy-center;
+      content: '';
+      width: $search-reset-icon-width;
+      height: $search-reset-icon-height;
+      background-color: $gray-75;
+      transform-origin: center center;
+      transition: background-color $transition-default;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &::before {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    &:hover {
+      &::after,
+      &::before {
+        background-color: $gray-38;
+      }
+    }
   }
 }
