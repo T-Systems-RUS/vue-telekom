@@ -54,7 +54,6 @@ $header-cell-font-size: 13px;
 
   &-row {
     display: table-row;
-    border-radius: $table-row-border-radius;
   }
 
   &-cell {
@@ -100,6 +99,10 @@ $header-cell-font-size: 13px;
       }
       &.is-checkbox {
         padding-bottom: $building-unit;
+      }
+
+      &.is-title {
+        font-weight: 700;
       }
     }
 
