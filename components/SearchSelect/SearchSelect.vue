@@ -162,9 +162,11 @@
         });
       },
       close() {
-        this.isOpen = false;
-        this.resetSearchString();
-        this.$emit('blur');
+        if (this.isOpen) {
+          this.isOpen = false;
+          this.resetSearchString();
+          this.$emit('blur');
+        }
       },
       reset() {
         if (!this.disabled) {
