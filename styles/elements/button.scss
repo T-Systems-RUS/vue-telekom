@@ -173,7 +173,7 @@ $primary-button-border-color: $magenta-160;
 
     &.is-plus {
       &::before {
-        background-image: url('#{$assets_path}images/plus_icon.svg');
+        background-image: url('#{$image_path}plus_icon.svg');
       }
 
       &.is-big {

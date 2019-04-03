@@ -31,7 +31,7 @@ $drag-icon-size: 64px;
     display: table;
     width: $drag-icon-size;
     height: $drag-icon-size;
-    background: center / cover url('#{$assets_path}images/drag-and-drop-outline.svg') no-repeat;
+    background: center / cover url('#{$image_path}drag-and-drop-outline.svg') no-repeat;
     margin-bottom: $building-unit;
   }
 }
