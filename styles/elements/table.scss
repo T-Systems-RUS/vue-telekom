@@ -9,7 +9,7 @@ $table-border-spacing-x: 0;
 $table-border-spacing: $table-border-spacing-x $table-border-spacing-y;
 $cell-horizontal-padding: $building-unit * 1.5;
 $cell-vertical-padding: $building-unit * 1.5;
-$head-cell-vertical-padding: $cell-vertical-padding - $table-border-spacing-y;
+$head-cell-vertical-padding: $building-unit-x0_66;
 $sorting-height: 9px;
 $sorting-width: 7px;
 $sorting-icon-padding: 1px;
@@ -24,6 +24,29 @@ $header-cell-font-size: 13px;
   width: 100%;
   overflow: visible;
   padding-bottom: $building-unit;
+
+  &.is-collapsed {
+    .table {
+      border-collapse: collapse;
+    }
+
+    .table-cell {
+      border: none;
+
+      &.is-head {
+        padding-bottom: $building-unit;
+      }
+    }
+
+    .table-row {
+      border-bottom: $table-border-width solid $table-border-color;
+    }
+
+    .table-no-results {
+      border: 0;
+      border-bottom: $table-border-width solid $table-border-color;
+    }
+  }
 }
 
 .table {
@@ -85,14 +108,12 @@ $header-cell-font-size: 13px;
       text-transform: uppercase;
       font-size: $header-cell-font-size;
       color: $gray-178;
-      padding-bottom: $head-cell-vertical-padding;
       white-space: nowrap;
-      position: sticky;
       top: 0;
       z-index: 1;
       background-color: transparent;
       position: relative;
-      padding-bottom: $building-unit-x0_66;
+      padding-bottom: $head-cell-vertical-padding;
 
       &.is-sortable {
         cursor: pointer;
