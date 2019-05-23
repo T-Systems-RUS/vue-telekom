@@ -193,6 +193,12 @@
         box-shadow: $input-focus-box-shadow-size $input-focus-box-shadow-color;
       }
     }
+
+    &.is-danger {
+      .date-range-picker-input {
+        border-color: $red;
+      }
+    }
   }
 
   /deep/ .popover-container {
