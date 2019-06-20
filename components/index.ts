@@ -5,6 +5,7 @@ import Breadcrumbs from './Breadcrumbs/Breadcrumbs.vue';
 import Checkbox from './Checkbox/Checkbox.vue';
 import Collapse from './Collapse/Collapse.vue';
 import CommonModal from './CommonModal/CommonModal.vue';
+import CommonModalV2 from './CommonModalV2/CommonModal.vue';
 import ConfirmModal from './ConfirmModal/ConfirmModal.vue';
 import ErrorMessage from './ErrorMessage/ErrorMessage.vue';
 import FileUploader from './FileUploader/FileUploader.vue';
@@ -44,6 +45,7 @@ const components: { [key: string]: {} } = {
   BackToTop,
   ConfirmModal,
   CommonModal,
+  CommonModalV2,
   ErrorMessage,
   FileUploader,
   RadioButton,
