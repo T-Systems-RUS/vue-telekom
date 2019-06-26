@@ -141,6 +141,7 @@
     }
 
     .modal-card-content {
+      width: 100%;
       overflow: auto;
       padding: $content-padding;
       @include custom-scroll-thin;
