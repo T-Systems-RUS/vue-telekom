@@ -1,3 +1,8 @@
+
+# **DEPRECATED** - no longer actively maintained
+
+---
+
 # vue-telekom
 
 This is a collection of Telekom styles and base Vue components.
